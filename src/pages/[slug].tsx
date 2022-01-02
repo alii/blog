@@ -29,6 +29,10 @@ export default function PostPage({slug}: Props) {
 				</a>
 			</Link>
 
+			<p>
+				<time dateTime={post.date.toISOString()}>{post.date.toLocaleDateString()}</time>
+			</p>
+
 			<main className="prose dark:prose-invert prose-a:text-blue-500 prose-a:hover:text-blue-800">
 				{post.render()}
 			</main>
