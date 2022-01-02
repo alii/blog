@@ -49,8 +49,12 @@ export class ServerlessDiscordOAuth extends Post {
 					<code>nextkit</code> that can assist us with this process but for the time being it's out
 					of scope for this post – i'll eventually write a small migration guide.
 				</p>
-				<code>pages/api/oauth.ts</code>
-				<span className="select-none">:</span>
+
+				<p>
+					<code>pages/api/oauth.ts</code>
+					<span className="select-none">:</span>
+				</p>
+
 				<pre>
 					{stripIndent`
 						import type {NextApiHandler} from 'next';
@@ -92,7 +96,7 @@ export class ServerlessDiscordOAuth extends Post {
 								scope,
 							}).toString()
 
-							const {data: auth} = await axios.post<{access_token: string}>('https://discord.com/api/oauth2/token', body, {
+							const {data: auth} = await axios.post<{access_token: string, token_type: string}>('https://discord.com/api/oauth2/token', body, {
 								headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 							});
 
@@ -120,23 +124,34 @@ export class ServerlessDiscordOAuth extends Post {
 								path: '/',
 								secure: process.env.NODE_ENV !== 'development',
 								expires: dayjs().add(1, 'day').toDate(),
+								sameSite: 'lax',
 							});
 						}
 
 						const handler: NextApiHandler = async (req, res) => {
+							// Find our callback code from req.query
 							const {code = null} = req.query as {code?: string};
 
-							if (!code) {
+							// If it doesn't exist, we need to redirect the user
+							// so that we can get the code
+							if (typeof code !== 'string') {
 								res.redirect(OAUTH_URL);
 								return;
 							}
 
+							// Exchange the code for a valid user object
 							const {user} = await exchangeCode(code);
-							const token = createJWT(user);
-							const cookie = getCookieHeader(token);
 
+							// Sign a JWT token with the user's details
+							// encoded into it
+							const token = createJWT(user);
+
+							// Serialize a cookie and set it
+							const cookie = getCookieHeader(token);
 							res.setHeader('Set-Cookie', cookie);
 
+							// Redirect the user to wherever we want
+							// in our application
 							res.redirect('/');
 						}
 
@@ -145,8 +160,10 @@ export class ServerlessDiscordOAuth extends Post {
 				</pre>
 
 				<p>
-					cool! this is the barebones that we will need to start writing our oauth. we're still
-					missing a few prerequesits to tell Discord who we ares: the client id and secret.
+					cool! this is the barebones that we will need to start writing our oauth. it's quite a lot
+					to bite but if you break it down line by line and read the comments, it should be fairly
+					self explanatory. we're still missing a few prerequesits to tell Discord who we ares: the
+					client id and secret.
 				</p>
 
 				<p>
