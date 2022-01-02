@@ -34,6 +34,7 @@ export class Goals extends Post {
 					<li>buy a car by working n hours (i have the value worked out)</li>
 					<li>start a passive income stream, but idea for this is tbc</li>
 					<li>work outside of my bedroom where possible</li>
+					<li>maintain this blog, maybe a new post once or twice a month</li>
 					<li className="line-through">continue evading my taxes 😎</li>
 				</ul>
 			</>
