@@ -19,11 +19,13 @@ export class Goals extends Post {
 					hello everyone! happy 2022. i wanted a place to quickly jot down what i wanted to achieve
 					this year by myself. i'm not the biggest fan of lists but it is indeed satisfactory to be
 					able to check something off as completed. 2021 was a fantastic year but i felt that i
-					could lost motivation in something remarkably quickly. i recognise i have poor sleeping
+					could lose motivation in something remarkably quickly. i recognise i have poor sleeping
 					patterns and i dont follow many healthy work/life balance practices so this would
 					definitely be something i'd like to pursue this year. i know i can work a lot more than i
 					do already!
 				</p>
+
+				<p>briefly, here's what i'd like to get done...</p>
 
 				<ul>
 					<li>as mentioned above, a consistent sleeping pattern</li>

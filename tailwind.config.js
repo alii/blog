@@ -6,7 +6,11 @@ module.exports = {
 	darkMode: 'media',
 	theme: {
 		fontFamily: {
-			mono: ['monospace'],
+			mono: ['DM Mono', 'monospace'],
+		},
+		fontWeight: {
+			light: 300,
+			medium: 500,
 		},
 	},
 	plugins: [require('@tailwindcss/typography')],
