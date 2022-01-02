@@ -9,5 +9,5 @@ module.exports = {
 			mono: ['monospace'],
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/typography')],
 };
