@@ -1,4 +1,5 @@
 import {stripIndent} from 'common-tags';
+import {Highlighter} from '../../../client/components/highlighter';
 import {Post} from '../../Post';
 
 export class ServerlessDiscordOAuth extends Post {
@@ -55,7 +56,7 @@ export class ServerlessDiscordOAuth extends Post {
 					<span className="select-none">:</span>
 				</p>
 
-				<pre>
+				<Highlighter>
 					{stripIndent`
 						import type {NextApiHandler} from 'next';
 						import type {RESTGetAPIUserResult} from 'discord-api-types/v8';
@@ -107,7 +108,7 @@ export class ServerlessDiscordOAuth extends Post {
 							return {user, auth};
 						}
 
-						/**
+						/**	
 						 * Signs a user object into a secure jwt
 						 * @param user The user object to encode
 						 */
@@ -157,7 +158,7 @@ export class ServerlessDiscordOAuth extends Post {
 
 						export default handler;
 					`}
-				</pre>
+				</Highlighter>
 
 				<p>
 					cool! this is the barebones that we will need to start writing our oauth. it's quite a lot
