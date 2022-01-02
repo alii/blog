@@ -1,4 +1,5 @@
 import {GetStaticPaths, GetStaticProps, PageConfig} from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
 import {posts} from '../posts';
 
@@ -15,6 +16,13 @@ export default function PostPage({slug}: Props) {
 
 	return (
 		<div className="space-y-4">
+			<Head>
+				<title>{post.name}</title>
+				<meta name="description" content={post.excerpt} />
+				<meta name="keywords" content={post.keywords.join(', ')} />
+				<meta name="theme-color" content="#101827" />
+			</Head>
+
 			<Link href="../">
 				<a className="text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600">
 					../
