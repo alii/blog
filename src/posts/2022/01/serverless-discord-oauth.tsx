@@ -29,12 +29,14 @@ export class ServerlessDiscordOAuth extends Post {
 					we will be relying on a few dependencies, the first is <code>discord-api-types</code>{' '}
 					which provides up-to-date type definitions for Discord's API (who could've guessed). we'll
 					also need <code>axios</code> (or whatever your favourite http lib is) to make requests to
-					Discord. Additionally, we'll be encoding our user info into a JWT token & using the cookie
-					package to serialize and send cookies down to the client.
+					Discord. additionally, we'll be encoding our user info into a JWT token & using the cookie
+					package to serialize and send cookies down to the client. finally we'll use{' '}
+					<code>dayjs</code> for basic date manipulation and <code>urlcat</code> to easily build
+					urls with query params.
 				</p>
 				<pre>
 					{stripIndent`
-						yarn add axios cookie jsonwebtoken
+						yarn add axios cookie urlcat dayjs jsonwebtoken
 						yarn add --dev discord-api-types @types/jsonwebtoken @types/cookie
 					`}
 				</pre>
@@ -52,29 +54,84 @@ export class ServerlessDiscordOAuth extends Post {
 				<pre>
 					{stripIndent`
 						import type {NextApiHandler} from 'next';
-						import type {APIUser} from 'discord-api-types/v8';
+						import type {RESTGetAPIUserResult} from 'discord-api-types/v8';
 						import {serialize} from 'cookie';
+						import {sign} from 'jsonwebtoken';
+						import dayjs from 'dayjs';
+						import urlcat from 'urlcat';
 
+						// Configuration constants
+						// TODO: Add these to environment variables
+						const CLIENT_ID = 'CLIENT_ID';
+						const CLIENT_SECRET = 'CLIENT_SECRET';
+						const JWT_SECRET = 'CHANGE ME!!!';
+						const REDIRECT_URI = 'http://localhost:3000/api/oauth';
+
+						// Scopes we want to be able to access as a user
+						const scope = ['identify'].join(' ');
+
+						// URL to redirect to outbound (to request authorization)
+						const OAUTH_URL = urlcat('https://discord.com/api/oauth2/authorize', {
+							client_id: CLIENT_ID,
+							redirect_uri: REDIRECT_URI,
+							response_type: 'code',
+							scope,
+						});
+
+						/**
+						 * Exchanges an OAuth code for a full user object
+						 * @param code The code from the callback querystring
+						 */
 						async function exchangeCode(code: string) {
-							// TODO: Exchange the code for a valid user token
+							const body = new URLSearchParams({
+								client_id: CLIENT_ID,
+								client_secret: CLIENT_SECRET,
+								redirect_uri: REDIRECT_URI,
+								grant_type: "authorization_code",
+								code,
+								scope,
+							}).toString()
+
+							const {data: auth} = await axios.post<{access_token: string}>('https://discord.com/api/oauth2/token', body, {
+								headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+							});
+
+							const {data: user} = await axios.get<RESTGetAPIUserResult>('https://discord.com/api/users/@me', {
+								headers: {Authorization: \`Bearer \${auth.access_token}\`},
+							});
+
+							return {user, auth};
 						}
 
+						/**
+						 * Signs a user object into a secure jwt
+						 * @param user The user object to encode
+						 */
 						function createJWT(user: APIUser) {
-							// TODO: Sign a JWT token with the user info encoded
+							return sign(user, JWT_SECRET, {expiresIn: '24h'});
 						}
 
+						/**
+						 * Generates the set-cookie header value from a given JWT token
+						 */
 						function getCookieHeader(token: string) {
-							// TODO: Serialize and create a valid set-cookie header
+							return serialize('token', token, {
+								httpOnly: true,
+								path: '/',
+								secure: process.env.NODE_ENV !== 'development',
+								expires: dayjs().add(1, 'day').toDate(),
+							});
 						}
 
 						const handler: NextApiHandler = async (req, res) => {
 							const {code = null} = req.query as {code?: string};
 
 							if (!code) {
-								// TODO: Redirect the user since there was no code provided
+								res.redirect(OAUTH_URL);
+								return;
 							}
 
-							const user = await exchangeCode(code);
+							const {user} = await exchangeCode(code);
 							const token = createJWT(user);
 							const cookie = getCookieHeader(token);
 
