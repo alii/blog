@@ -16,7 +16,7 @@ export default function Home() {
 				<a
 					target="_blank"
 					href="https://github.com/alii/blog"
-					className="text-gray-500 hover:text-blue-500"
+					className="text-neutral-500 hover:text-blue-500"
 					rel="noreferrer"
 				>
 					– github

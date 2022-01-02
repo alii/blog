@@ -24,13 +24,13 @@ export default function PostPage({slug}: Props) {
 			</Head>
 
 			<Link href="../">
-				<a className="text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600">
+				<a className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600">
 					../
 				</a>
 			</Link>
 
 			<p>
-				<time dateTime={post.date.toISOString()}>{post.date.toLocaleDateString()}</time>
+				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
 			</p>
 
 			<main className="prose dark:prose-invert prose-a:text-blue-500 prose-a:hover:text-blue-800">
