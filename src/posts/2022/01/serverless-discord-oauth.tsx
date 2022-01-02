@@ -64,6 +64,7 @@ export class ServerlessDiscordOAuth extends Post {
 						import {sign} from 'jsonwebtoken';
 						import dayjs from 'dayjs';
 						import urlcat from 'urlcat';
+						import axios from 'axios';
 
 						// Configuration constants
 						// TODO: Add these to environment variables
@@ -92,28 +93,27 @@ export class ServerlessDiscordOAuth extends Post {
 								client_id: CLIENT_ID,
 								client_secret: CLIENT_SECRET,
 								redirect_uri: REDIRECT_URI,
-								grant_type: "authorization_code",
+								grant_type: 'authorization_code',
 								code,
 								scope,
-							}).toString()
+							}).toString();
 
-							const {data: auth} = await axios.post<{access_token: string, token_type: string}>('https://discord.com/api/oauth2/token', body, {
-								headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-							});
+							const {data: auth} = await axios.post<{access_token: string; token_type: string}>(
+								'https://discord.com/api/oauth2/token',
+								body,
+								{
+									headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+								},
+							);
 
-							const {data: user} = await axios.get<RESTGetAPIUserResult>('https://discord.com/api/users/@me', {
-								headers: {Authorization: \`Bearer \${auth.access_token}\`},
-							});
+							const {data: user} = await axios.get<RESTGetAPIUserResult>(
+								'https://discord.com/api/users/@me',
+								{
+									headers: {Authorization: \`Bearer \${auth.access_token}\`},
+								},
+							);
 
 							return {user, auth};
-						}
-
-						/**	
-						 * Signs a user object into a secure jwt
-						 * @param user The user object to encode
-						 */
-						function createJWT(user: APIUser) {
-							return sign(user, JWT_SECRET, {expiresIn: '24h'});
 						}
 
 						/**
@@ -145,7 +145,7 @@ export class ServerlessDiscordOAuth extends Post {
 
 							// Sign a JWT token with the user's details
 							// encoded into it
-							const token = createJWT(user);
+							const token = sign(user, JWT_SECRET, {expiresIn: '24h'});
 
 							// Serialize a cookie and set it
 							const cookie = getCookieHeader(token);
@@ -154,7 +154,7 @@ export class ServerlessDiscordOAuth extends Post {
 							// Redirect the user to wherever we want
 							// in our application
 							res.redirect('/');
-						}
+						};
 
 						export default handler;
 					`}
