@@ -100,16 +100,12 @@ export class ServerlessDiscordOAuth extends Post {
 							const {data: auth} = await axios.post<{access_token: string; token_type: string}>(
 								'https://discord.com/api/oauth2/token',
 								body,
-								{
-									headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-								},
+								{headers: {'Content-Type': 'application/x-www-form-urlencoded'}},
 							);
 
 							const {data: user} = await axios.get<RESTGetAPIUserResult>(
 								'https://discord.com/api/users/@me',
-								{
-									headers: {Authorization: \`Bearer \${auth.access_token}\`},
-								},
+								{headers: {Authorization: \`Bearer \${auth.access_token}\`}},
 							);
 
 							return {user, auth};
@@ -164,31 +160,110 @@ export class ServerlessDiscordOAuth extends Post {
 					self explanatory. we're still missing a few prerequesits to tell Discord who we ares: the
 					client id and secret.
 				</p>
+
+				<h3>Obtaining keys</h3>
 				<p>
-					these tokens can be obtained by visiting{' '}
+					our tokens can be obtained by visiting{' '}
 					<a href="https://discord.com/developers/applications" target="_blank" rel="noreferrer">
 						discord.com/developers/applications
 					</a>{' '}
 					and registering a new application.
 				</p>
-				<h3>Obtaining keys</h3>
-
 				<img
 					src={discordOAuthDashboardImage.src}
 					alt="Screenshot of Discord's Developer OAuth page"
 				/>
+				<ol>
+					<li>
+						Copy and paste your client ID into your <code>oauth.ts</code> file
+					</li>
+					<li>
+						Copy and paste your client secret into your <code>oauth.ts</code> file
+					</li>
+					<li>
+						Add your redirect URI (<code>http://localhost:3000/api/oauth</code>) on the dashboard
+					</li>
+					<li>
+						make sure all your changes are saved and then we are ready to test it out for the first
+						time!
+					</li>
+				</ol>
 
-				<div>
-					<ol>
-						<li>
-							Copy and paste your client ID into your <code>oauth.ts</code> file
-						</li>
-						<li>
-							Copy and paste your client secret into your <code>oauth.ts</code> file
-						</li>
-						<li>Add your redirect URI on the dashboard</li>
-					</ol>
-				</div>
+				<h2>testing it</h2>
+				<p>
+					awesome, we've got everything setup correctly. now we can give it a quick spin. if you
+					start your Next.js development server if you haven't already by running{' '}
+					<code>yarn dev</code> in your terminal, you should be able to navigate to{' '}
+					<a target="_blank" href="http://localhost:3000/api/oauth" rel="noreferrer">
+						localhost:3000/api/oauth
+					</a>{' '}
+					and successfully authenticate
+				</p>
+
+				<p>
+					afterwards, if you open up your browser's devtools and check for the cookie section, you
+					should see a cookie by the name of <code>token</code> – this is ours! copy the value and
+					paste it into{' '}
+					<a href="https://jwt.io" target="_blank" rel="noreferrer">
+						jwt.io
+					</a>{' '}
+					to decode it and see your details encoded inside it!
+				</p>
+
+				<h3>why jwt?</h3>
+				<p>
+					we've picked jwt because it lets us store information on the client side where only the
+					server can mutate and verify that the server created it. this means users cant modify the
+					data inside a jwt token allowing the server to make guarantees about the data encoded.
+				</p>
+
+				<h2>environment variables</h2>
+				<p>okay, we're almost there. final stretch</p>
+				<p>
+					right now, we have our constants defined in this file which is fine for prototyping but it
+					now means that if you want to push your code to github for example, your client secret and
+					perhaps other private information will be publicly available on your project's repository!
+					the solution? environment varibles.
+				</p>
+				<p>
+					environment variables are bits of information that are provided to a process at runtime
+					and it means we don't have to store secrets inside of our source code.
+				</p>
+				<p>
+					thankfully, Next.js makes it super easy for us to use environment variables with something
+					called an env file.
+				</p>
+
+				<h3>creating our env file</h3>
+				<p>
+					firstly, make a new file in your project's file structure called <code>.env</code> and add
+					the content below. the format for env files is <code>KEY=value</code>
+				</p>
+				<pre>
+					{stripIndent`
+						CLIENT_ID=<our discord client id>
+						CLIENT_SECRET=<our discord client secret>
+						JWT_SECRET=<a secure, randomly generated string>
+					`}
+				</pre>
+				<p>
+					and finally, we need to update our code to make sure that our <code>api/oauth.ts</code>{' '}
+					file can use the newly generated environment variables
+				</p>
+				<Highlighter>
+					{stripIndent`
+						const CLIENT_ID = process.env.CLIENT_ID;
+						const CLIENT_SECRET = process.env.CLIENT_SECRET;
+						const JWT_SECRET = process.env.JWT_SECRET;
+					`}
+				</Highlighter>
+
+				<p>
+					and that should be all good! i'll be writing a part two and three later on that will cover
+					accessing the jwt from the server and also deployment to vercel.
+				</p>
+
+				<p>thanks for reading!</p>
 			</>
 		);
 	}
