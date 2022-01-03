@@ -1,6 +1,8 @@
 import {stripIndent} from 'common-tags';
-import {Highlighter} from '../../../client/components/highlighter';
-import {Post} from '../../Post';
+import {Highlighter} from '../../../../client/components/highlighter';
+import {Post} from '../../../Post';
+import Image from 'next/image';
+import discordOAuthDashboardImage from './discord-oauth-dashboard.png';
 
 export class ServerlessDiscordOAuth extends Post {
 	public name = 'Serverless Discord OAuth with Next.js';
@@ -50,12 +52,10 @@ export class ServerlessDiscordOAuth extends Post {
 					<code>nextkit</code> that can assist us with this process but for the time being it's out
 					of scope for this post – i'll eventually write a small migration guide.
 				</p>
-
 				<p>
 					<code>pages/api/oauth.ts</code>
 					<span className="select-none">:</span>
 				</p>
-
 				<Highlighter>
 					{stripIndent`
 						import type {NextApiHandler} from 'next';
@@ -159,14 +159,12 @@ export class ServerlessDiscordOAuth extends Post {
 						export default handler;
 					`}
 				</Highlighter>
-
 				<p>
 					cool! this is the barebones that we will need to start writing our oauth. it's quite a lot
 					to bite but if you break it down line by line and read the comments, it should be fairly
 					self explanatory. we're still missing a few prerequesits to tell Discord who we ares: the
 					client id and secret.
 				</p>
-
 				<p>
 					these tokens can be obtained by visiting{' '}
 					<a href="https://discord.com/developers/applications" target="_blank" rel="noreferrer">
@@ -174,6 +172,24 @@ export class ServerlessDiscordOAuth extends Post {
 					</a>{' '}
 					and registering a new application.
 				</p>
+				<h3>Obtaining keys</h3>
+
+				<Image
+					src={discordOAuthDashboardImage}
+					alt="Screenshot of Discord's Developer OAuth page"
+				/>
+
+				<div>
+					<ol>
+						<li>
+							Copy and paste your client ID into your <code>oauth.ts</code> file
+						</li>
+						<li>
+							Copy and paste your client secret into your <code>oauth.ts</code> file
+						</li>
+						<li>Add your redirect URI on the dashboard</li>
+					</ol>
+				</div>
 			</>
 		);
 	}
