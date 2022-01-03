@@ -70,6 +70,11 @@ export class ServerlessDiscordOAuth extends Post {
 						const CLIENT_ID = 'CLIENT_ID';
 						const CLIENT_SECRET = 'CLIENT_SECRET';
 						const JWT_SECRET = 'CHANGE ME!!!';
+
+						// The URL that we will redirect to
+						// note: this should be an environment variable
+						// but I'll cover that in part 2 since
+						// it will work fine locally for the time being
 						const REDIRECT_URI = 'http://localhost:3000/api/oauth';
 
 						// Scopes we want to be able to access as a user
