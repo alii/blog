@@ -1,6 +1,7 @@
 import {APIUser} from 'discord-api-types/v8';
 import {verify} from 'jsonwebtoken';
 import {GetServerSideProps, PageConfig} from 'next';
+import Link from 'next/link';
 import {env} from '../../server/constants';
 
 interface Props {
@@ -13,13 +14,25 @@ export const config: PageConfig = {
 
 export default function ServerlessDiscordOAuthDemoPage({user}: Props) {
 	if (!user) {
-		return <h1>you are not signed in!</h1>;
+		return (
+			<div>
+				<h1>you are not signed in!</h1>
+
+				<Link href="/api/oauth">
+					<a className="text-blue-500 dark:text-blue-300">Log in with Discord ↗</a>
+				</Link>
+			</div>
+		);
 	}
 
 	return (
-		<h1>
-			hello, {user.username}#{user.discriminator}!
-		</h1>
+		<div>
+			<h1>
+				hello, {user.username}#{user.discriminator}!
+			</h1>
+
+			<p>clear your cookies to logout!</p>
+		</div>
 	);
 }
 

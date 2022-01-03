@@ -22,7 +22,8 @@ export class ServerlessDiscordOAuth extends Post {
 					especially in a serverless environment. hopefully this post will help you get started
 				</p>
 				<p>
-					live demo: <Link href="/api/oauth">/api/oauth</Link>
+					live demo:{' '}
+					<Link href="/demos/serverless-discord-oauth">/demos/serverless-discord-oauth</Link>
 				</p>
 				<h2>the setup</h2>
 				<p>
