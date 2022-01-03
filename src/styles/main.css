@@ -1,7 +1,3 @@
-html {
-	font-size: 0.9em;
-}
-
 body {
 	@apply bg-white text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200 font-mono font-light;
 }

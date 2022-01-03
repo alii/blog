@@ -33,7 +33,7 @@ export default function PostPage({slug}: Props) {
 				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
 			</p>
 
-			<main className="prose prose-img:rounded-md prose-img:w-full dark:prose-invert prose-a:text-blue-500 dark:prose-a:text-blue-300 hover:prose-a:text-blue-800 dark:hover:prose-a:text-blue-500">
+			<main className="prose max-w-none prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
 				{post.render()}
 			</main>
 		</div>
