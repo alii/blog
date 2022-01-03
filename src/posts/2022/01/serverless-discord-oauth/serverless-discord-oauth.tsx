@@ -15,29 +15,29 @@ export class ServerlessDiscordOAuth extends Post {
 	public render() {
 		return (
 			<>
-				<h1>serverless discord oauth with Next.js</h1>
+				<h1>Serverless Discord OAuth with Next.js</h1>
 				<p>
-					oauth is arguably the number one way to authorize a user from a third party platform. it
+					OAuth is arguably the number one way to authorize a user from a third party platform. It
 					is a brilliant solution to a difficult problem, but it can be hard to implement,
-					especially in a serverless environment. hopefully this post will help you get started
+					especially in a serverless environment. Hopefully, this post will help you get started.
 				</p>
 				<p>
-					live demo:{' '}
+					Live demo:{' '}
 					<Link href="/demos/serverless-discord-oauth">/demos/serverless-discord-oauth</Link>
 				</p>
-				<h2>the setup</h2>
+				<h2>The setup</h2>
 				<p>
-					firstly, we're going to need to create a Next.js with TypeScript app. feel free to skip
-					this if you "have one that you made earlier."
+					Firstly, we're going to need to create a Next.js with TypeScript app. Feel free to skip
+					this if you "have one that you made earlier".
 				</p>
 				<pre>yarn create next-app my-app --typescript</pre>
-				<h3>dependencies</h3>
+				<h3>Dependencies</h3>
 				<p>
-					we will be relying on a few dependencies, the first is <code>discord-api-types</code>{' '}
-					which provides up-to-date type definitions for Discord's API (who could've guessed). we'll
+					We will be relying on a few dependencies, the first is <code>discord-api-types</code>{' '}
+					which provides up-to-date type definitions for Discord's API (who could've guessed). We'll
 					also need <code>axios</code> (or whatever your favourite http lib is) to make requests to
-					Discord. additionally, we'll be encoding our user info into a JWT token & using the cookie
-					package to serialize and send cookies down to the client. finally we'll use{' '}
+					Discord. Additionally, we'll be encoding our user info into a JWT token & using the cookie
+					package to serialize and send cookies down to the client. Finally, we'll use{' '}
 					<code>dayjs</code> for basic date manipulation and <code>urlcat</code> to easily build
 					urls with query params.
 				</p>
@@ -47,14 +47,14 @@ export class ServerlessDiscordOAuth extends Post {
 						yarn add --dev discord-api-types @types/jsonwebtoken @types/cookie
 					`}
 				</pre>
-				<h2>code</h2>
-				<p>dope, you made it this far already! let's get some code written</p>
+				<h2>Code</h2>
+				<p>Dope, you've made it this far already! Let's get some code written</p>
 				<p>
-					firstly, you're going to want to open up the folder <code>pages/api</code> and create a
-					new file. we can call it <code>oauth.ts</code>. the api folder is where Next.js will
-					locate our serverless functions. handily, i've written a library called{' '}
+					Firstly, you're going to want to open up the folder <code>pages/api</code> and create a
+					new file. We can call it <code>oauth.ts</code>. The api folder is where Next.js will
+					locate our serverless functions. Handily, I've written a library called{' '}
 					<code>nextkit</code> that can assist us with this process but for the time being it's out
-					of scope for this post – i'll eventually write a small migration guide.
+					of scope for this post – I'll eventually write a small migration guide.
 				</p>
 				<p>
 					<code>pages/api/oauth.ts</code>
@@ -165,15 +165,15 @@ export class ServerlessDiscordOAuth extends Post {
 					`}
 				</Highlighter>
 				<p>
-					cool! this is the barebones that we will need to start writing our oauth. it's quite a lot
+					Cool! This is the barebones that we will need to start writing our OAuth. It's quite a lot
 					to bite but if you break it down line by line and read the comments, it should be fairly
-					self explanatory. we're still missing a few prerequesits to tell Discord who we ares: the
+					self-explanatory. We're still missing a few prerequesits to tell Discord who we are: the
 					client id and secret.
 				</p>
 
 				<h3>Obtaining keys</h3>
 				<p>
-					our tokens can be obtained by visiting{' '}
+					Our tokens can be obtained by visiting{' '}
 					<a href="https://discord.com/developers/applications" target="_blank" rel="noreferrer">
 						discord.com/developers/applications
 					</a>{' '}
@@ -194,25 +194,25 @@ export class ServerlessDiscordOAuth extends Post {
 						Add your redirect URI (<code>http://localhost:3000/api/oauth</code>) on the dashboard
 					</li>
 					<li>
-						make sure all your changes are saved and then we are ready to test it out for the first
+						Make sure all your changes are saved and then we are ready to test it out for the first
 						time!
 					</li>
 				</ol>
 
-				<h2>testing it</h2>
+				<h2>Testing it</h2>
 				<p>
-					awesome, we've got everything setup correctly. now we can give it a quick spin. if you
+					Awesome, we've got everything setup correctly. Now we can give it a quick spin. You can
 					start your Next.js development server if you haven't already by running{' '}
 					<code>yarn dev</code> in your terminal, you should be able to navigate to{' '}
 					<a target="_blank" href="http://localhost:3000/api/oauth" rel="noreferrer">
 						localhost:3000/api/oauth
 					</a>{' '}
-					and successfully authenticate
+					and successfully authenticate.
 				</p>
 
 				<p>
-					afterwards, if you open up your browser's devtools and check for the cookie section, you
-					should see a cookie by the name of <code>token</code> – this is ours! copy the value and
+					Afterwards, if you open up your browser's devtools and check for the cookie section, you
+					should see a cookie by the name of <code>token</code> – this is ours! Copy the value and
 					paste it into{' '}
 					<a href="https://jwt.io" target="_blank" rel="noreferrer">
 						jwt.io
@@ -220,34 +220,34 @@ export class ServerlessDiscordOAuth extends Post {
 					to decode it and see your details encoded inside it!
 				</p>
 
-				<h3>why jwt?</h3>
+				<h3>Why JWT?</h3>
 				<p>
-					we've picked jwt because it lets us store information on the client side where only the
-					server can mutate and verify that the server created it. this means users cant modify the
-					data inside a jwt token allowing the server to make guarantees about the data encoded.
+					We've picked JWT because it lets us store information on the client side where only the
+					server can mutate and verify that the server created it. This means users cant modify the
+					data inside a JWT token, allowing the server to make guarantees about the data encoded.
 				</p>
 
-				<h2>environment variables</h2>
-				<p>okay, we're almost there. final stretch</p>
+				<h2>Environment variables</h2>
+				<p>Okay, we're almost there. Final stretch</p>
 				<p>
-					right now, we have our constants defined in this file which is fine for prototyping but it
-					now means that if you want to push your code to github for example, your client secret and
+					Right now, we have our constants defined in this file which is fine for prototyping but it
+					now means that if you want to push your code to github, for example, your client secret and
 					perhaps other private information will be publicly available on your project's repository!
-					the solution? environment varibles.
+					The solution? Environment varibles.
 				</p>
 				<p>
-					environment variables are bits of information that are provided to a process at runtime
-					and it means we don't have to store secrets inside of our source code.
+					Environment variables are bits of information that are provided to a process at runtime,
+					it means we don't have to store secrets inside of our source code.
 				</p>
 				<p>
-					thankfully, Next.js makes it super easy for us to use environment variables with something
+					Thankfully, Next.js makes it super easy for us to use environment variables with something
 					called an env file.
 				</p>
 
-				<h3>creating our env file</h3>
+				<h3>Creating our env file</h3>
 				<p>
-					firstly, make a new file in your project's file structure called <code>.env</code> and add
-					the content below. the format for env files is <code>KEY=value</code>
+					Firstly, make a new file in your project's file structure called <code>.env</code> and add
+					the content below. the format for env files is <code>KEY=value</code>.
 				</p>
 				<pre>
 					{stripIndent`
@@ -257,8 +257,8 @@ export class ServerlessDiscordOAuth extends Post {
 					`}
 				</pre>
 				<p>
-					and finally, we need to update our code to make sure that our <code>api/oauth.ts</code>{' '}
-					file can use the newly generated environment variables
+					And finally, we need to update our code to make sure that our <code>api/oauth.ts</code>{' '}
+					file can use the newly generated environment variables.
 				</p>
 				<Highlighter>
 					{stripIndent`
@@ -269,11 +269,11 @@ export class ServerlessDiscordOAuth extends Post {
 				</Highlighter>
 
 				<p>
-					and that should be all good! i'll be writing a part two and three later on that will cover
-					accessing the jwt from the server and also deployment to vercel.
+					And that should be all good! I'll be writing a part two and three later on that will cover
+					accessing the JWT from the server and also deployment to vercel.
 				</p>
 
-				<p>thanks for reading!</p>
+				<p>Thanks for reading!</p>
 			</>
 		);
 	}
