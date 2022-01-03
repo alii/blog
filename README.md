@@ -1,7 +1,5 @@
-# next-boilerplate
+[alistair.blog](https://alistair.blog)
 
-It's quick, fast, easy to use. Strict eslint/typescript, prettier setup. Faster build times with canary next.
+# alistair.blog
 
-i'll update it every now and then but no guarantee dependencies will work.
-
-have fun x
+A basic blogging site that uses Next.js whislt shipping zero client JS!
