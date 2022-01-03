@@ -1,7 +1,6 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
-import Image from 'next/image';
 import discordOAuthDashboardImage from './discord-oauth-dashboard.png';
 
 export class ServerlessDiscordOAuth extends Post {
@@ -174,8 +173,8 @@ export class ServerlessDiscordOAuth extends Post {
 				</p>
 				<h3>Obtaining keys</h3>
 
-				<Image
-					src={discordOAuthDashboardImage}
+				<img
+					src={discordOAuthDashboardImage.src}
 					alt="Screenshot of Discord's Developer OAuth page"
 				/>
 

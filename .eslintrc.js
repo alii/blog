@@ -26,6 +26,9 @@ module.exports = {
 		'@typescript-eslint/triple-slash-reference': 'off',
 		'react/react-in-jsx-scope': 'off',
 
+		// Doesn't work with next zero js
+		'@next/next/no-img-element': 'off',
+
 		// Prettier handles these
 		'@typescript-eslint/comma-dangle': 'off',
 		'react/function-component-definition': 'off',
