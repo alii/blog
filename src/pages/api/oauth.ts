@@ -8,13 +8,7 @@ import axios from 'axios';
 import {env} from '../../server/constants';
 
 // Configuration constants
-const {CLIENT_ID, CLIENT_SECRET, JWT_SECRET} = env;
-
-// The URL that we will redirect to
-// note: this should be an environment variable
-// but I'll cover that in part 2 since
-// it will work fine locally for the time being
-const REDIRECT_URI = 'http://localhost:3000/api/oauth';
+const {CLIENT_ID, CLIENT_SECRET, JWT_SECRET, REDIRECT_URI} = env;
 
 // Scopes we want to be able to access as a user
 const scope = ['identify'].join(' ');

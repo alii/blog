@@ -8,6 +8,7 @@ export const env = envsafe({
 		desc: 'Discord client secret',
 	}),
 	REDIRECT_URI: url({
+		devDefault: 'http://localhost:3000/api/oauth',
 		desc: 'Discord OAuth redirect URL',
 	}),
 	JWT_SECRET: str({
