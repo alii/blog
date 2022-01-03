@@ -1,4 +1,5 @@
 import {stripIndent} from 'common-tags';
+import Link from 'next/link';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
 import discordOAuthDashboardImage from './discord-oauth-dashboard.png';
@@ -19,6 +20,9 @@ export class ServerlessDiscordOAuth extends Post {
 					oauth is arguably the number one way to authorize a user from a third party platform. it
 					is a brilliant solution to a difficult problem, but it can be hard to implement,
 					especially in a serverless environment. hopefully this post will help you get started
+				</p>
+				<p>
+					live demo: <Link href="/api/oauth">/api/oauth</Link>
 				</p>
 				<h2>the setup</h2>
 				<p>
