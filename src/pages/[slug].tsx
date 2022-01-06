@@ -23,11 +23,19 @@ export default function PostPage({slug}: Props) {
 				<meta name="theme-color" content="#101827" />
 			</Head>
 
-			<Link href="../">
-				<a className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600">
-					../
-				</a>
-			</Link>
+			{post.hidden && (
+				<div className="bg-yellow-500 text-yellow-900 rounded-md py-2 px-4">
+					<p>hey! this post is hidden! please don't share the link for now...</p>
+				</div>
+			)}
+
+			<div>
+				<Link href="../">
+					<a className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600">
+						../
+					</a>
+				</Link>
+			</div>
 
 			<p>
 				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
