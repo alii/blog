@@ -9,7 +9,7 @@ export class ServerlessDiscordOAuth extends Post {
 	public slug = 'serverless-discord-oauth';
 	public date = new Date('2 January 2022');
 	public excerpt = "Implementing basic Discord OAuth on Vercel's serverless platform";
-
+	public hidden = false;
 	public keywords = ['serverless', 'vercel', 'discord', 'oauth', 'node'];
 
 	public render() {
@@ -231,9 +231,9 @@ export class ServerlessDiscordOAuth extends Post {
 				<p>Okay, we're almost there. Final stretch</p>
 				<p>
 					Right now, we have our constants defined in this file which is fine for prototyping but it
-					now means that if you want to push your code to github, for example, your client secret and
-					perhaps other private information will be publicly available on your project's repository!
-					The solution? Environment varibles.
+					now means that if you want to push your code to github, for example, your client secret
+					and perhaps other private information will be publicly available on your project's
+					repository! The solution? Environment varibles.
 				</p>
 				<p>
 					Environment variables are bits of information that are provided to a process at runtime,

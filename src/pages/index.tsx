@@ -32,12 +32,14 @@ export default function Home() {
 				</a>
 			</h2>
 
-			<ul className="space-y-1">
-				{posts.map(post => (
-					<BlogLink key={post.slug} href={`/${post.slug}`}>
-						{post.name}
-					</BlogLink>
-				))}
+			<ul className="space-y-1 list-disc">
+				{posts
+					.filter(post => !post.hidden)
+					.map(post => (
+						<BlogLink key={post.slug} href={`/${post.slug}`}>
+							{post.name}
+						</BlogLink>
+					))}
 			</ul>
 		</main>
 	);
@@ -47,7 +49,9 @@ function BlogLink(props: {href: string; children: ReactNode}) {
 	return (
 		<li>
 			<Link passHref href={props.href}>
-				<a className="text-blue-500 hover:text-blue-800">{props.children}</a>
+				<a className="text-blue-500 hover:text-blue-700 dark:hover:text-blue-600">
+					{props.children}
+				</a>
 			</Link>
 		</li>
 	);

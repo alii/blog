@@ -6,8 +6,8 @@ export class Goals extends Post {
 	public date = new Date('2 January 2022');
 	public slug = 'goals';
 	public keywords = ['goals', '2022'];
-
-	public excerpt = stripIndents`
+	public hidden = false;
+	public excerpt = stripIndents`	
         My goals for the year
     `;
 
