@@ -20,7 +20,7 @@ export default function PostPage({slug}: Props) {
 				<title>{post.name}</title>
 				<meta name="description" content={post.excerpt} />
 				<meta name="keywords" content={post.keywords.join(', ')} />
-				<meta name="theme-color" content="#101827" />
+				<meta name="theme-color" content={post.hidden ? '#ebb305' : '#101827'} />
 			</Head>
 
 			{post.hidden && (
