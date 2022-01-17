@@ -6,11 +6,11 @@ import {ServerlessDiscordOAuth} from './2022/01/serverless-discord-oauth/serverl
 import {Mochip} from './2022/01/mochip/mochip';
 import {ZeroKbBlog} from './2022/01/zero-kb-blog/zero-kb-blog';
 
-const ensurePosts = ensure<Post[]>();
+const ensurePosts = ensure<readonly Post[] | Post[]>();
 
 export const posts = ensurePosts([
 	new Mochip(),
 	new ZeroKbBlog(),
 	new ServerlessDiscordOAuth(),
 	new Goals(),
-]);
+] as const);
