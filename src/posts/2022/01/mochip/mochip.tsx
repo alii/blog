@@ -86,13 +86,13 @@ export class Mochip extends Post {
 				<p>
 					2018-19, our school gives us access to a new platform for science homework, Educake. It's
 					good, and it doesn't have a video to watch at the beginning (woohoo)! But, it's still
-					homework and I am still a software engineer. I do my homework for about a year until
-					around the end of 2019 as Covid-19 starts to infect the planet.
+					homework and I am still a software engineer. I accept my fate for around a year until 2019
+					begsin to close just before the covid-19 update drops.
 				</p>
 				<p>
-					One common factor between Hegarty and Educake is that they both give you the correct
-					answer if you got it wrong straight away, so I took advantage of this and wrote a small js
-					express app with mongodb and tampermonkey script to detect when I'm on a quiz page, and
+					One common factor between Hegarty and Educake is that they both give you straight away the
+					correct answer if you got a question wrong, so I took advantage of this and wrote a small
+					js express app with mongodb and tampermonkey script to detect when I'm on a quiz page, and
 					answer every question with a random number and then store the correct answer in mongo. I
 					don't have the original soruce but it was <i>something</i> like the following.
 				</p>
