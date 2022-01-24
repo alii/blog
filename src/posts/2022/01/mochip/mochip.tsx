@@ -62,9 +62,9 @@ export class Mochip extends Post {
 				</p>
 
 				<p>
-					So we flexed it on our SnapChat stories and had peers message us to use it blah blah. We
-					eventually figured out that we could also set it to be watched over 9999x times; every
-					time we did that our accounts were reset by the Hegarty team, however.
+					So we flexed it on our Snapchat stories and had our school friends message us to use it
+					blah blah. We eventually figured out that we could also set it to be watched over 9999x
+					times; every time we did that our accounts were reset by the Hegarty team.
 				</p>
 
 				<h2>The first email</h2>
@@ -91,10 +91,11 @@ export class Mochip extends Post {
 				</p>
 				<p>
 					One common factor between Hegarty and Educake is that they both give you straight away the
-					correct answer if you got a question wrong, so I took advantage of this and wrote a small
-					js express app with mongodb and tampermonkey script to detect when I'm on a quiz page, and
-					answer every question with a random number and then store the correct answer in mongo. I
-					don't have the original soruce but it was <i>something</i> like the following.
+					correct answer if you got a question wrong, so I, now working on the project solo, took
+					advantage of this and wrote a small js express app with mongodb and tampermonkey script to
+					detect when I'm on a quiz page, and answer every question with a random number and then
+					store the correct answer in mongo. I don't have the original soruce but it was{' '}
+					<i>something</i> like the following.
 				</p>
 
 				<Highlighter>
@@ -110,8 +111,8 @@ export class Mochip extends Post {
 								body: {
 									question_id: question.id,
 									answer: result.correct_answer,
-								}
-							})
+								},
+							});
 						}
 
 						nextQuestion();
@@ -126,6 +127,13 @@ export class Mochip extends Post {
 					that we actually pick one of the possible answers rather than making it up – however I was
 					surprised that the Educake backend would allow an answer that wasn't even in the possible
 					choices).
+				</p>
+
+				<p>
+					Once I'd had this down, I decided it would be time to build a nice UI for it all and
+					bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
+					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
+					experience before) and also for myself to get out of homework I didn't want to do.
 				</p>
 			</>
 		);
