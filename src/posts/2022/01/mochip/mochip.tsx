@@ -97,32 +97,34 @@ export class Mochip extends Post {
 				</p>
 				<p>
 					One common factor between Hegarty and Educake is that immediately give you the correct
-					answer if you got a question wrong. Now working on the project solo, I took advantage of
-					this and wrote a small node/mongo app &amp; tampermonkey script to detect when I'm on a
-					quiz page, and answer every question with a random number and then store the correct
-					answer in mongodb. I don't have the original source but the TamperMonkey script was{' '}
-					<i>probably something</i> like the following:
+					answer if you got a question wrong. We took advantage of this and wrote a small node/mongo
+					app &amp; tampermonkey script to detect when a user was on a quiz page, and answer every
+					question with a random number and then store the correct answer in mongodb. I don't have
+					the original source but the TamperMonkey script was <i>probably something</i> like the
+					following:
 				</p>
 				<Highlighter>
 					{stripIndent`
+						const guess = Math.random();
+
 						const result = await post('/api/answer', {
 							body: {
-								answer: Math.random(),
+								answer: guess,
 							},
 						});
 
-						if (!result.success) {
-							await post('http://localhost:8080/save', {
-								body: {
-									question_id: question.id,
-									answer: result.correct_answer,
-								},
-							});
-						}
+						await post('http://localhost:8080/save', {
+							body: {
+								question_id: question.id,
+								answer: result.success ? guess : result.correct_answer,
+							},
+						});
 
+						// Go to next question and repeat code above
 						nextQuestion();
 					`}
 				</Highlighter>
+
 				<p>
 					As you can see, it was quite literally a loop through every question, saving the correct
 					answer as we got it and moving on. Eventually I added a few more features to fetch from
@@ -132,9 +134,10 @@ export class Mochip extends Post {
 					surprised that the Educake backend would allow an answer that wasn't even in the possible
 					choices).
 				</p>
+
 				<p>
-					Once I'd had this down, I decided it would be time to build a nice UI for it all and
-					bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
+					Now working on the project solo, I decided it would be time to build a nice UI for it all
+					and bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
 					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
 					experience before) and also for myself to get out of homework I didn't want to do.
 				</p>
