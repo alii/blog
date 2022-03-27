@@ -3,6 +3,7 @@ import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
 import hegartyTimeExploit from './hegarty-time-exploit.png';
 import emailFromColin from './email-from-colin.png';
+import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
 
@@ -32,12 +33,10 @@ export class Mochip extends Post {
 					lockdown, and the end of the world. welcome to the story of mochip, perhaps my most
 					ambitious and indeed interesting project.
 				</p>
-
 				<p>
 					Small disclaimer: this post was written as a teenager with no will to partake in their
 					home studies. Education is important! Are you sitting comfortably? Then I'll begin...
 				</p>
-
 				<h2>The back story</h2>
 				<p>
 					Let's set the scene. 2018, my school introduces a new online homework platform for
@@ -48,7 +47,6 @@ export class Mochip extends Post {
 					especially the quiz, and in the worst cases can take up to an hour to complete one topic
 					(bad).
 				</p>
-
 				<p>
 					Software engineers are naturally lazy individuals. Sure, some get up at 3:30am and go for
 					a "light" 2 hour run in Silicon Valley (before stopping to get their Cloudy Toffee and
@@ -64,15 +62,12 @@ export class Mochip extends Post {
 					teachers could see how many times we've watched the video, so being able to skip up to 20
 					minutes of homework time was especially useful – and it was a lot of fun to build too.
 				</p>
-
 				<p>
 					So we flexed it on our Snapchat stories and had our school friends message us to use it
 					blah blah. We eventually figured out that we could also set it to be watched over 9999x
 					times; every time we did that our accounts were reset by the Hegarty team.
 				</p>
-
 				<h2>The first email</h2>
-
 				<p>
 					After this, we got in contact with our Math teacher in November of 2018 and got her to
 					send an email to HegartyMaths informing them of our petty exploit and they got back to us
@@ -86,25 +81,20 @@ export class Mochip extends Post {
 					taken of it in 2020. See below{' '}
 					<span className="opacity-50">(certain details redacted for obvious reasons)</span>:
 				</p>
-
 				<img src={hegartyTimeExploit.src} alt="Hegarty Time Exploit Email" />
-
 				<p>
 					This response excited us a bit, as they were now aware of us messing around with the site
 					and they had no intention of fixing the minor vuln we had anyway, so we kept using it. We
 					had tried to build a script to answer the questions for us, but it was too much work at
 					the time (complex data structures, weird API responses, etc etc).
 				</p>
-
 				<h2>Educake</h2>
-
 				<p>
 					For a while, students had access to another platform called Educake. Similar to
 					HegartyMaths but targeting Biology, Chemistry and Physics. There was no video to watch at
 					the beginning. We'd used it for a few years, in fact since I joined the school, but I'd
 					never thought about reversing until all of this began.
 				</p>
-
 				<p>
 					One common factor between Hegarty and Educake is that immediately give you the correct
 					answer if you got a question wrong. Now working on the project solo, I took advantage of
@@ -113,7 +103,6 @@ export class Mochip extends Post {
 					answer in mongodb. I don't have the original source but the TamperMonkey script was{' '}
 					<i>probably something</i> like the following:
 				</p>
-
 				<Highlighter>
 					{stripIndent`
 						const result = await post('/api/answer', {
@@ -134,7 +123,6 @@ export class Mochip extends Post {
 						nextQuestion();
 					`}
 				</Highlighter>
-
 				<p>
 					As you can see, it was quite literally a loop through every question, saving the correct
 					answer as we got it and moving on. Eventually I added a few more features to fetch from
@@ -144,27 +132,22 @@ export class Mochip extends Post {
 					surprised that the Educake backend would allow an answer that wasn't even in the possible
 					choices).
 				</p>
-
 				<p>
 					Once I'd had this down, I decided it would be time to build a nice UI for it all and
 					bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
 					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
 					experience before) and also for myself to get out of homework I didn't want to do.
 				</p>
-
 				<p>
 					The end result? A ~200 line codebase that scooped up all questions and answered on the
 					site and could repeatedly get 100% on every single assignment and a 15mb mongo database.
 				</p>
-
 				<p>
 					Below is a small video of what it all looked like. It also demonstrates a feature I added
 					allowing for a "target percentage" — meaning users could get something other than 100% to
 					look like more real/human score. Video was recorded on my Snapchat in November 2019.
 				</p>
-
 				<video controls src="/videos/mochip-educake.mp4" />
-
 				<h2>Hegarty 2</h2>
 				<p>
 					The success of this script along with pressure from my peers led me to gain a lot of
@@ -180,42 +163,55 @@ export class Mochip extends Post {
 						decimate his statistics.
 					</i>
 				</p>
-
 				<p>
 					Together, Jake and I scraped the entirety of Hegarty's database and now had a JSON file
 					that could be argued to be worth as much as Hegarty the company itself due to the entire
 					product quite literally being the database we had copied.
 				</p>
-
 				<p>
 					With this file, I wanted to take it a step further and allow my friends and other people
 					to make good use of it without directly giving out the database (irresponsible)... And
 					here Mochip was coined.
 				</p>
-
 				<h2>Mochip</h2>
 				<p>
-					So, where does Mochip tie in to this? Mochip was a collection of both our scraped Hegarty
-					and scraped Educake databases sat behind a TypeScript API and a small React app. Hosted on
-					Heroku free tier and MongoDB Atlas free tier, users could login, enter a question (from
-					either site) and get back a list of answers Mochip has for that question. Here's what the
-					landing page looked like
+					So, where does Mochip tie in to this? Mochip was a chrome extension, a collection of both
+					our scraped Hegarty and scraped Educake databases sat behind a TypeScript API and a small
+					React app. Hosted on Heroku free tier and MongoDB Atlas free tier, users could login,
+					enter a question (from either site) and get back a list of answers Mochip has for that
+					question. Here's what the landing page looked like
 				</p>
-
 				<img src={mochipLanding.src} alt="Screenshot of Mochip's main dashboard page" />
-
 				<p>
 					In the screenshot we can see a few stats on the right like total estimated time saved and
 					how long you've had your account for. We gamified it a little just to keep people engaged
 				</p>
-
+				<p>
+					Our chrome extension was made for Educake as they disabled copying question text with the
+					clipboard. We re-enabled that just by clicking a button that was injected into the UI. The
+					chrome extension is no longer on the chrome web store, but we've found that mirrors still
+					have listings that we can't get taken down:{' '}
+					<a href="https://extpose.com/ext/195388" target="_blank" rel="noreferrer">
+						extpose.com/ext/195388
+					</a>
+				</p>
+				<p>
+					Our userbase grew so big that we ended up with a Discord server and even our own listing
+					on Urban dictionary — I'm yet to find out who made it!{' '}
+					<a
+						href="https://www.urbandictionary.com/define.php?term=mochip"
+						target="_blank"
+						rel="noreferrer"
+					>
+						urbandictionary.com/define.php?term=mochip
+					</a>
+				</p>
 				<p>
 					Eventually we "rebranded" as I wanted to disassociate my name from the project.
 					Unfortunately I do not have any screenshots from this era to show. I made an alt discord
 					account and a few announcements saying we'd "passed on ownership" however this ineveitably
 					only lasted for a couple weeks before we were rumbled.
 				</p>
-
 				<h2>Crashing down</h2>
 				<p>
 					All good things must come to and end, and Mochip's did after Scott posted about Mochip on
@@ -225,9 +221,7 @@ export class Mochip extends Post {
 					shocked to see it working. Shortly after this I received an email from Colin directly. See
 					below
 				</p>
-
 				<img src={emailFromColin.src} alt="Email from Colin" />
-
 				<p>
 					I was upset but also a little content — it was sort of validation that I'd successfully
 					made it and that catching the attention of Colin himself was sort of a good thing. We
@@ -235,16 +229,13 @@ export class Mochip extends Post {
 					conversations of my life. I am extremely grateful for the advice Colin gave us in the
 					call.
 				</p>
-
 				<img src={gmeet.src} alt="Screenshot of Google Meet" />
-
 				<p>
 					I'd like to give a special thank you to the legendary Colin Hegarty for his kindness and
 					consideration when reaching out to me. Things could have gone a lot worse for me had this
 					not been the case. HegartyMaths is a brilliant learning resource and at the end of the
 					day, it's there to help students learn rather than an inconvenience.
 				</p>
-
 				<p>
 					Shortly after, Colin reached out to the Educake team who we also scheduled a call with. We
 					explained our complete methodology and suggested ways to prevent this in the future. The
@@ -255,7 +246,12 @@ export class Mochip extends Post {
 					question).
 				</p>
 
-				<p>Scott and I connected with Colin on LinkedIn, and hereby ends my peak.</p>
+				<img src={goodbyeMochip.src} alt="My email replying to Colin" />
+
+				<p>
+					Thank you for reading, truly. Mochip was a real passion project and I had a wild time
+					building it. ⭐
+				</p>
 			</>
 		);
 	}
