@@ -2,6 +2,9 @@ import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
 import hegartyTimeExploit from './hegarty-time-exploit.png';
+import emailFromColin from './email-from-colin.png';
+import gmeet from './gmeet.png';
+import mochipLanding from './landing.jpeg';
 
 export class Mochip extends Post {
 	public name = 'mochip.xyz';
@@ -25,7 +28,7 @@ export class Mochip extends Post {
 			<>
 				<h1>mochip.xyz</h1>
 				<p>
-					the long awaited story of mochip is finally here. a twisted tale of homework, the 2020
+					The long awaited story of mochip is finally here. a twisted tale of homework, the 2020
 					lockdown, and the end of the world. welcome to the story of mochip, perhaps my most
 					ambitious and indeed interesting project.
 				</p>
@@ -150,12 +153,109 @@ export class Mochip extends Post {
 				</p>
 
 				<p>
+					The end result? A ~200 line codebase that scooped up all questions and answered on the
+					site and could repeatedly get 100% on every single assignment and a 15mb mongo database.
+				</p>
+
+				<p>
 					Below is a small video of what it all looked like. It also demonstrates a feature I added
 					allowing for a "target percentage" — meaning users could get something other than 100% to
 					look like more real/human score. Video was recorded on my Snapchat in November 2019.
 				</p>
 
 				<video controls src="/videos/mochip-educake.mp4" />
+
+				<h2>Hegarty 2</h2>
+				<p>
+					The success of this script along with pressure from my peers led me to gain a lot of
+					motivation to start working on reversing Hegarty again. I reached out to an internet
+					friend who, for the sake of his privacy, will be named as "Jake." He also used
+					HegartyMaths at his school and was in the same boat as me trying to not do our homework.
+					Together, we managed to figure out how to answer many varying types of questions,
+					including multiple choice and ordered answers resulting in a huge amount of data stored.
+					We had sacrificial user accounts and managed to answer 60,000 questions in a couple
+					minutes, rocketing our way to the top of the HegartyMaths global leaderboard.{' '}
+					<i>
+						Would like to give a special shoutout to Boon for lending us his login and letting us
+						decimate his statistics.
+					</i>
+				</p>
+
+				<p>
+					Together, Jake and I scraped the entirety of Hegarty's database and now had a JSON file
+					that could be argued to be worth as much as Hegarty the company itself due to the entire
+					product quite literally being the database we had copied.
+				</p>
+
+				<p>
+					With this file, I wanted to take it a step further and allow my friends and other people
+					to make good use of it without directly giving out the database (irresponsible)... And
+					here Mochip was coined.
+				</p>
+
+				<h2>Mochip</h2>
+				<p>
+					So, where does Mochip tie in to this? Mochip was a collection of both our scraped Hegarty
+					and scraped Educake databases sat behind a TypeScript API and a small React app. Hosted on
+					Heroku free tier and MongoDB Atlas free tier, users could login, enter a question (from
+					either site) and get back a list of answers Mochip has for that question. Here's what the
+					landing page looked like
+				</p>
+
+				<img src={mochipLanding.src} alt="Screenshot of Mochip's main dashboard page" />
+
+				<p>
+					In the screenshot we can see a few stats on the right like total estimated time saved and
+					how long you've had your account for. We gamified it a little just to keep people engaged
+				</p>
+
+				<p>
+					Eventually we "rebranded" as I wanted to disassociate my name from the project.
+					Unfortunately I do not have any screenshots from this era to show. I made an alt discord
+					account and a few announcements saying we'd "passed on ownership" however this ineveitably
+					only lasted for a couple weeks before we were rumbled.
+				</p>
+
+				<h2>Crashing down</h2>
+				<p>
+					All good things must come to and end, and Mochip's did after Scott posted about Mochip on
+					his reddit account. Like any good CEO, Colin searches his company every now and then on
+					Google to see what people are saying or doing and unfortunately came across our reddit
+					post. He signed up (although under a different email) and tested out the app and was
+					shocked to see it working. Shortly after this I received an email from Colin directly. See
+					below
+				</p>
+
+				<img src={emailFromColin.src} alt="Email from Colin" />
+
+				<p>
+					I was upset but also a little content — it was sort of validation that I'd successfully
+					made it and that catching the attention of Colin himself was sort of a good thing. We
+					quickly scheduled a Google Meet, also inviting Scott, and I had one of the most memorable
+					conversations of my life. I am extremely grateful for the advice Colin gave us in the
+					call.
+				</p>
+
+				<img src={gmeet.src} alt="Screenshot of Google Meet" />
+
+				<p>
+					I'd like to give a special thank you to the legendary Colin Hegarty for his kindness and
+					consideration when reaching out to me. Things could have gone a lot worse for me had this
+					not been the case. HegartyMaths is a brilliant learning resource and at the end of the
+					day, it's there to help students learn rather than an inconvenience.
+				</p>
+
+				<p>
+					Shortly after, Colin reached out to the Educake team who we also scheduled a call with. We
+					explained our complete methodology and suggested ways to prevent this in the future. The
+					easiest fix from our point of view would be to implement an easy rate limit with Redis
+					that would make it wildy infeasible to automate a test. The other thing we suggested was
+					to scramble IDs in the database to invalidate <b>our</b> cloned database as much as
+					possible (e.g. we only had the Hegarty IDs, so we could no longer reverse lookup a
+					question).
+				</p>
+
+				<p>Scott and I connected with Colin on LinkedIn, and hereby ends my peak.</p>
 			</>
 		);
 	}
