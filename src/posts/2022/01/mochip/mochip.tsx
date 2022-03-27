@@ -1,6 +1,7 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
+import hegartyTimeExploit from './hegarty-time-exploit.png';
 
 export class Mochip extends Post {
 	public name = 'mochip.xyz';
@@ -68,12 +69,22 @@ export class Mochip extends Post {
 				</p>
 
 				<h2>The first email</h2>
+
 				<p>
-					After this, we got in contact with our Math teacher and got her to send an email to
-					HegartyMaths informing them of our petty exploit and they got back to us very quickly. I
-					don't have the original email anymore but I distinctly remember it saying something along
-					the lines of "Stop trying to hack our platform and get back to doing your homework."
+					After this, we got in contact with our Math teacher in November of 2018 and got her to
+					send an email to HegartyMaths informing them of our petty exploit and they got back to us
+					very quickly.{' '}
+					<span className="line-through">
+						I don't have the original email anymore but I distinctly remember it saying something
+						along the lines of "Stop trying to hack our platform and get back to doing your
+						homework."
+					</span>{' '}
+					Edit: While writing this, I was able to uncover the deleted email from a photo we had
+					taken of it in 2020. See below{' '}
+					<span className="opacity-50">(certain details redacted for obvious reasons)</span>:
 				</p>
+
+				<img src={hegartyTimeExploit.src} alt="Hegarty Time Exploit Email" />
 
 				<p>
 					This response excited us a bit, as they were now aware of us messing around with the site
@@ -83,19 +94,21 @@ export class Mochip extends Post {
 				</p>
 
 				<h2>Educake</h2>
+
 				<p>
-					2018-19, our school gives us access to a new platform for science homework, Educake. It's
-					good, and it doesn't have a video to watch at the beginning (woohoo)! But, it's still
-					homework and I am still a software engineer. I accept my fate for around a year until 2019
-					began to close just before the covid-19 update drops.
+					For a while, students had access to another platform called Educake. Similar to
+					HegartyMaths but targeting Biology, Chemistry and Physics. There was no video to watch at
+					the beginning. We'd used it for a few years, in fact since I joined the school, but I'd
+					never thought about reversing until all of this began.
 				</p>
+
 				<p>
-					One common factor between Hegarty and Educake is that they both give you straight away the
-					correct answer if you got a question wrong, so I, now working on the project solo, took
-					advantage of this and wrote a small js express app with mongodb and tampermonkey script to
-					detect when I'm on a quiz page, and answer every question with a random number and then
-					store the correct answer in mongo. I don't have the original source but it was{' '}
-					<i>something</i> like the following.
+					One common factor between Hegarty and Educake is that immediately give you the correct
+					answer if you got a question wrong. Now working on the project solo, I took advantage of
+					this and wrote a small node/mongo app &amp; tampermonkey script to detect when I'm on a
+					quiz page, and answer every question with a random number and then store the correct
+					answer in mongodb. I don't have the original source but the TamperMonkey script was{' '}
+					<i>probably something</i> like the following:
 				</p>
 
 				<Highlighter>
@@ -135,6 +148,14 @@ export class Mochip extends Post {
 					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
 					experience before) and also for myself to get out of homework I didn't want to do.
 				</p>
+
+				<p>
+					Below is a small video of what it all looked like. It also demonstrates a feature I added
+					allowing for a "target percentage" — meaning users could get something other than 100% to
+					look like more real/human score. Video was recorded on my Snapchat in November 2019.
+				</p>
+
+				<video controls src="/videos/mochip-educake.mp4" />
 			</>
 		);
 	}
