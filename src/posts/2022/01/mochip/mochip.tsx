@@ -145,12 +145,15 @@ export class Mochip extends Post {
 					The end result? A ~200 line codebase that scooped up all questions and answered on the
 					site and could repeatedly get 100% on every single assignment and a 15mb mongo database.
 				</p>
+
 				<p>
 					Below is a small video of what it all looked like. It also demonstrates a feature I added
 					allowing for a "target percentage" — meaning users could get something other than 100% to
 					look like more real/human score. Video was recorded on my Snapchat in November 2019.
 				</p>
+
 				<video controls src="/videos/mochip-educake.mp4" />
+
 				<h2>Hegarty 2</h2>
 				<p>
 					The success of this script along with pressure from my peers led me to gain a lot of
