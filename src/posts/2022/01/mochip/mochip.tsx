@@ -1,11 +1,11 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
-import hegartyTimeExploit from './hegarty-time-exploit.png';
 import emailFromColin from './email-from-colin.png';
 import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
+import hegartyTimeExploit from './hegarty-time-exploit.png';
 
 export class Mochip extends Post {
 	public name = 'mochip.xyz';
