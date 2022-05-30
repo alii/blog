@@ -5,5 +5,6 @@ export abstract class Post {
 	public abstract readonly hidden: boolean;
 	public abstract readonly excerpt: string;
 	public abstract readonly keywords: string[];
+	public abstract readonly image: string;
 	public abstract render(): JSX.Element;
 }
