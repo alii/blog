@@ -1,6 +1,8 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
+import {Meta} from '../../../../client/components/meta';
 import {Post} from '../../../Post';
+import blog from './blog.png';
 
 export class ZeroKbBlog extends Post {
 	public name = 'The 0kb Next.js blog';
@@ -9,10 +11,13 @@ export class ZeroKbBlog extends Post {
 	public hidden = false;
 	public excerpt = 'How I shipped a Next.js app with a 0kb bundle';
 	public keywords = ['nextjs', 'zero', 'bundle', 'nextjs-zero-bundle', 'unstable_runtimeJS'];
+	public image = blog;
 
 	public render() {
 		return (
 			<>
+				<Meta title={this.name} description={this.excerpt} image={this.image.src} />
+
 				<h1>The 0kb Next.js blog</h1>
 				<p>
 					Ok so this was a little bit clickbaity, but it's not technically a lie. This entire

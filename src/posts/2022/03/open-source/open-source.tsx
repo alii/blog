@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-child-element-spacing */
 
 import {Post} from '../../../Post';
+import openSource from './open-source.png';
 
 export class OpenSource extends Post {
 	public name = 'Open Source';
@@ -10,6 +11,7 @@ export class OpenSource extends Post {
 	public hidden = false;
 	public excerpt = 'Thoughts & feelings on Open Source';
 	public keywords = ['Developer', 'Open Source', 'GitHub', 'sponsorships'];
+	public image = openSource;
 
 	public render() {
 		return (
