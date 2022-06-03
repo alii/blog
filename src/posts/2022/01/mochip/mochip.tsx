@@ -6,6 +6,7 @@ import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
 import hegartyTimeExploit from './hegarty-time-exploit.png';
+import {Meta} from '../../../../client/components/meta';
 
 export class Mochip extends Post {
 	public name = 'mochip.xyz';
@@ -23,10 +24,13 @@ export class Mochip extends Post {
 		'maths homework',
 		'programming',
 	];
+	public image = goodbyeMochip;
 
 	public render() {
 		return (
 			<>
+				<Meta title={this.name} description={this.excerpt} image={this.image.src} />
+
 				<h1>mochip.xyz</h1>
 				<p>
 					The long awaited story of mochip is finally here. a twisted tale of homework, the 2020

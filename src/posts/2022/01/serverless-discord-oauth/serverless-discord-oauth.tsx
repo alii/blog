@@ -1,6 +1,8 @@
 import {stripIndent} from 'common-tags';
+import {StaticImageData} from 'next/image';
 import Link from 'next/link';
 import {Highlighter} from '../../../../client/components/highlighter';
+import {Meta} from '../../../../client/components/meta';
 import {Post} from '../../../Post';
 import discordOAuthDashboardImage from './discord-oauth-dashboard.png';
 
@@ -11,10 +13,12 @@ export class ServerlessDiscordOAuth extends Post {
 	public excerpt = "Implementing basic Discord OAuth on Vercel's serverless platform";
 	public hidden = false;
 	public keywords = ['serverless', 'vercel', 'discord', 'oauth', 'node'];
+	public image: StaticImageData = discordOAuthDashboardImage;
 
 	public render() {
 		return (
 			<>
+				<Meta title={this.name} description={this.excerpt} image={this.image.src} />
 				<h1>Serverless Discord OAuth with Next.js</h1>
 				<p>
 					OAuth is arguably the number one way to authorize a user from a third party platform. It
