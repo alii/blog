@@ -12,7 +12,7 @@ export class Mochip extends Post {
 	public slug = 'mochip';
 	public date = new Date('6 Jan 2022');
 	public excerpt = 'The eventful tale of me getting fed up with my homework';
-	public hidden = true;
+	public hidden = false;
 	public keywords = [
 		'school',
 		'homework',
@@ -28,15 +28,15 @@ export class Mochip extends Post {
 		return (
 			<>
 				<h1>mochip.xyz</h1>
+
 				<p>
-					The long awaited story of mochip is finally here. a twisted tale of homework, the 2020
-					lockdown, and the end of the world. welcome to the story of mochip, perhaps my most
-					ambitious and indeed interesting project.
+					Back in of 2020, my school used a few online learning platforms that allowed
+					professors/teachers to assign homework to students. I, as a lazy developer, wanted to
+					spend more time playing games and writing code, especially when everyone was spending
+					their time at home because of lockdown. I've put off publicizing this post for a while but
+					it has been long enough since it all happened, so please enjoy.
 				</p>
-				<p>
-					Small disclaimer: this post was written as a teenager with no will to partake in their
-					home studies. Education is important! Are you sitting comfortably? Then I'll begin...
-				</p>
+
 				<h2>The back story</h2>
 				<p>
 					Let's set the scene. 2018, my school introduces a new online homework platform for
