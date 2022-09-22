@@ -885,6 +885,7 @@ __metadata:
     dayjs: ^1.11.5
     discord-api-types: ^0.37.10
     envsafe: ^2.0.3
+    es-urlcat: ^1.0.0
     eslint: ^8.23.1
     eslint-config-next: 12.3.1
     eslint-config-xo: ^0.42.0
@@ -1511,6 +1512,15 @@ __metadata:
     is-date-object: ^1.0.1
     is-symbol: ^1.0.2
   checksum: 4ead6671a2c1402619bdd77f3503991232ca15e17e46222b0a41a5d81aebc8740a77822f5b3c965008e631153e9ef0580540007744521e72de8e33599fca2eed
+  languageName: node
+  linkType: hard
+
+"es-urlcat@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "es-urlcat@npm:1.0.0"
+  dependencies:
+    qs: ^6.9.4
+  checksum: e646f8510f80e11951602178168d2348fcbc39ed12cc80b0c93d592224a4692c155250e136c05cae4f9a4325ba5f991554d94623b2ebbb431d6064119a2acacf
   languageName: node
   linkType: hard
 
@@ -3694,6 +3704,15 @@ __metadata:
   version: 2.1.1
   resolution: "punycode@npm:2.1.1"
   checksum: 823bf443c6dd14f669984dea25757b37993f67e8d94698996064035edd43bed8a5a17a9f12e439c2b35df1078c6bec05a6c86e336209eb1061e8025c481168e8
+  languageName: node
+  linkType: hard
+
+"qs@npm:^6.9.4":
+  version: 6.11.0
+  resolution: "qs@npm:6.11.0"
+  dependencies:
+    side-channel: ^1.0.4
+  checksum: 6e1f29dd5385f7488ec74ac7b6c92f4d09a90408882d0c208414a34dd33badc1a621019d4c799a3df15ab9b1d0292f97c1dd71dc7c045e69f81a8064e5af7297
   languageName: node
   linkType: hard
 
