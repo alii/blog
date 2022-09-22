@@ -1,4 +1,4 @@
-import {Post} from './Post';
+import type {Post} from './Post';
 import {ensure} from '../types';
 
 import {Goals} from './2022/01/goals/goals';

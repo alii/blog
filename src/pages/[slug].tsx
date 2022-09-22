@@ -1,4 +1,4 @@
-import {GetStaticPaths, GetStaticProps, PageConfig} from 'next';
+import type {GetStaticPaths, GetStaticProps, PageConfig} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import {posts} from '../posts';
@@ -7,9 +7,9 @@ export const config: PageConfig = {
 	unstable_runtimeJS: false,
 };
 
-interface Props {
+type Props = {
 	slug: string;
-}
+};
 
 export default function PostPage({slug}: Props) {
 	const post = posts.find(post => post.slug === slug)!;

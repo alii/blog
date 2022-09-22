@@ -1,6 +1,6 @@
-import {PageConfig} from 'next';
+import type {PageConfig} from 'next';
 import Link from 'next/link';
-import {ReactNode} from 'react';
+import type {ReactNode} from 'react';
 import {posts} from '../posts';
 
 // Sweet zero js 🤑

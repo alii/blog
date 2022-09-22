@@ -1,7 +1,7 @@
-import {PageConfig} from "next";
+import type {PageConfig} from 'next';
 
 export const config: PageConfig = {
-    unstable_runtimeJS: false,
+	unstable_runtimeJS: false,
 };
 
 export default function Page404() {
