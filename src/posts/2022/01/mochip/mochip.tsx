@@ -5,7 +5,7 @@ import emailFromColin from './email-from-colin.png';
 import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
-import hegartyTimeExploit from './hegarty-time-exploit.png';
+import hegartyTimeExploit from './hegarty-time-exploit.webp';
 
 export class Mochip extends Post {
 	public name = 'Avoiding homework with code (and getting caught)';
