@@ -8,7 +8,7 @@ import mochipLanding from './landing.jpeg';
 import hegartyTimeExploit from './hegarty-time-exploit.png';
 
 export class Mochip extends Post {
-	public name = 'mochip.xyz';
+	public name = 'Avoiding homework with code (and getting caught)';
 	public slug = 'mochip';
 	public date = new Date('6 Jan 2022');
 	public excerpt = 'The eventful tale of me getting fed up with my homework';
