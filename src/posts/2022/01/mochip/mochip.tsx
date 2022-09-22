@@ -27,7 +27,7 @@ export class Mochip extends Post {
 	public render() {
 		return (
 			<>
-				<h1>mochip.xyz</h1>
+				<h1>Avoiding homework with code (and getting caught)</h1>
 
 				<p>
 					Back in of 2020, my school used a few online learning platforms that allowed
