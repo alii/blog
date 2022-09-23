@@ -257,6 +257,19 @@ export class Mochip extends Post {
 					Thank you for reading, truly. Mochip was a real passion project and I had a wild time
 					building it. ⭐
 				</p>
+
+				<hr />
+
+				<p>
+					Edit as of 23 Sept, 2022: After making this post public, I posted this on HackerNews and
+					amazingly got to #1 for a few hours, so this site received a lot of traffic. I served
+					almost 1.5tb of content in about 6 hours. Some of the employees at Sparx (the parent
+					company of HegartyMaths) ended up seeing this and sent it it on Colin. A few minutes ago I
+					just received a really, <i>really</i> lovely email from Mr Hegarty himself with the
+					subject "Congrats to you!". I am so grateful for the kindness and consideration Colin has
+					shown Scott and I. If you are a teacher using this, then please use HegartyMaths for your
+					students! The happy ending.
+				</p>
 			</>
 		);
 	}
