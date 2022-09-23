@@ -49,11 +49,9 @@ export class Mochip extends Post {
 					(bad).
 				</p>
 				<p>
-					Software engineers are naturally lazy individuals. Sure, some get up at 3:30am and go for
-					a "light" 2 hour run in Silicon Valley (before stopping to get their Cloudy Toffee and
-					Caramel Iced Frappe Latte with sprinkles and extra cream and sugar from Philz Coffee), but
-					most of us are lazy. Homework then, naturally, is an arduous task. So, still 2018, myself
-					and a close friend of mine by the name of{' '}
+					Mostly, software engineers are rather lazy individuals. We tell metal how to do stuff for
+					us. Homework then, naturally, is an arduous task for a developer who is still at school.
+					So, still 2018, myself and a close friend of mine by the name of{' '}
 					<a href="https://hiett.dev" target="_blank" rel="noreferrer">
 						Scott Hiett
 					</a>{' '}
