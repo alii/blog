@@ -138,11 +138,11 @@ export class Mochip extends Post {
 					Now working on the project solo, I decided it would be time to build a nice UI for it all
 					and bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
 					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
-					experience before) and also for myself to get out of homework I didn't want to do.
+					experienced before) and also for myself to get out of homework I didn't want to do.
 				</p>
 				<p>
-					The end result? A ~200 line codebase that scooped up all questions and answered on the
-					site and could repeatedly get 100% on every single assignment and a 15mb mongo database.
+					The end result? A ~200 line codebase that scooped up all questions and answers on the site
+					that could repeatedly get 100% on every single assignment and a 15mb mongo database.
 				</p>
 
 				<p>
