@@ -22,13 +22,6 @@ export default function App({Component, pageProps, router}: AppProps) {
 				>
 					Alistair Smith
 				</a>
-
-				<img
-					className="opacity-50"
-					src={urlcat('https://hits.link', '/hits', {
-						url: urlcat('https://alistair.blog', router.asPath),
-					})}
-				/>
 			</footer>
 		</div>
 	);
