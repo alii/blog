@@ -15,4 +15,4 @@ export const posts = [
 	new ServerlessDiscordOAuth(),
 	new Goals(),
 	new StrictTSConfig(),
-] as const satisfies readonly Post[];
+] as const;
