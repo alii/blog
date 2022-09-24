@@ -267,8 +267,8 @@ export class Mochip extends Post {
 					company of HegartyMaths) ended up seeing this and sent it it on Colin. A few minutes ago I
 					just received a really, <i>really</i> lovely email from Mr Hegarty himself with the
 					subject "Congrats to you!". I am so grateful for the kindness and consideration Colin has
-					shown Scott and I. If you are a teacher using this, then please use HegartyMaths for your
-					students! The happy ending.
+					shown Scott and I. If you are a teacher reading this, then please use HegartyMaths for
+					your students! The happy ending.
 				</p>
 			</>
 		);
