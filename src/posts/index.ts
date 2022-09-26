@@ -5,6 +5,7 @@ import {ZeroKbBlog} from './2022/01/zero-kb-blog/zero-kb-blog';
 import {OpenSource} from './2022/03/open-source/open-source';
 import {ServerlessOAuthPart2} from './2022/05/serverless-oauth-pt2/serverless-oauth-pt2';
 import {StrictTSConfig} from './2022/08/strict-tsconfig/strict-tsconfig';
+import {Post} from './Post';
 
 export const posts = [
 	new ServerlessOAuthPart2(),
@@ -14,4 +15,4 @@ export const posts = [
 	new ServerlessDiscordOAuth(),
 	new Goals(),
 	new StrictTSConfig(),
-] as const;
+] satisfies readonly Post[];
