@@ -5,15 +5,15 @@ import emailFromColin from './email-from-colin.png';
 import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
-import hegartyTimeExploit from './hegarty-time-exploit.png';
+import hegartyTimeExploit from './hegarty-time-exploit.webp';
 import {Meta} from '../../../../client/components/meta';
 
 export class Mochip extends Post {
-	public name = 'mochip.xyz';
+	public name = 'Avoiding homework with code (and getting caught)';
 	public slug = 'mochip';
 	public date = new Date('6 Jan 2022');
 	public excerpt = 'The eventful tale of me getting fed up with my homework';
-	public hidden = true;
+	public hidden = false;
 	public keywords = [
 		'school',
 		'homework',
@@ -29,18 +29,18 @@ export class Mochip extends Post {
 	public render() {
 		return (
 			<>
-				<Meta title={this.name} description={this.excerpt} image={this.image.src} />
+        <Meta title={this.name} description={this.excerpt} image={this.image.src} />
+				<h1>Avoiding homework with code (and getting caught)</h1>
 
-				<h1>mochip.xyz</h1>
 				<p>
-					The long awaited story of mochip is finally here. a twisted tale of homework, the 2020
-					lockdown, and the end of the world. welcome to the story of mochip, perhaps my most
-					ambitious and indeed interesting project.
+					Back in of 2020, my school used a few online learning platforms that allowed
+					professors/teachers to assign homework to students. I, as a lazy developer, wanted to
+					spend more time playing games and writing code, especially when everyone was spending
+					their time at home because of lockdown. I started writing this post in January of 2022,
+					but I put off publicizing it for a while. It has been long enough since this all happened,
+					so please sit back and enjoy.
 				</p>
-				<p>
-					Small disclaimer: this post was written as a teenager with no will to partake in their
-					home studies. Education is important! Are you sitting comfortably? Then I'll begin...
-				</p>
+
 				<h2>The back story</h2>
 				<p>
 					Let's set the scene. 2018, my school introduces a new online homework platform for
@@ -52,11 +52,9 @@ export class Mochip extends Post {
 					(bad).
 				</p>
 				<p>
-					Software engineers are naturally lazy individuals. Sure, some get up at 3:30am and go for
-					a "light" 2 hour run in Silicon Valley (before stopping to get their Cloudy Toffee and
-					Caramel Iced Frappe Latte with sprinkles and extra cream and sugar from Philz Coffee), but
-					most of us are lazy. Homework then, naturally, is an arduous task. So, still 2018, myself
-					and a close friend of mine by the name of{' '}
+					Mostly, software engineers are rather lazy individuals. We tell metal how to do stuff for
+					us. Homework then, naturally, is an arduous task for a developer who is still at school.
+					So, still 2018, myself and a close friend of mine by the name of{' '}
 					<a href="https://hiett.dev" target="_blank" rel="noreferrer">
 						Scott Hiett
 					</a>{' '}
@@ -143,11 +141,11 @@ export class Mochip extends Post {
 					Now working on the project solo, I decided it would be time to build a nice UI for it all
 					and bundle it all into a simple Tampermonkey script for both flexing rights on Snapchat
 					(people constantly begging me to be able to use it was certainly ego fuel I hadn't
-					experience before) and also for myself to get out of homework I didn't want to do.
+					experienced before) and also for myself to get out of homework I didn't want to do.
 				</p>
 				<p>
-					The end result? A ~200 line codebase that scooped up all questions and answered on the
-					site and could repeatedly get 100% on every single assignment and a 15mb mongo database.
+					The end result? A ~200 line codebase that scooped up all questions and answers on the site
+					that could repeatedly get 100% on every single assignment and a 15mb mongo database.
 				</p>
 
 				<p>
@@ -261,6 +259,19 @@ export class Mochip extends Post {
 				<p>
 					Thank you for reading, truly. Mochip was a real passion project and I had a wild time
 					building it. ⭐
+				</p>
+
+				<hr />
+
+				<p>
+					Edit as of 23 Sept, 2022: After making this post public, I posted this on HackerNews and
+					amazingly got to #1 for a few hours, so this site received a lot of traffic. I served
+					almost 1.5tb of content in about 6 hours. Some of the employees at Sparx (the parent
+					company of HegartyMaths) ended up seeing this and sent it it on Colin. A few minutes ago I
+					just received a really, <i>really</i> lovely email from Mr Hegarty himself with the
+					subject "Congrats to you!". I am so grateful for the kindness and consideration Colin has
+					shown Scott and I. If you are a teacher reading this, then please use HegartyMaths for
+					your students! The happy ending.
 				</p>
 			</>
 		);
