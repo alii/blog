@@ -4,6 +4,7 @@ import '../styles/main.css';
 import React from 'react';
 import Head from 'next/head';
 import type {AppProps} from 'next/app';
+import Script from 'next/script';
 
 export default function App({Component, pageProps, router}: AppProps) {
 	return (
@@ -22,6 +23,15 @@ export default function App({Component, pageProps, router}: AppProps) {
 					Alistair Smith
 				</a>
 			</footer>
+
+			<Script src="https://lab.alistair.cloud/latest.js" />
+			<noscript>
+				<img
+					src="https://lab.alistair.cloud/noscript.gif"
+					alt=""
+					referrerPolicy="no-referrer-when-downgrade"
+				/>
+			</noscript>
 		</div>
 	);
 }
