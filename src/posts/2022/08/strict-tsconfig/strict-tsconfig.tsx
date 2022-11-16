@@ -27,7 +27,8 @@ export class StrictTSConfig extends Post {
 							"noUnusedParameters": true,
 							"exactOptionalPropertyTypes": true,
 							"noImplicitReturns": true,
-							"noUncheckedIndexedAccess": true
+							"noUncheckedIndexedAccess": true,
+							"importsNotUsedAsValues": "error"
 						}
 					}
                 		`}
