@@ -41,7 +41,7 @@ export default function PostPage({slug}: Props) {
 				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
 			</p>
 
-			<main className="prose max-w-none prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
+			<main className="prose prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
 				{post.render()}
 			</main>
 		</div>
