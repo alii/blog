@@ -82,7 +82,7 @@ export class ZeroKbBlog extends Post {
 				</p>
 
 				<p>
-					p.s please check out my twitter <a href="https://twitter.com/alistaiiiir">@alistaiiiir</a>{' '}
+					p.s please check out my twitter <a href="https://twitter.com/alistaiir">@alistaiir</a>{' '}
 					:)
 				</p>
 			</>
