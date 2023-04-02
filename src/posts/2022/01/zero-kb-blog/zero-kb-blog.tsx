@@ -16,8 +16,8 @@ export class ZeroKbBlog extends Post {
 				<h1>The 0kb Next.js blog</h1>
 				<p>
 					Ok so this was a little bit clickbaity, but it's not technically a lie. This entire
-					website has a zero kilobyte bundle on <i>every single page</i>... except it uses no
-					JavaScript... how can this be possible?
+					website has zero JavaScript on <i>every single page</i>... a Next.js app with zero
+					client side JS. How can this be possible?
 				</p>
 				<h2>Context</h2>
 				<p>
