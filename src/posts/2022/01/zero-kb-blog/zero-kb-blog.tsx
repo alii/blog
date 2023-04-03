@@ -1,6 +1,7 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
+import {Note} from '../../../../client/components/note';
 
 export class ZeroKbBlog extends Post {
 	public name = 'The 0kb Next.js blog';
@@ -14,10 +15,16 @@ export class ZeroKbBlog extends Post {
 		return (
 			<>
 				<h1>The 0kb Next.js blog</h1>
+
+				<Note variant="warning" title="Update 3rd April 2023">
+					This blog post applies to pages dir - which is the majority of Next.js apps. I cannot
+					confirm if this will still work on the upcoming app dir, in Next 13.
+				</Note>
+
 				<p>
 					Ok so this was a little bit clickbaity, but it's not technically a lie. This entire
-					website has zero JavaScript on <i>every single page</i>... a Next.js app with zero
-					client side JS. How can this be possible?
+					website has zero JavaScript on <i>every single page</i>... a Next.js app with zero client
+					side JS. How can this be possible?
 				</p>
 				<h2>Context</h2>
 				<p>
@@ -82,8 +89,7 @@ export class ZeroKbBlog extends Post {
 				</p>
 
 				<p>
-					p.s please check out my twitter <a href="https://twitter.com/alistaiir">@alistaiir</a>{' '}
-					:)
+					p.s please check out my twitter <a href="https://twitter.com/alistaiir">@alistaiir</a> :)
 				</p>
 			</>
 		);
