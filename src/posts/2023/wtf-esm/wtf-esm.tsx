@@ -11,6 +11,7 @@ export class WTFESM extends Post {
 	public hidden = true;
 	public excerpt =
 		'I recently Tweeted about publishing a dual ESM and CJS package to npm. It got a lot of likes, and here is why that matters.';
+
 	public keywords = ['javascript', 'esm', 'typescript', 'publish', 'package', 'npm', 'node'];
 
 	public render(): JSX.Element {
@@ -128,7 +129,7 @@ export class WTFESM extends Post {
 					</li>
 
 					<li>
-						<code>.exports[].types</code> is for TypeScript type definitions. A single
+						<code>.exports[].types</code> is for TypeScript type definitions. A single{' '}
 						<code>.d.ts</code> file can define all exported symbols in your package for both CJS and
 						ESM.
 					</li>
