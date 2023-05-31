@@ -855,6 +855,7 @@ __metadata:
     eslint-config-xo-typescript: ^0.56.0
     jsonwebtoken: ^9.0.0
     next: canary
+    nextkit: ^3.4.3
     postcss: ^8.4.21
     prettier: ^2.8.7
     react: 18.2.0
@@ -3232,6 +3233,15 @@ __metadata:
   bin:
     next: dist/bin/next
   checksum: fbb4b11b2e290ec07edd6e486dfa4b66a1dfb4a587333a5597eefb343bb2619df1218ef9a785f36c872e932e9968f0ebfcd6f0d11da331b05e531fa208b8113a
+  languageName: node
+  linkType: hard
+
+"nextkit@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "nextkit@npm:3.4.3"
+  peerDependencies:
+    next: "*"
+  checksum: 4d4177ae0049450898efe95c2e31f0fcf75b54de04240984650b3a7f52dc16e5e0d1811687b2717c96e86146077138fa708a465ff5db3906ed0620a120b761ad
   languageName: node
   linkType: hard
 

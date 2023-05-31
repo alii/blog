@@ -5,5 +5,17 @@ export abstract class Post {
 	public abstract readonly hidden: boolean;
 	public abstract readonly excerpt: string;
 	public abstract readonly keywords: string[];
+
+	public toJSON() {
+		return {
+			name: this.name,
+			slug: this.slug,
+			date: this.date.toISOString(),
+			hidden: this.hidden,
+			excerpt: this.excerpt,
+			keywords: this.keywords,
+		};
+	}
+
 	public abstract render(): JSX.Element;
 }
