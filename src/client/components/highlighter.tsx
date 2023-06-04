@@ -17,7 +17,7 @@ export function Highlighter({
 				</SyntaxHighlighter>
 			</div>
 
-			<div className="dark:hidden">
+			<div className="dark:hidden border border-neutral-100 rounded-md">
 				<SyntaxHighlighter language={language} style={light}>
 					{children}
 				</SyntaxHighlighter>

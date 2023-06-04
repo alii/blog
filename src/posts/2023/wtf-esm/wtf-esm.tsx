@@ -1,8 +1,8 @@
 import {stripIndent} from 'common-tags';
 import {ExternalLink} from '../../../client/components/external-link';
 import {Highlighter} from '../../../client/components/highlighter';
-import {Post} from '../../Post';
 import {Note} from '../../../client/components/note';
+import {Post} from '../../Post';
 
 export class WTFESM extends Post {
 	public name = 'WTF, ESM!?';
@@ -44,9 +44,9 @@ export class WTFESM extends Post {
 
 				<p>
 					Andrew works on TypeScript itself at Microsoft, specifically on auto imports and modules.
-					He's the only person on the planet who knows exactly how this works inside out. He will be
-					summoned if you say "module resolution" three times in the dark. Thank you Andy - you're
-					truly a super star ⭐💖
+					It's likely he's the only person on the planet who knows exactly how this works inside
+					out. It's been rumoured that he will be summoned if you utter "module resolution" three
+					times in the dark. Thank you Andy - you're truly a super star ⭐💖
 				</p>
 
 				<hr />
@@ -89,11 +89,11 @@ export class WTFESM extends Post {
 
 				<p>
 					It's pretty hard to get a conclusive answer from the "crowd" of JavaScript developers
-					about the best way to publish a package to npm. Everyone will have different answers. We
+					about the best way to publish a package to npm. Everyone has conflicting answers &amp; we
 					all seem to be following what already exists on GitHub and npm. There are lots of packages
 					that are published technically incorrectly but used and installed by millions of people.
-					To me, this is a colloquial standard. Here's what I <b>*thought to be true*</b>, and so do
-					most other devs...
+					This means a lot of packages follow what I'm calling a colloquial standard. Here's what I{' '}
+					<b>*thought to be true*</b>, and so do most other devs...
 				</p>
 
 				<Note variant="warning" title="Warning">
@@ -115,8 +115,8 @@ export class WTFESM extends Post {
 					<li>
 						<code>.module</code> is for an ESM entrypoint before <code>exports</code> existed. This
 						was mostly used by bundlers like Webpack, and has never been part of any standard. It's
-						superseded by <code>exports</code>, but it might be good to keep supporting the older
-						bundlers.
+						superseded by <code>exports</code>, but it might be good to keep in order to support the
+						older bundlers.
 					</li>
 
 					<li>
@@ -129,21 +129,27 @@ export class WTFESM extends Post {
 					</li>
 
 					<li>
-						<code>.exports[].types</code> is for TypeScript type definitions. A single{' '}
+						<code>.exports[string].types</code> is for TypeScript type definitions. A single{' '}
 						<code>.d.ts</code> file can define all exported symbols in your package for both CJS and
 						ESM.
 					</li>
 
 					<li>
-						<code>.exports[].import</code> is for ESM. This is the entrypoint for how a modern
+						<code>.exports[string].import</code> is for ESM. This is the entrypoint for how a modern
 						runtime should import your package when running under CommonJS. It is a single ESM
 						compatible file.
 					</li>
 
 					<li>
-						<code>.exports[].require</code> is for CJS. This is the entrypoint for how a modern
-						runtime should import your package when running under CommonJS. It is a single CJS
-						compatible file.
+						<code>.exports[string].require</code> is for CJS. This is the entrypoint for how a
+						modern runtime should import your package when running under CommonJS. It is a single
+						CJS compatible file.
+					</li>
+
+					<li>
+						<code>.exports[string].default</code> is for when a runtime does not match any other
+						condition, and is a fallback. It's also within the spec to specify <code>default</code>{' '}
+						as the <b>only</b> entrypoint. I did not use <code>default</code> in my initial Tweet.
 					</li>
 				</ul>
 
@@ -152,8 +158,8 @@ export class WTFESM extends Post {
 					there should be <b>two</b> <code>types</code> fields. One for ESM, one for CJS. Even the
 					TypeScript documentation gets this wrong, and is something they're working on updating.
 					Solutions for this are also pretty wild. I've managed to get things working by simply
-					copying my <code>index.d.ts</code> to <code>index.d.cts</code> after bundling, and making
-					the following changes to my <code>package.json</code>.
+					copying <code>./dist/index.d.ts</code> to <code>./dist/index.d.cts</code> after bundling,
+					and making the following changes to my <code>package.json</code>.
 				</p>
 
 				<Highlighter language="json">
@@ -162,12 +168,12 @@ export class WTFESM extends Post {
                                 "exports": {
                                     ".": {
                                         "import": {
-                                            "default": "./dist/index.js",
-                                            "types": "./dist/index.d.ts"
+                                            "types": "./dist/index.d.ts",
+                                            "default": "./dist/index.js"
                                         },
                                         "require": {
-                                            "default": "./dist/index.cjs",
-                                            "types": "./dist/index.d.cts"
+                                            "types": "./dist/index.d.cts",
+                                            "default": "./dist/index.cjs"
                                         }
                                     },
                                     "./package.json": "./package.json"
@@ -180,16 +186,9 @@ export class WTFESM extends Post {
 					Note that we point to a .js file and not .mjs when targeting ESM. This is because our
 					package.json has <code>type</code> set to <code>module</code>. This tells our runtime that
 					all files are assumed to be ESM unless they have a <code>.cjs</code> extension. There's no
-					such thing as an esm package, only esm files. Using <code>"type": "module",</code> is just
+					such thing as an ESM package, only ESM files. Using <code>"type": "module",</code> is just
 					a way to tell the runtime to interpret existing files as ESM.
 				</p>
-
-				<p>
-					Wow, this is getting quite messy. We shouldn't have to expand the object so much that it
-					starts to get unreadible.
-				</p>
-
-				<p>Also, I thought that col</p>
 
 				<h3>What gives?</h3>
 
@@ -197,6 +196,74 @@ export class WTFESM extends Post {
 					I'm still figuring this all out, and I'm not an expert. I'm just trying to share what I
 					have learned so far. If you have any corrections or suggestions, please let me know!
 				</Note>
+
+				<p>
+					Clearly, this is messy. It's messy because we're trying to support a lot of different
+					runtimes, and we're trying to support them all at once. We're trying to support ESM, CJS,
+					legacy bundlers, modern bundlers, and TypeScript. We're trying to support all of these
+					runtimes at once, and finally, we're trying to support them all at once in a single{' '}
+					<code>package.json</code> file. Few other languages suffer from this level of complexity
+					and fragmentation.
+				</p>
+
+				<p>
+					Let's break down the mess and why all these things are the way they are. Starting off with{' '}
+					<code>exports</code>.
+				</p>
+
+				<p>
+					<code>exports</code> is the modern way to define what your package exports. We have
+					already established that it is a map of entrypoints to files. Let's step through what
+					happens when a runtime/consumer (we'll use the word consumer, because TypeScript - which
+					is not a runtime - is also reading our code in this case) wants to import our package.
+				</p>
+
+				<ol>
+					<li>
+						<p>Consumer encounters an import statement</p>
+
+						<Highlighter>
+							{stripIndent`
+								import {something} from 'my-package';
+							`}
+						</Highlighter>
+					</li>
+
+					<li>
+						<p>
+							Consumer resolve the source code for <code>my-package</code>. In Node.js this is done
+							by looking for the folder name in <code>node_modules</code>, and then finding the{' '}
+							<code>package.json</code>. In any case, this is up to the consumer to implement
+						</p>
+					</li>
+
+					<li>
+						<p>
+							Consumer finds <code>package.json</code> file in the source code folder, and begins to
+							read the <code>exports</code> field
+						</p>
+					</li>
+
+					<li>
+						It steps through each field (in order, despite it being an object) and checks if the
+						condition the consumer is looking for exists in the <code>exports</code> field.
+					</li>
+
+					<li>
+						<p>
+							If the condition is met, the consumer will use the file specified in the{' '}
+							<code>exports</code> field as the entrypoint for the package. If the condition is not
+							met, it will continue to the next field. If no condition is met, a consumer will
+							usually exit/throw an error.
+						</p>
+
+						<p>
+							An example of a condition being met could be Node.js looking for an ESM file. In this
+							case, it would look for the <code>import</code> condition first, before trying to fall
+							back to <code>default</code> if it exists.
+						</p>
+					</li>
+				</ol>
 			</>
 		);
 	}

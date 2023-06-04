@@ -1,7 +1,8 @@
 import type {PageConfig} from 'next';
 import Link from 'next/link';
 import type {ReactNode} from 'react';
-import {posts} from '../posts';
+import {posts, sortPosts} from '../posts';
+import {flatMap} from '../util/flat-map';
 
 // Sweet zero js 🤑
 export const config: PageConfig = {
@@ -24,13 +25,17 @@ export default function Home() {
 			</h2>
 
 			<ul className="space-y-1 list-disc list-inside">
-				{posts
-					.filter(post => !post.hidden)
-					.map(post => (
+				{flatMap(sortPosts(posts), post => {
+					if (post.hidden) {
+						return [];
+					}
+
+					return [
 						<BlogLink key={post.slug} href={`/${post.slug}`}>
 							{post.name}
-						</BlogLink>
-					))}
+						</BlogLink>,
+					];
+				})}
 			</ul>
 		</main>
 	);

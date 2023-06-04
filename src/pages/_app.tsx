@@ -1,8 +1,8 @@
 import 'tailwindcss/tailwind.css';
 import '../styles/main.css';
 
-import Head from 'next/head';
 import type {AppProps} from 'next/app';
+import Head from 'next/head';
 import {ExternalLink} from '../client/components/external-link';
 
 const footerLink =
