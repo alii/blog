@@ -30,11 +30,10 @@ export default function PostPage({slug}: Props) {
 			)}
 
 			<div>
-				<Link href="/">
-					<a className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600">
-						../
-					</a>
-				</Link>
+			<Link className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600" href="/">
+				../
+			</Link>
+
 			</div>
 
 			<p>

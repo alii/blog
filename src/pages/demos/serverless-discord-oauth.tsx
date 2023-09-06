@@ -18,8 +18,8 @@ export default function ServerlessDiscordOAuthDemoPage({user}: Props) {
 			<div>
 				<h1>you are not signed in!</h1>
 
-				<Link href="/api/oauth">
-					<a className="text-blue-500 dark:text-blue-300">Log in with Discord ↗</a>
+				<Link className="text-blue-500 dark:text-blue-300" href="/api/oauth">
+					Log in with Discord ↗
 				</Link>
 			</div>
 		);
