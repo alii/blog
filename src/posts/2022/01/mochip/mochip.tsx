@@ -6,6 +6,7 @@ import goodbyeMochip from './goodbye-mochip.png';
 import gmeet from './gmeet.png';
 import mochipLanding from './landing.jpeg';
 import hegartyTimeExploit from './hegarty-time-exploit.webp';
+import {Meta} from '../../../../client/components/meta';
 
 export class Mochip extends Post {
 	public name = 'Avoiding homework with code (and getting caught)';
@@ -23,10 +24,12 @@ export class Mochip extends Post {
 		'maths homework',
 		'programming',
 	];
+	public image = goodbyeMochip;
 
 	public render() {
 		return (
 			<>
+        <Meta title={this.name} description={this.excerpt} image={this.image.src} />
 				<h1>Avoiding homework with code (and getting caught)</h1>
 
 				<p>

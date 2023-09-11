@@ -1,5 +1,7 @@
 import {stripIndents} from 'common-tags';
+import {Meta} from '../../../../client/components/meta';
 import {Post} from '../../../Post';
+import goals from './2022.jpeg';
 
 export class Goals extends Post {
 	public name = 'Goals';
@@ -10,10 +12,12 @@ export class Goals extends Post {
 	public excerpt = stripIndents`	
         My goals for the year
     `;
+	public image = goals;
 
 	render() {
 		return (
 			<>
+				<Meta title={this.name} description={this.excerpt} image={this.image.src} />
 				<h1>goals</h1>
 
 				<p>
