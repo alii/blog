@@ -14,22 +14,25 @@ export class StrictTSConfig extends Post {
 		return (
 			<Highlighter>
 				{stripIndent`
-                    {
-                        "compilerOptions": {
-                            "moduleResolution": "NodeNext",
-                            "module": "NodeNext",
-                            "strict": true,
-                            "useUnknownInCatchVariables": true,
-                            "noImplicitOverride": true,
-                            "noFallthroughCasesInSwitch": true,
-                            "noUnusedLocals": true,
-                            "noUnusedParameters": true,
-                            "exactOptionalPropertyTypes": true,
-                            "noImplicitReturns": true,
-                            "noUncheckedIndexedAccess": true
-                        }
-                    }
-                `}
+					{
+						"compilerOptions": {
+							"moduleResolution": "bundler",
+							"module": "ESNext",
+							"target": "ESNext",
+							"strict": true,
+							"useUnknownInCatchVariables": true,
+							"noImplicitOverride": true,
+							"noFallthroughCasesInSwitch": true,
+							"noUnusedLocals": true,
+							"noUnusedParameters": true,
+							"exactOptionalPropertyTypes": true,
+							"noImplicitReturns": true,
+							"noUncheckedIndexedAccess": true,
+							"allowImportingTsExtensions": true,
+							"verbatimModuleSyntax": true
+						}
+					}
+                		`}
 			</Highlighter>
 		);
 	}

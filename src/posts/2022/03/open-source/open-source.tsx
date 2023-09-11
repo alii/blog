@@ -25,13 +25,13 @@ export class OpenSource extends Post {
 				</p>
 
 				<p>
-					I really do love Open Source. I love being able to build software that I know people will
-					be able to make greate use of if it fits their use case. I love that we can extend already
-					existing open source software &amp; I love that we're able to put licenses on our code and
-					explain where and how you can use it.
+					I really do love open source. I love being able to build software that I know people will
+					be able to make great use of. I love that we can extend already existing open source
+					software &amp; I love that we're able to put licenses on our code and explain where and
+					how you can use it.
 				</p>
 				<p>
-					But open source is a tuly double-edged sword. Forever are there stories on Twitter with
+					But open source is a truly double-edged sword. Forever are there stories on Twitter with
 					people explaining how they were taken advantage of, or don't have the resource to keep
 					maintaining a project.
 				</p>

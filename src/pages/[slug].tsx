@@ -25,23 +25,22 @@ export default function PostPage({slug}: Props) {
 
 			{post.hidden && (
 				<div className="bg-yellow-500 text-yellow-900 rounded-md py-2 px-4">
-					<p>hey! this post is hidden! please don't share the link for now...</p>
+					<p>Hey! This post is hidden! Please don't share the link for now...</p>
 				</div>
 			)}
 
 			<div>
-				<Link href="/">
-					<a className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600">
-						../
-					</a>
-				</Link>
+			<Link className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600" href="/">
+				../
+			</Link>
+
 			</div>
 
 			<p>
 				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
 			</p>
 
-			<main className="prose max-w-none prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
+			<main className="prose prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
 				{post.render()}
 			</main>
 		</div>

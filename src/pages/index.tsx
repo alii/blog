@@ -1,7 +1,8 @@
 import type {PageConfig} from 'next';
 import Link from 'next/link';
 import type {ReactNode} from 'react';
-import {posts} from '../posts';
+import {posts, sortPosts} from '../posts';
+import {flatMap} from '../util/flat-map';
 
 // Sweet zero js 🤑
 export const config: PageConfig = {
@@ -11,15 +12,6 @@ export const config: PageConfig = {
 export default function Home() {
 	return (
 		<main className="space-y-8">
-			<div>
-				<a
-					className="text-sm text-yellow-700 dark:text-yellow-500"
-					href="https://old.alistair.blog"
-				>
-					⚠️ looking for the old blog?
-				</a>
-			</div>
-
 			<h2>
 				<span>alistair.blog</span>{' '}
 				<a
@@ -33,13 +25,17 @@ export default function Home() {
 			</h2>
 
 			<ul className="space-y-1 list-disc list-inside">
-				{posts
-					.filter(post => !post.hidden)
-					.map(post => (
+				{flatMap(sortPosts(posts), post => {
+					if (post.hidden) {
+						return [];
+					}
+
+					return [
 						<BlogLink key={post.slug} href={`/${post.slug}`}>
 							{post.name}
-						</BlogLink>
-					))}
+						</BlogLink>,
+					];
+				})}
 			</ul>
 		</main>
 	);
@@ -48,10 +44,8 @@ export default function Home() {
 function BlogLink(props: {href: string; children: ReactNode}) {
 	return (
 		<li>
-			<Link passHref href={props.href}>
-				<a className="text-blue-500 hover:text-blue-700 dark:hover:text-blue-600">
-					{props.children}
-				</a>
+			<Link className="text-blue-500 hover:text-blue-700 dark:hover:text-blue-600" href={props.href}>
+				{props.children}
 			</Link>
 		</li>
 	);
