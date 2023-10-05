@@ -20,7 +20,7 @@ export class StrictTSConfig extends Post {
 							"module": "ESNext",
 							"target": "ESNext",
 							"strict": true,
-       							"noEmit": true,
+							"noEmit": true,
 							"useUnknownInCatchVariables": true,
 							"noImplicitOverride": true,
 							"noFallthroughCasesInSwitch": true,
