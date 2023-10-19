@@ -8,7 +8,7 @@ export const config: PageConfig = {
 };
 
 type Props = {
-	slug: string;
+	readonly slug: string;
 };
 
 export default function PostPage({slug}: Props) {
@@ -30,10 +30,12 @@ export default function PostPage({slug}: Props) {
 			)}
 
 			<div>
-			<Link className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600" href="/">
-				../
-			</Link>
-
+				<Link
+					className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600"
+					href="/"
+				>
+					../
+				</Link>
 			</div>
 
 			<p>

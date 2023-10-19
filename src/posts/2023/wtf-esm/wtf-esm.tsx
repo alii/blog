@@ -129,25 +129,25 @@ export class WTFESM extends Post {
 					</li>
 
 					<li>
-						<code>.exports[string].types</code> is for TypeScript type definitions. A single{' '}
+						<code>.exports.*.types</code> is for TypeScript type definitions. A single{' '}
 						<code>.d.ts</code> file can define all exported symbols in your package for both CJS and
 						ESM.
 					</li>
 
 					<li>
-						<code>.exports[string].import</code> is for ESM. This is the entrypoint for how a modern
+						<code>.exports.*.import</code> is for ESM. This is the entrypoint for how a modern
 						runtime should import your package when running under CommonJS. It is a single ESM
 						compatible file.
 					</li>
 
 					<li>
-						<code>.exports[string].require</code> is for CJS. This is the entrypoint for how a
-						modern runtime should import your package when running under CommonJS. It is a single
-						CJS compatible file.
+						<code>.exports.*.require</code> is for CJS. This is the entrypoint for how a modern
+						runtime should import your package when running under CommonJS. It is a single CJS
+						compatible file.
 					</li>
 
 					<li>
-						<code>.exports[string].default</code> is for when a runtime does not match any other
+						<code>.exports.*.default</code> is for when a runtime does not match any other
 						condition, and is a fallback. It's also within the spec to specify <code>default</code>{' '}
 						as the <b>only</b> entrypoint. I did not use <code>default</code> in my initial Tweet.
 					</li>
