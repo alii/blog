@@ -1,10 +1,10 @@
-import type {NextApiHandler} from 'next';
-import type {RESTGetAPIUserResult} from 'discord-api-types/v10';
-import {serialize} from 'cookie';
-import {sign} from 'jsonwebtoken';
-import dayjs from 'dayjs';
-import urlcat from 'urlcat';
 import axios from 'axios';
+import {serialize} from 'cookie';
+import dayjs from 'dayjs';
+import type {RESTGetAPIUserResult} from 'discord-api-types/v10';
+import {sign} from 'jsonwebtoken';
+import type {NextApiHandler} from 'next';
+import urlcat from 'urlcat';
 import {env} from '../../server/constants';
 
 // Configuration constants
