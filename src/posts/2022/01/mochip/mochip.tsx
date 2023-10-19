@@ -1,6 +1,6 @@
-import { stripIndent } from 'common-tags';
-import { Highlighter } from '../../../../client/components/highlighter';
-import { Post } from '../../../Post';
+import {stripIndent} from 'common-tags';
+import {Highlighter} from '../../../../client/components/highlighter';
+import {Post} from '../../../Post';
 import emailFromColin from './email-from-colin.png';
 import gmeet from './gmeet.png';
 import goodbyeMochip from './goodbye-mochip.png';

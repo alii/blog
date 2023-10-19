@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {env} from '../../server/constants';
 
 type Props = {
-	user: APIUser | undefined;
+	readonly user: APIUser | undefined;
 };
 
 export const config: PageConfig = {

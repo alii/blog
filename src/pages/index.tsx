@@ -41,7 +41,7 @@ export default function Home() {
 	);
 }
 
-function BlogLink(props: {href: string; children: ReactNode}) {
+function BlogLink(props: {readonly href: string; readonly children: ReactNode}) {
 	return (
 		<li>
 			<Link

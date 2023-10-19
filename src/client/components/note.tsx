@@ -3,9 +3,9 @@ import type {ReactNode} from 'react';
 import {VscInfo, VscWarning} from 'react-icons/vsc';
 
 export type NoteProps = {
-	title?: string;
-	children: ReactNode;
-	variant: 'warning' | 'info';
+	readonly title?: string;
+	readonly children: ReactNode;
+	readonly variant: 'warning' | 'info';
 };
 
 const icons = {

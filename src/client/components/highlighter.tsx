@@ -6,8 +6,8 @@ export function Highlighter({
 	children,
 	language = 'typescript',
 }: {
-	children: string;
-	language?: string;
+	readonly children: string;
+	readonly language?: string;
 }) {
 	return (
 		<div className="no-pre-margin">
