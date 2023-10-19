@@ -38,7 +38,7 @@ async function exchangeCode(code: string) {
 	const {data: auth} = await axios.post<{access_token: string; token_type: string}>(
 		'https://discord.com/api/oauth2/token',
 		body,
-		{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+		{headers: {'Content-Type': 'application/x-www-form-urlencoded'}},
 	);
 
 	const {data: user} = await axios.get<RESTGetAPIUserResult>('https://discord.com/api/users/@me', {
