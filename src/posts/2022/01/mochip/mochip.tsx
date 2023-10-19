@@ -4,7 +4,7 @@ import {Post} from '../../../Post';
 import emailFromColin from './email-from-colin.png';
 import gmeet from './gmeet.png';
 import goodbyeMochip from './goodbye-mochip.png';
-import hegartyTimeExploit from './hegarty-time-exploit.jpg';
+import hegartyTimeExploit from './hegarty-time-exploit.jpeg';
 import mochipLanding from './landing.jpeg';
 
 export class Mochip extends Post {
