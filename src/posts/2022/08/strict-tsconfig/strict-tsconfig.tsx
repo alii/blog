@@ -16,8 +16,8 @@ export class StrictTSConfig extends Post {
 				{stripIndent`
 					{
 						"compilerOptions": {
-							"moduleResolution": "bundler",
-							"module": "ESNext",
+							"moduleResolution": "NodeNext",
+							"module": "NodeNext",
 							"target": "ESNext",
 							"strict": true,
 							"noEmit": true,
@@ -30,7 +30,10 @@ export class StrictTSConfig extends Post {
 							"noImplicitReturns": true,
 							"noUncheckedIndexedAccess": true,
 							"allowImportingTsExtensions": true,
-							"verbatimModuleSyntax": true
+							"verbatimModuleSyntax": true,
+							"isolatedModules": true,
+							"isolatedDeclarations": true,
+							"composite": true
 						}
 					}
                 		`}
