@@ -30,7 +30,7 @@ export class Mochip extends Post {
 				<h1>Avoiding homework with code (and getting caught)</h1>
 
 				<p>
-					Back in of 2020, my school used a few online learning platforms that allowed
+					Back in 2020, my school used a few online learning platforms that allowed
 					professors/teachers to assign homework to students. I, as a lazy developer, wanted to
 					spend more time playing games and writing code, especially when everyone was spending
 					their time at home because of lockdown. I started writing this post in January of 2022,
