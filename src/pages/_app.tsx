@@ -10,6 +10,9 @@ import {VscGithubAlt} from 'react-icons/vsc';
 import {ExternalLink} from '../client/components/external-link';
 
 const iosevkaTerm = localFont({
+	fallback: ['monospace'],
+	display: 'block',
+	adjustFontFallback: false,
 	src: [
 		// Thin
 		{
