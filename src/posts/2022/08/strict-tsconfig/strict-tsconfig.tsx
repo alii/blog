@@ -6,7 +6,7 @@ export class StrictTSConfig extends Post {
 	public name = 'A strict TSConfig';
 	public slug = 'strict-tsconfig';
 	public date = new Date('08 Sep 2022');
-	public hidden = false;
+	public hidden = true;
 	public excerpt = 'The strictest TypeScript configuration possible.';
 	public keywords = ['strict', 'tsconfig', 'typescript'];
 

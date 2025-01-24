@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type {GetStaticPaths, GetStaticProps, PageConfig} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import {Note} from '../client/components/note';
 import {posts} from '../posts';
 
 export const config: PageConfig = {
@@ -23,26 +25,36 @@ export default function PostPage({slug}: Props) {
 				<meta name="theme-color" content={post.hidden ? '#ebb305' : '#171717'} />
 			</Head>
 
-			{post.hidden && (
-				<div className="bg-yellow-500 text-yellow-900 rounded-md py-2 px-4">
-					<p>Hey! This post is hidden! Please don't share the link for now...</p>
-				</div>
-			)}
-
 			<div>
 				<Link
-					className="text-blue-500 dark:text-neutral-400 hover:text-blue-800 dark:hover:text-neutral-600"
+					className="text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600"
 					href="/"
 				>
 					../
 				</Link>
 			</div>
 
+			{post.hidden && (
+				<Note variant="warning" title="Hidden post">
+					<p>This post is not listed on the homepage. Please don't share the link</p>
+				</Note>
+			)}
+
 			<p>
-				<time dateTime={post.date.toISOString()}>{post.date.toDateString()}</time>
+				<time dateTime={post.date.toISOString()} className="dark:text-gray-400">
+					{post.date.toDateString()}
+				</time>
 			</p>
 
-			<main className="prose prose-hr:border-neutral-200 dark:prose-hr:border-neutral-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert">
+			<main
+				className={clsx(
+					'prose dark:text-gray-400 dark:prose-hr:border-gray-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert',
+					'prose-hr:border-gray-200',
+					'dark:prose-headings:text-gray-300',
+
+					'prose-pre:border prose-pre:border-gray-200 prose-pre:bg-transparent prose-pre:text-gray-700 dark:prose-pre:border-gray-800 dark:prose-pre:text-gray-300',
+				)}
+			>
 				{post.render()}
 			</main>
 		</div>

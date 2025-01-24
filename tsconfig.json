@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es5",
+		"module": "ES2020",
+		"target": "ESNext",
 		"sourceMap": true,
 		"strict": true,
 		"lib": ["dom", "dom.iterable", "esnext"],
@@ -10,11 +10,12 @@
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
+		"moduleResolution": "Bundler",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
-		"incremental": true
+		"incremental": true,
+		"allowImportingTsExtensions": true
 	},
 	"exclude": ["node_modules"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]

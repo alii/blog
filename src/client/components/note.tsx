@@ -15,10 +15,15 @@ const icons = {
 
 export function Note(props: NoteProps) {
 	const className = clsx('p-4 pt-3 not-prose rounded-md space-y-2', {
-		'bg-yellow-100/90 text-yellow-600 dark:bg-yellow-900/40 dark:text-yellow-500':
+		'bg-yellow-100/90 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-500':
 			props.variant === 'warning',
 
 		'bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-500': props.variant === 'info',
+
+		'[&_code]:p-1 [&_code]:-mx-1 [&_code]:inline [&_code]:rounded': true,
+
+		'[&_code]:bg-yellow-50 [&_code]:dark:bg-yellow-900/40': props.variant === 'warning',
+		'[&_code]:bg-blue-200/90 [&_code]:dark:bg-blue-900/40': props.variant === 'info',
 	});
 
 	return (

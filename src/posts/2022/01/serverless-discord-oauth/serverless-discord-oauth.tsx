@@ -1,6 +1,6 @@
 import {stripIndent} from 'common-tags';
 import Link from 'next/link';
-import {Highlighter} from '../../../../client/components/highlighter';
+import {Highlighter, Shell} from '../../../../client/components/highlighter';
 import {Post} from '../../../Post';
 import discordOAuthDashboardImage from './discord-oauth-dashboard.png';
 
@@ -30,7 +30,7 @@ export class ServerlessDiscordOAuth extends Post {
 					Firstly, we're going to need to create a Next.js with TypeScript app. Feel free to skip
 					this if you "have one that you made earlier".
 				</p>
-				<pre>yarn create next-app my-app --typescript</pre>
+				<Shell>yarn create next-app my-app --typescript</Shell>
 				<h3>Dependencies</h3>
 				<p>
 					We will be relying on a few dependencies, the first is <code>discord-api-types</code>{' '}
@@ -38,15 +38,15 @@ export class ServerlessDiscordOAuth extends Post {
 					also need <code>axios</code> (or whatever your favourite http lib is) to make requests to
 					Discord. Additionally, we'll be encoding our user info into a JWT token & using the cookie
 					package to serialize and send cookies down to the client. Finally, we'll use{' '}
-					<code>dayjs</code> for basic date manipulation and <code>urlcat</code> to easily build
+					<code>dayjs</code> for basic date manipulation and <code>pathcat</code> to easily build
 					urls with query params.
 				</p>
-				<pre>
+				<Shell>
 					{stripIndent`
-						yarn add axios cookie urlcat dayjs jsonwebtoken
+						yarn add axios cookie pathcat dayjs jsonwebtoken
 						yarn add --dev discord-api-types @types/jsonwebtoken @types/cookie
 					`}
-				</pre>
+				</Shell>
 				<h2>Code</h2>
 				<p>Dope, you've made it this far already! Let's get some code written</p>
 				<p>
@@ -67,7 +67,7 @@ export class ServerlessDiscordOAuth extends Post {
 						import {serialize} from 'cookie';
 						import {sign} from 'jsonwebtoken';
 						import dayjs from 'dayjs';
-						import urlcat from 'urlcat';
+						import {pathcat} from 'pathcat';
 						import axios from 'axios';
 
 						// Configuration constants
@@ -86,7 +86,7 @@ export class ServerlessDiscordOAuth extends Post {
 						const scope = ['identify'].join(' ');
 
 						// URL to redirect to outbound (to request authorization)
-						const OAUTH_URL = urlcat('https://discord.com/api/oauth2/authorize', {
+						const OAUTH_URL = pathcat('https://discord.com/api/oauth2/authorize', {
 							client_id: CLIENT_ID,
 							redirect_uri: REDIRECT_URI,
 							response_type: 'code',
@@ -247,8 +247,10 @@ export class ServerlessDiscordOAuth extends Post {
 				<h3>Creating our env file</h3>
 				<p>
 					Firstly, make a new file in your project's file structure called <code>.env</code> and add
-					the content below. the format for env files is <code>KEY=value</code>.
+					the content below. the format for env files is <code>KEY=value</code>. You can use{' '}
+					<code>openssl rand -hex 64</code> to generate a JWT secret.
 				</p>
+
 				<pre>
 					{stripIndent`
 						CLIENT_ID=<our discord client id>
@@ -256,6 +258,7 @@ export class ServerlessDiscordOAuth extends Post {
 						JWT_SECRET=<a secure, randomly generated string>
 					`}
 				</pre>
+
 				<p>
 					And finally, we need to update our code to make sure that our <code>api/oauth.ts</code>{' '}
 					file can use the newly generated environment variables.

@@ -4,17 +4,17 @@ import dayjs from 'dayjs';
 import type {RESTGetAPIUserResult} from 'discord-api-types/v10';
 import {sign} from 'jsonwebtoken';
 import type {NextApiHandler} from 'next';
-import urlcat from 'urlcat';
+import {pathcat} from 'pathcat';
 import {env} from '../../server/constants';
 
 // Configuration constants
 const {CLIENT_ID, CLIENT_SECRET, JWT_SECRET, REDIRECT_URI} = env;
 
 // Scopes we want to be able to access as a user
-const scope = ['identify'].join(' ');
+const scope = ['identify', 'email'].join(' ');
 
 // URL to redirect to outbound (to request authorization)
-const OAUTH_URL = urlcat('https://discord.com/api/oauth2/authorize', {
+const OAUTH_URL = pathcat('https://discord.com/api/oauth2/authorize', {
 	client_id: CLIENT_ID,
 	redirect_uri: REDIRECT_URI,
 	response_type: 'code',

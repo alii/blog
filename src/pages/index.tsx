@@ -4,7 +4,6 @@ import type {ReactNode} from 'react';
 import {posts, sortPosts} from '../posts';
 import {flatMap} from '../util/flat-map';
 
-// Sweet zero js 🤑
 export const config: PageConfig = {
 	unstable_runtimeJS: false,
 };
@@ -12,17 +11,7 @@ export const config: PageConfig = {
 export default function Home() {
 	return (
 		<main className="space-y-8">
-			<h2>
-				<span>alistair.blog</span>{' '}
-				<a
-					target="_blank"
-					href="https://github.com/alii/blog"
-					className="text-neutral-500 hover:text-blue-500"
-					rel="noreferrer"
-				>
-					– github
-				</a>
-			</h2>
+			<h2>alistair.blog</h2>
 
 			<ul className="space-y-1 list-disc list-inside">
 				{flatMap(sortPosts(posts), post => {

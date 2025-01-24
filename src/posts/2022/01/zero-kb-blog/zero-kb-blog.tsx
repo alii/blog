@@ -1,7 +1,7 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../../client/components/highlighter';
-import {Post} from '../../../Post';
 import {Note} from '../../../../client/components/note';
+import {Post} from '../../../Post';
 
 export class ZeroKbBlog extends Post {
 	public name = 'The 0kb Next.js blog';
@@ -17,23 +17,26 @@ export class ZeroKbBlog extends Post {
 				<h1>The 0kb Next.js blog</h1>
 
 				<Note variant="warning" title="Update 3rd April 2023">
-					This blog post applies to pages dir - which is the majority of Next.js apps. I cannot
-					confirm if this will still work on the upcoming app dir, in Next 13.
+					This only applies to apps using the <code>pages</code> directory of Next.js as App Dir
+					(released in v13) does not support the settings used here. RSCs offer a similar idealogy
+					of rendering components on the server only, while also allowing for client side JS.
 				</Note>
 
 				<p>
-					Ok so this was a little bit clickbaity, but it's not technically a lie. This entire
-					website has zero JavaScript on <i>every single page</i>... a Next.js app with zero client
-					side JS. How can this be possible?
+					Ok so the title was a <i>liiittle</i> bit clickbaity, but it's not technically a lie. This
+					entire website has zero JavaScript on <i>every single page</i>... a Next.js app with zero
+					client side JS. How can this be possible?
 				</p>
-				<h2>Context</h2>
+
+				<h2>Some context</h2>
+
 				<p>
-					Next.js is a huge abstraction of ReactDOMServer and other helpful utilities for building
-					server side rendered apps powered by React. It's really easy to get started with, and
-					features things like file system routing, statically generated content and much much more.
-					I'm not trying to advertise it but I really really love it. There are a couple things to
-					take in from the first sentence here, server side rendering and React.
+					Next.js is a huge abstraction of <code>react-dom/server</code> and other helpful utilities
+					for building server side rendered apps powered by React. It's really easy to get started
+					with, and features things like file system routing, statically generated content and much
+					much more. The most important thing to understand here is that there's a server...
 				</p>
+
 				<p>
 					For those of you who are not familiar with React, it's a <b>JavaScript</b> framework for
 					building user interfaces. It handles the view layer of an app and is used to render the
@@ -41,15 +44,19 @@ export class ZeroKbBlog extends Post {
 					the first render performed on a server, which allows for a lot of performance and UI
 					optimizations because we can ship back a lot less to the client (foreshadowing).
 				</p>
+
 				<h2>Runtime JS</h2>
+
 				<p>
-					With something called the Next.js <code>PageConfig</code>, we can instruct Next.js to
-					supply zero runtime JS to the client. It comes with a couple trade offs but the general
-					idea is that we perform our first render on the server (executing JavaScript) and the
-					resulting HTML and CSS is "frozen" and sent down to the client over the wire. Zero
-					JavaScript runtime in the browser, no <code>&lt;script&gt;</code> tags in sight!
+					With something called <code>PageConfig</code> we can instruct Next.js to supply zero
+					runtime JS to the client. It comes with a couple trade offs but the general idea is that
+					we perform our first render on the server and the resulting HTML and CSS is "frozen" and
+					sent down to the client over the wire. Zero JavaScript runtime in the browser, no{' '}
+					<code>&lt;script&gt;</code> tags in sight!
 				</p>
-				<h2>Why not...?</h2>
+
+				<h2>What's the catch?</h2>
+
 				<p>
 					As the saying goes, there's no such thing as free lunch. As with anything, doing this
 					comes with some tradeoffs. For example, Next has a lot of built in React components that
@@ -60,16 +67,18 @@ export class ZeroKbBlog extends Post {
 					runtime JavaScript (a regular <code>img</code> works just fine). This also means zero
 					state updates or literally any JavaScript that would've otherwise been bundled can run.
 				</p>
+
 				<p>
-					However, apart from that, we are able to eliminate all JavaScript completely. No more
-					worrying about installing momentjs and watching your user count drop in realtime. See your
-					gorgeous website in pure static HTML & CSS. Gone are the days of bundlephobia.com... I bet
-					at this point you are itching to know how to enable it. Well, here's a quick example:
+					So if you're fine with that, then you can go ahead and enable it. No more worrying about
+					worrying about installing huge npm packages and watching your user count drop in realtime.
+					See your gorgeous website in pure static HTML & CSS. Gone are the days of
+					bundlephobia.com... I bet at this point you are itching to know how to enable it. Well,
+					here's a quick example:
 				</p>
 
 				<Highlighter>
 					{stripIndent`
-						import {PageConfig} from 'next';
+						import type {PageConfig} from 'next';
 
 						export const config: PageConfig = {
 							unstable_runtimeJS: false,
@@ -86,10 +95,6 @@ export class ZeroKbBlog extends Post {
 					mind that as well as the trade offs mentioned above, you literally cannot use any
 					JavaScript in the client anymore for this page. Zero. Nada. Null. Void. That means no
 					state updates, no SWR requests. No <code>useEffects</code> (thank god tbh).
-				</p>
-
-				<p>
-					p.s please check out my twitter <a href="https://twitter.com/alistaiir">@alistaiir</a> :)
 				</p>
 			</>
 		);
