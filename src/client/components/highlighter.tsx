@@ -27,7 +27,7 @@ export function Highlighter({
 	readonly language?: 'typescript' | 'javascript' | 'bash' | 'json' | 'css' | 'html' | 'markdown';
 }) {
 	return (
-		<div className="no-pre-margin md:-mx-[4rem]">
+		<div className="no-pre-margin">
 			<div className="hidden dark:block">
 				<SyntaxHighlighter language={language} style={dark} PreTag={Pre}>
 					{children}

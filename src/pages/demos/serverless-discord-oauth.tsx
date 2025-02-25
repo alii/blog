@@ -28,9 +28,9 @@ export default function ServerlessDiscordOAuthDemoPage({user}: Props) {
 	const avatar_url = user.avatar
 		? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`
 		: user.discriminator === '0'
-		? // eslint-disable-next-line no-bitwise, no-mixed-spaces-and-tabs
-		  `https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> BigInt(22)) % BigInt(6)}.png`
-		: `https://cdn.discordapp.com/embed/avatars/${Number(user.discriminator) % 5}.png`;
+			? // eslint-disable-next-line no-bitwise
+				`https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> BigInt(22)) % BigInt(6)}.png`
+			: `https://cdn.discordapp.com/embed/avatars/${Number(user.discriminator) % 5}.png`;
 
 	return (
 		<div>

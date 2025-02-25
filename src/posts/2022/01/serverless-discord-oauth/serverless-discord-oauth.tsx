@@ -30,7 +30,7 @@ export class ServerlessDiscordOAuth extends Post {
 					Firstly, we're going to need to create a Next.js with TypeScript app. Feel free to skip
 					this if you "have one that you made earlier".
 				</p>
-				<Shell>yarn create next-app my-app --typescript</Shell>
+				<Shell>bun create next-app my-app --typescript</Shell>
 				<h3>Dependencies</h3>
 				<p>
 					We will be relying on a few dependencies, the first is <code>discord-api-types</code>{' '}
@@ -43,8 +43,8 @@ export class ServerlessDiscordOAuth extends Post {
 				</p>
 				<Shell>
 					{stripIndent`
-						yarn add axios cookie pathcat dayjs jsonwebtoken
-						yarn add --dev discord-api-types @types/jsonwebtoken @types/cookie
+						bun add axios cookie pathcat dayjs jsonwebtoken
+						bun add --dev discord-api-types @types/jsonwebtoken @types/cookie
 					`}
 				</Shell>
 				<h2>Code</h2>
@@ -203,7 +203,7 @@ export class ServerlessDiscordOAuth extends Post {
 				<p>
 					Awesome, we've got everything setup correctly. Now we can give it a quick spin. You can
 					start your Next.js development server if you haven't already by running{' '}
-					<code>yarn dev</code> in your terminal, you should be able to navigate to{' '}
+					<code>bun dev</code> in your terminal, you should be able to navigate to{' '}
 					<a target="_blank" href="http://localhost:3000/api/oauth" rel="noreferrer">
 						localhost:3000/api/oauth
 					</a>{' '}
