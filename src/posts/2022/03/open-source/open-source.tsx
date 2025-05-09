@@ -7,7 +7,7 @@ export class OpenSource extends Post {
 	public name = 'Open Source';
 	public slug = 'open-source';
 	public date = new Date('20 Mar 2022');
-	public hidden = false;
+	public hidden = true;
 	public excerpt = 'Thoughts & feelings on Open Source';
 	public keywords = ['Developer', 'Open Source', 'GitHub', 'sponsorships'];
 

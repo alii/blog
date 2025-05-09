@@ -11,7 +11,8 @@ import {ExternalLink} from '../client/components/external-link';
 
 const iosevkaTerm = localFont({
 	fallback: ['monospace'],
-	display: 'block',
+	display: 'swap',
+	preload: true,
 	adjustFontFallback: false,
 	src: [
 		// Thin

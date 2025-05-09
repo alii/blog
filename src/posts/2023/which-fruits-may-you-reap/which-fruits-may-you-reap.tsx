@@ -14,8 +14,8 @@ export class WhichFruitsMayYouReap extends Post {
 				<h1>Which fruits may you reap?</h1>
 
 				<p>
-					Your biggest threat is complacency, I think. It's athreat on productivity and on general
-					wellbeing. Often I feel I've let myself become complacent and comfortable{' '}
+					Your biggest threat is complacency, I think. It's a threat on productivity and on general
+					wellbeing. Oftentimes I feel that I've let myself become complacent and comfortable{' '}
 					<i>just enough</i> to make it through each day. Achieving great things will be impossible
 					for me if I'm constantly in the "comfortable" state I am. Sometimes it feels like I'm
 					waiting for some change to happen to me, rather than that change be something I make
@@ -27,28 +27,26 @@ export class WhichFruitsMayYouReap extends Post {
 				<hr />
 
 				<p>
-					I realise that the introduction is a little depressive and negative, in reality most
-					things in life are sunshines and rainbows. I'm a pretty optimistic person in general, I
-					just think a lot when I'm alone. This post exists because I've been trying to turn my
-					thoughts &amp; feelings into some words. I find it therapeutic to write, and to an extent
-					it helps me rationalise and argue with myself. I hope you find it useful.
+					I realise that introduction is quite depressive. In reality life is sunshines and
+					rainbows. I'm a pretty optimistic person in general, so this post exists because I've been
+					trying to turn some thoughts from the past few years into something tangible. I find it
+					somewhat therapeutic to write, and to an extent it helps me rationalise and argue with
+					myself. So, I hope you can find some use reading this, like I do writing it.
 				</p>
 
 				<p>
 					Through periods of reflection (often as I'm drifting off to sleep each night), I've come
-					to see "Which fruits may you reap?" as a question urging each of us to look inward. Are we
-					truly satisfied with what we're earning, not just in terms of money but also I think this
-					extends to time spent with family or outdoors or doing non-work things. It's so easy to
-					stick with what's comfortable because it requires no thought.
+					to see "Which fruits may you reap?" as a question urging us to look inward. Are we truly
+					satisfied with what we're getting out of life not just financially but also in terms of
+					time spent with family or outdoors or doing non-work things. It's so easy to stick with
+					what's comfortable because it requires no thought.
 				</p>
 
 				<p>
 					When I reflect on my personal experiences, I realize how often I've leaned on
-					circumstance, perhaps more than I care to admit. In questioning which fruits I "deserve,"
-					I can't ignore all the times I've needed a nudge, a resource, or a helping hand. But maybe
-					that's part of being human: we rarely achieve anything of value entirely on our own. This
-					realisation reminds me to stay humble about my successes and mindful that gratitude should
-					be core to my sense of accomplishment.
+					circumstance, perhaps more than I care to admit in conversation. In questioning which
+					fruits I "deserve," I can't ignore all the times I've needed a nudge, a resource, or a
+					helping hand, many times it feels like I am reaping the rewards undeservedly.
 				</p>
 
 				<p>
@@ -62,7 +60,7 @@ export class WhichFruitsMayYouReap extends Post {
 
 				<hr />
 
-				<p>Living is like 100% good 98% of the time. Really these emotions are late-night</p>
+				<p>Living is like 100% good 98.5% of the time. I'm not worried.</p>
 			</>
 		);
 	}
