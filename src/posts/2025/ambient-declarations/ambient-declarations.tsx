@@ -330,7 +330,7 @@ export class AmbientDeclarations extends Post {
 					While doing research for the pull request mentioned at the beginning, I found a few cases
 					where the compiler was not able to resolve the types of some of Bun's APIs because we had
 					declared that certain symbols existed, where they might have already been declared by{' '}
-					<a href="https://github.com/microsoft/TypeScript/blob/main/lib/lib.dom.d.ts">
+					<a href="https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts">
 						lib.dom.d.ts
 					</a>{' '}
 					(the builtin types that TypeScript provides by default) or things like{' '}
