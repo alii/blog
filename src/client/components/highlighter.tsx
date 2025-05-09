@@ -14,7 +14,7 @@ export function Shell({
 	hasDollarOnFirstLineOnly,
 }: {
 	readonly children: string;
-	hasDollarOnFirstLineOnly?: boolean;
+	readonly hasDollarOnFirstLineOnly?: boolean;
 }) {
 	const lines = children.split('\n');
 
