@@ -97,11 +97,11 @@ export class AmbientDeclarations extends Post {
 				</p>
 
 				<p>
-					Ambient declarations are almost always defined as modules. The reason for this is that
-					TypeScript is old. Like, really old. It predates the modern module system, ESM/ES Modules.
-					It's for this reason that TypeScript has support for global script-like files that exist
-					in the global scope. Almost all apps authored in TypeScript nowadays use some kind of
-					module system and bundler if being used on the web.
+					Ambient declarations are almost always defined as modules. Modern apps and libraries are
+					authored in ESM and use a bundler/other tooling if deploying to the web. TypeScript makes
+					a diffrentiation, though, because TypeScript is old, like, really old in terms of
+					JavaScript's history. It predates the modern module system, ESM, and so it's for this
+					reason that TypeScript supports script-like declarations that exist in the global scope.
 				</p>
 
 				<p>
