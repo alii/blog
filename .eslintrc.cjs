@@ -42,5 +42,6 @@ module.exports = {
 		'react/jsx-curly-newline': 'off',
 		'@typescript-eslint/indent': 'off',
 		'jsx-quotes': 'off',
+		'react/jsx-child-element-spacing': 'off',
 	},
 };

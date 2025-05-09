@@ -56,11 +56,7 @@ export class ServerlessDiscordOAuth extends Post {
 					<code>nextkit</code> that can assist us with this process but for the time being it's out
 					of scope for this post – I'll eventually write a small migration guide.
 				</p>
-				<p>
-					<code>pages/api/oauth.ts</code>
-					<span className="select-none">:</span>
-				</p>
-				<Highlighter>
+				<Highlighter filename="pages/api/oauth.ts">
 					{stripIndent`
 						import type {NextApiHandler} from 'next';
 						import type {RESTGetAPIUserResult} from 'discord-api-types/v8';
@@ -251,23 +247,25 @@ export class ServerlessDiscordOAuth extends Post {
 					<code>openssl rand -hex 64</code> to generate a JWT secret.
 				</p>
 
-				<pre>
+				<Highlighter filename=".env">
 					{stripIndent`
 						CLIENT_ID=<our discord client id>
 						CLIENT_SECRET=<our discord client secret>
 						JWT_SECRET=<a secure, randomly generated string>
 					`}
-				</pre>
+				</Highlighter>
 
 				<p>
 					And finally, we need to update our code to make sure that our <code>api/oauth.ts</code>{' '}
 					file can use the newly generated environment variables.
 				</p>
-				<Highlighter>
+				<Highlighter filename="pages/api/oauth.ts">
 					{stripIndent`
+						// ...
 						const CLIENT_ID = process.env.CLIENT_ID;
 						const CLIENT_SECRET = process.env.CLIENT_SECRET;
 						const JWT_SECRET = process.env.JWT_SECRET;
+						// ...
 					`}
 				</Highlighter>
 

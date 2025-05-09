@@ -1,6 +1,3 @@
-// Slightly broken rule
-/* eslint-disable react/jsx-child-element-spacing */
-
 import {Post} from '../../../Post';
 
 export class OpenSource extends Post {
