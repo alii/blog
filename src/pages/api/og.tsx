@@ -70,7 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			tw="flex flex-col justify-center items-start w-full h-full text-white font-mono"
 			style={{
 				fontFamily: 'JetBrains Mono, monospace',
-				padding: `0 ${xPadding}px`,
+				padding: `0px ${xPadding}px`,
 				backgroundColor: '#030712',
 			}}
 		>
