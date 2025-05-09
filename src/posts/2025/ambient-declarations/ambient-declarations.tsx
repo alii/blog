@@ -45,13 +45,12 @@ export class AmbientDeclarations extends Post {
 				</p>
 				<p>
 					By <i>things</i> I mean anything you import and use. That could be functions, classes,
-					variables, modules themselves, APIs from your runtime, or even globals you wish existed
-					(and sometimes, wish didn't!).
+					variables, modules themselves, APIs from your runtime, etc.
 				</p>
 
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
-					benefited from ambient declarations. They're the secret sauce behind TypeScript's magic.
+					benefited from ambient declarations.
 				</p>
 
 				<p>A simple ambient declaration file could look like this:</p>
