@@ -17,44 +17,72 @@ export class AmbientDeclarations extends Post {
 				<h1>Ambient Declarations</h1>
 
 				<p>
-					If you've ever wondered how TypeScript "knows" about the types in your dependencies, or
-					you've seen <code>.d.ts</code> files and felt lost, this is for you.
+					I recently landed a <a href="https://github.com/oven-sh/bun/pull/18024">pull request</a>{' '}
+					in <a href="https://bun.sh/">Bun</a> that reorganized and rewrote significant portions of
+					Bun's TypeScript definitions. Working on this PR made me realize how little documentation
+					there is on ambient declarations, so I wanted to write about it—and hopefully make it a
+					little less mysterious (and a little more fun!).
 				</p>
 
 				<hr />
 
 				<h2>What are ambient declarations?</h2>
+
+				<p>I'll start by answering this question with a couple questions...</p>
+				<blockquote>
+					1. How does TypeScript know the types of my <code>node_modules</code>, which are mostly
+					all .js files?
+				</blockquote>
+				<blockquote>
+					2. How does TypeScript know the types of APIs that exist in my runtime?
+				</blockquote>
 				<p>
-					Ambient declarations are what allow TypeScript to "know" about the types in your
-					dependencies and runtime.
+					The short answer: <b>It can't!</b>
 				</p>
+				<p>
+					The short but slightly longer answer is that it <i>CAN</i> with ambient declarations!
+					These are files that exist somewhere in your project (usually in <code>node_modules</code>
+					) that contain type information and tell TypeScript what <i>things</i> exist at runtime.
+					They use the file extension <code>.d.ts</code>, with the `.d` denoting "declaration".
+				</p>
+				<p>
+					By <i>things</i> I mean anything you import and use. That could be functions, classes,
+					variables, modules themselves, APIs from your runtime, or even globals you wish existed
+					(and sometimes, wish didn't!).
+				</p>
+
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
 					benefited from ambient declarations.
 				</p>
 
 				<h2>How Does TypeScript Find Types?</h2>
-				<p>When you import something, TypeScript looks for its types in a few places:</p>
-				<ul>
+				<p>
+					Module resolution is an incredibly complex topic, but you can boil down to TypeScript
+					looking for relevant types in a few places.
+				</p>
+				<ul className="space-y-6">
 					<li>
-						<b>Bundled types:</b> Some packages include their own <code>.d.ts</code> files.
+						<b>Bundled types</b>: Some packages include their own <code>.d.ts</code> files.
 					</li>
 					<li>
-						<b>DefinitelyTyped:</b> If not, TypeScript looks in <code>@types/</code> packages in{' '}
+						<b>DefinitelyTyped</b>: If not, TypeScript looks in <code>@types/</code> packages in{' '}
 						<code>node_modules</code>.
 					</li>
 					<li>
-						<b>Your own code:</b> You can add <code>.d.ts</code> files anywhere in your project to
-						describe types for JS code, global variables, or even new modules.
+						<b>Your own project</b>: You can add <code>.d.ts</code> files anywhere in your project
+						to describe types for JS code, global variables, or even new modules.
+					</li>
+					<li>
+						<b>Source</b>: If the module resolution algorithm resolves to an actual TypeScript file,
+						then the types can be read from the original source code anyway. Some packages on NPM
+						also publish their TypeScript source and allow modern tooling to consume it directly.{' '}
+						<b>
+							<u>Ambient declarations are NOT used in either of these scenarios</u>
+						</b>
+						.
 					</li>
 				</ul>
-				<p>
-					<b>Example:</b>
-					<br />
-					If you install <code>lodash</code>, TypeScript will look for{' '}
-					<code>node_modules/lodash/index.d.ts</code>. If it's not there, it'll look for{' '}
-					<code>node_modules/@types/lodash/index.d.ts</code>.
-				</p>
 
 				<h2>Ambient vs. Regular Declarations</h2>
 				<p>
@@ -80,7 +108,7 @@ export class AmbientDeclarations extends Post {
 				</p>
 				<p>
 					<b>
-						You can use <code>declare</code> in .ts files too!
+						It is also perfectly legal to use <code>declare</code> in .ts files
 					</b>
 				</p>
 				<Highlighter filename="globals.ts">
@@ -182,8 +210,6 @@ export class AmbientDeclarations extends Post {
 					`}
 					</Highlighter>
 				</div>
-
-				<p>Now you can import CSS or JSON files and get type safety!</p>
 
 				<h2>Writing Your Own .d.ts Files</h2>
 				<p>Suppose you're using a JS library with no types. Here's how to add them:</p>
