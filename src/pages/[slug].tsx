@@ -59,6 +59,8 @@ export default function PostPage({slug}: Props) {
 					'prose-hr:border-gray-200',
 					'dark:prose-headings:text-gray-300',
 
+					'prose-table:border-none',
+
 					'prose-pre:border prose-pre:border-gray-200 prose-pre:bg-transparent prose-pre:text-gray-700 dark:prose-pre:border-gray-800 dark:prose-pre:text-gray-300',
 				)}
 			>
