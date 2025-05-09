@@ -72,7 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const node = (
 		<div
-			tw="flex flex-col justify-center items-start w-full h-full text-gray-300 font-mono"
+			tw="flex flex-col justify-center items-start w-full h-full text-gray-400 font-mono"
 			style={{
 				padding: `0px ${xPadding}px`,
 				backgroundColor: '#030712',
