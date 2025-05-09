@@ -67,8 +67,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const node = (
 		<div
-			tw="flex flex-col justify-center items-start w-full h-full bg-[#030712] text-white font-mono"
-			style={{fontFamily: 'JetBrains Mono, monospace', padding: `0 ${xPadding}px`}}
+			tw="flex flex-col justify-center items-start w-full h-full text-white font-mono"
+			style={{
+				fontFamily: 'JetBrains Mono, monospace',
+				padding: `0 ${xPadding}px`,
+				backgroundColor: '#030712',
+			}}
 		>
 			<div tw="font-bold mb-6 leading-tight" style={{fontSize: titleFontSize}}>
 				{post.name}
