@@ -9,8 +9,7 @@ export class AmbientDeclarations extends Post {
 	public date = new Date('9 May 2025');
 	public hidden = false;
 	public keywords = ['Ambient Modules', 'TypeScript', 'Module Resolution'];
-	public excerpt =
-		"I recently landed a pull request in Bun that reorganised and rewrote significant portions of Bun's TypeScript definitions. Here's what I learned.";
+	public excerpt = 'Explaining ambient declarations with @types/bun as an example';
 
 	public render() {
 		return (
