@@ -2,10 +2,6 @@ body {
 	@apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-200 font-light;
 }
 
-.no-pre-margin pre {
-	margin: 0;
-}
-
 .prose video {
 	@apply rounded-md w-full;
 }

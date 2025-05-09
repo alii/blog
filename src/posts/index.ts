@@ -4,10 +4,10 @@ import {ZeroKbBlog} from './2022/01/zero-kb-blog/zero-kb-blog';
 import {OpenSource} from './2022/03/open-source/open-source';
 import {StrictTSConfig} from './2022/08/strict-tsconfig/strict-tsconfig';
 import {WTFESM} from './2023/wtf-esm/wtf-esm';
-import {AmbientModules} from './2025/ambient-modules/ambient-modules';
+import {AmbientDeclarations} from './2025/ambient-declarations/ambient-declarations';
 
 export const posts = [
-	new AmbientModules(),
+	new AmbientDeclarations(),
 	new WTFESM(),
 	new OpenSource(),
 	new Mochip(),
