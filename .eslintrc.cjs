@@ -29,6 +29,9 @@ module.exports = {
 		// Doesn't work with next zero js
 		'@next/next/no-img-element': 'off',
 
+		// TypeScript handles these
+		'react/no-unknown-property': 'off',
+
 		// Prettier handles these
 		'@typescript-eslint/comma-dangle': 'off',
 		'react/function-component-definition': 'off',

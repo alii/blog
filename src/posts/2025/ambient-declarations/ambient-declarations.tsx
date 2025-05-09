@@ -10,7 +10,7 @@ export class AmbientDeclarations extends Post {
 	public hidden = true;
 	public keywords = ['Ambient Modules', 'TypeScript', 'Module Resolution'];
 	public excerpt =
-		"I recently landed a large pull request in Bun that reorganised and rewrote significant portions of Bun's TypeScript definitions. Here's what I learned.";
+		"I recently landed a pull request in Bun that reorganised and rewrote significant portions of Bun's TypeScript definitions. Here's what I learned.";
 
 	public render() {
 		return (
@@ -96,9 +96,9 @@ export class AmbientDeclarations extends Post {
 				<p>
 					Ambient declarations are almost always defined as modules. Modern apps and libraries are
 					authored in ESM and use a bundler/other tooling if deploying to the web. TypeScript makes
-					a differentiation, though, because TypeScript is old, like, really old in terms of
-					JavaScript's history. It predates the modern module system, ESM, and so it's for this
-					reason that TypeScript supports script-like declarations that exist in the global scope.
+					a differentiation, though, because TypeScript is really old in JavaScript's history. It
+					predates the modern module system, ESM, and so it's for this reason that TypeScript
+					supports script-like declarations that exist in the global scope.
 				</p>
 
 				<p>
@@ -142,8 +142,8 @@ export class AmbientDeclarations extends Post {
 				</Highlighter>
 
 				<p>
-					The rule of thumb is: Ambient declaration file is a script/global unless top level imports
-					and exports are present.
+					The rule of thumb is: An ambient declaration file is a script/global unless top-level
+					imports and exports are present.
 				</p>
 
 				<p>
@@ -192,7 +192,8 @@ export class AmbientDeclarations extends Post {
 
 				<p>
 					Since we've already used the <code>declare</code> keyword at the top of this scope AND the
-					declaration file itself is a script (not a module)
+					declaration file itself is a script (not a module), we don't need to add another{' '}
+					<code>declare</code> inside the block.
 				</p>
 
 				<h3>Declaring modules by wildcard</h3>
