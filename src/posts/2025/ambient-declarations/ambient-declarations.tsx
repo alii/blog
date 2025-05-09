@@ -1,6 +1,3 @@
-// Slightly broken rule
-/* eslint-disable react/jsx-child-element-spacing */
-
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../client/components/highlighter';
 import {Note} from '../../../client/components/note';
@@ -13,7 +10,7 @@ export class AmbientDeclarations extends Post {
 	public hidden = true;
 	public keywords = ['Ambient Modules', 'TypeScript', 'Module Resolution'];
 	public excerpt =
-		"I recently landed a large pull request in Bun that reorganised/rewrote significant portions of Bun's TypeScript definitions.";
+		"I recently landed a large pull request in Bun that reorganised and rewrote significant portions of Bun's TypeScript definitions. Here's what I learned.";
 
 	public render() {
 		return (
@@ -21,7 +18,7 @@ export class AmbientDeclarations extends Post {
 				<h1>Ambient Declarations</h1>
 
 				<p>
-					I recently landed a larger pull request (
+					I recently landed a pull request (
 					<a href="https://github.com/oven-sh/bun/pull/18024">#18024</a>) in{' '}
 					<a href="https://bun.sh/">Bun</a> that reorganised/rewrote significant portions of Bun's
 					TypeScript definitions. Working on this PR made me realise how little documentation there
@@ -39,7 +36,7 @@ export class AmbientDeclarations extends Post {
 				</blockquote>
 
 				<blockquote>
-					2. How does TypeScript know the types of APIs that exist in the my runtime?
+					2. How does TypeScript know the types of APIs that exist in my runtime?
 				</blockquote>
 
 				<p>
@@ -99,7 +96,7 @@ export class AmbientDeclarations extends Post {
 				<p>
 					Ambient declarations are almost always defined as modules. Modern apps and libraries are
 					authored in ESM and use a bundler/other tooling if deploying to the web. TypeScript makes
-					a diffrentiation, though, because TypeScript is old, like, really old in terms of
+					a differentiation, though, because TypeScript is old, like, really old in terms of
 					JavaScript's history. It predates the modern module system, ESM, and so it's for this
 					reason that TypeScript supports script-like declarations that exist in the global scope.
 				</p>
