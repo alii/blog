@@ -385,8 +385,8 @@ export class AmbientDeclarations extends Post {
 
 					<Highlighter filename="globals.d.ts">
 						{stripIndent`
-							declare var Worker: import("bun").__internal.UseLibDomIfAvailable<'Worker', {
-								new(filename: string, options?: import("bun").WorkerOptions): Worker;
+							declare var Worker: Bun.__internal.UseLibDomIfAvailable<'Worker', {
+								new(filename: string, options?: Bun.WorkerOptions): Worker;
 							}>;
 						`}
 					</Highlighter>
