@@ -4,7 +4,7 @@ import {Note} from '../../../client/components/note';
 import {Post} from '../../Post';
 
 export class AmbientDeclarations extends Post {
-	public name = 'Ambient Declarations in TypeScript: The Complete Guide';
+	public name = 'Ambient Declarations';
 	public slug = 'ambient-declarations';
 	public date = new Date('9 May 2025');
 	public hidden = false;
