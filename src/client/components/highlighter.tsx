@@ -3,7 +3,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import light from 'react-syntax-highlighter/dist/cjs/styles/hljs/lightfair';
 import dark from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
 
-import {TbBrandJavascript, TbBrandTypescript} from 'react-icons/tb';
+import {TbBrandCss3, TbBrandHtml5, TbBrandJavascript, TbBrandTypescript} from 'react-icons/tb';
 
 const Pre = ({children}: PropsWithChildren) => <pre className="px-4">{children}</pre>;
 
@@ -28,6 +28,10 @@ function Filename({filename}: {readonly filename: string}) {
 				return <TbBrandTypescript className="inline" />;
 			case filename.endsWith('.js'):
 				return <TbBrandJavascript className="inline" />;
+			case filename.endsWith('.html'):
+				return <TbBrandHtml5 className="inline" />;
+			case filename.endsWith('.css'):
+				return <TbBrandCss3 className="inline" />;
 			default:
 				return null;
 		}

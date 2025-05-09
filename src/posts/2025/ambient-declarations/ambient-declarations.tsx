@@ -3,6 +3,7 @@
 
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../client/components/highlighter';
+import {Note} from '../../../client/components/note';
 import {Post} from '../../Post';
 
 export class AmbientDeclarations extends Post {
@@ -55,14 +56,30 @@ export class AmbientDeclarations extends Post {
 				<Highlighter filename="add.d.ts">
 					{stripIndent`
 						/**
-						 * Performs addition using llms
+						 * Performs addition using AI and LLMs
+						 * 
 						 * @param a - The first number
 						 * @param b - The second number
-						 * @returns The sum of a and b
+						 * 
+						 * @returns The sum of a and b (probably)
 						 */
 						export declare function add(a: number, b: number): Promise<number>;
 					`}
 				</Highlighter>
+
+				<p>
+					This is easy enough to understand. You can see we have a JSDoc comment, the types of the
+					arguments, the return type, an export keyword, etc. It almost looks like real TypeScript,
+					except the really important part to note here is the keyword <code>declare</code> is used.
+					This keyword tells TypeScript to not expect any runtime code to exist here, it's purely a
+					type declaration only.
+				</p>
+
+				<Note variant="tip" title="Using the declare keyword in source code">
+					It's useful to note that it is completely legitimate and legal to use the{' '}
+					<code>declare</code> keyword inside of regular .ts files. There are many use cases for
+					this, a common one being declaring types of globals.
+				</Note>
 
 				<h2>Module? Script? Global?... What?</h2>
 
