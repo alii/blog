@@ -24,6 +24,12 @@ export default function PostPage({slug}: Props) {
 				<meta name="keywords" content={post.keywords.join(', ')} />
 				<meta name="theme-color" content={post.hidden ? '#ebb305' : '#171717'} />
 				<meta property="og:image" content={`https://alistair.blog/api/og?slug=${post.slug}`} />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={post.name} />
+				<meta name="twitter:description" content={post.excerpt} />
+				<meta name="twitter:image" content={`https://alistair.blog/api/og?slug=${post.slug}`} />
+				<meta name="twitter:site" content="@alistaiir" />
+				<meta name="twitter:creator" content="@alistaiir" />
 			</Head>
 
 			<div>
