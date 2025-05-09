@@ -104,21 +104,25 @@ export class AmbientDeclarations extends Post {
 						.
 					</li>
 				</ul>
+
 				<h2>Ambient vs. Regular Declarations</h2>
+
 				<p>
 					<b>Regular declarations</b> are for code you write and control.
 				</p>
+
 				<Highlighter filename="add.ts">
 					{stripIndent`
 						export function add(a: number, b: number): number {
 							return a + b;
 						}`}
 				</Highlighter>
+
 				<p>
 					<b>Ambient declarations</b> are for code that exists elsewhere.
 				</p>
 
-				<Highlighter filename="add.d.ts">
+				<Highlighter filename="ai-add.d.ts">
 					{stripIndent`
 						export declare function add(a: number, b: number): number;
 					`}
@@ -176,6 +180,43 @@ export class AmbientDeclarations extends Post {
 					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
+
+				<h3>Declaring Global Types</h3>
+
+				<p>
+					Suppose you want to add a global variable that your runtime creates, or perhaps a library
+					you're using doesn't have types for:
+				</p>
+
+				<Highlighter filename="globals.d.ts">
+					{stripIndent`
+						declare function myAwesomeFunction(x: string): number;
+					`}
+				</Highlighter>
+
+				<p>
+					Because this declaration file is NOT a module, this will be accessible everywhere in your
+					program.
+				</p>
+
+				<p>
+					What if you wanted to add something to the <code>window</code> object? TypeScript declares
+					the window variable exists by assigning it to an interface called <code>Window</code>,
+					which is also declared globally. You can perform{' '}
+					<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">
+						Declaration Merging
+					</a>{' '}
+					to extend that interface, and tell TypeScript about new properties that exist.
+				</p>
+
+				<Highlighter filename="globals.d.ts">
+					{stripIndent`
+						interface Window {
+							myAwesomeFunction: (x: string) => number;
+						}
+					`}
+				</Highlighter>
+
 				<p>
 					Why does this distinction exist? TypeScript is old in JavaScript's history - it predates
 					the modern module system (ESM) and needed to support the "everything is global" style of
