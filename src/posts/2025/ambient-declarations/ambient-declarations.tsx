@@ -410,7 +410,7 @@ export class AmbientDeclarations extends Post {
 					In fact, you can do an equality to check to see that importing the module gives you the
 					same reference to the global namespace.
 				</p>
-				<Shell dollarOnFirstLineOnly>
+				<Shell hasDollarOnFirstLineOnly>
 					{stripIndent`
 						bun repl
 

@@ -11,10 +11,10 @@ const Pre = ({children}: PropsWithChildren) => <pre className="px-4">{children}<
 
 export function Shell({
 	children,
-	dollarOnFirstLineOnly,
+	hasDollarOnFirstLineOnly,
 }: {
 	readonly children: string;
-	dollarOnFirstLineOnly?: boolean;
+	hasDollarOnFirstLineOnly?: boolean;
 }) {
 	const lines = children.split('\n');
 
@@ -28,7 +28,7 @@ export function Shell({
 						key={line}
 						className={clsx(
 							'before:select-none my-0',
-							dollarOnFirstLineOnly
+							hasDollarOnFirstLineOnly
 								? isFirst &&
 										'before:content-["$_"] before:text-yellow-600 text-yellow-800 dark:before:text-yellow-400 dark:text-yellow-200'
 								: 'before:content-["$_"]',
