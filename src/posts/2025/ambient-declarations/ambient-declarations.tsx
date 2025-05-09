@@ -179,7 +179,53 @@ export class AmbientDeclarations extends Post {
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
 
-				<h2>Declaring Global Types</h2>
+				<p>
+					Why does this distinction exist? TypeScript is old in JavaScript's history - it predates
+					the modern module system (ESM) and needed to support the "everything is global" style of
+					early JS. That's why it still supports both module and script (global) declaration files.
+				</p>
+
+				<p>
+					<b>How does TypeScript treat these differently?</b>
+				</p>
+
+				<ul>
+					<li>
+						<b>Module:</b> Everything you declare is private to that module and must be explicitly
+						imported by the consumer - just like regular TypeScript/ESM code.
+					</li>
+					<li>
+						<b>Script (global):</b> Everything is injected directly into the global scope of every
+						file in your program. This is how the DOM lib ships types like <code>window</code>,{' '}
+						<code>document</code>, and functions like <code>setTimeout</code>.
+					</li>
+				</ul>
+
+				<p>
+					<b>When would you use each?</b>
+				</p>
+				<ul>
+					<li>
+						<b>Module:</b> For packages, libraries, and almost all modern code.
+					</li>
+					<li>
+						<b>Script:</b> For patching browser globals, legacy code, or when you really need to add
+						something to the global scope.
+					</li>
+				</ul>
+
+				<Note variant="info" title="Edge case: Augmenting the global scope from a module">
+					You can still augment the global scope from inside a module-style declaration file by
+					using the <code>global {'{ ... }'}</code> escape hatch, but that should be reserved for
+					unavoidable edge-cases.
+				</Note>
+				<p>
+					<b>Real-world gotchas:</b> If you accidentally omit an import/export, your types might
+					leak everywhere! If two script files declare the same global, you'll get conflicts and
+					headaches.
+				</p>
+
+				<h2>Declaring global types</h2>
 				<p>Suppose you want to add a global variable for your project:</p>
 				<Highlighter filename="globals.d.ts">
 					{stripIndent`
