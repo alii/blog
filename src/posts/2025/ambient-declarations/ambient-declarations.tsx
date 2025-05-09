@@ -41,14 +41,22 @@ export class AmbientDeclarations extends Post {
 					) that contain type information and tell TypeScript what <i>things</i> exist at runtime.
 					They use the file extension <code>.d.ts</code>, with the `.d` denoting "declaration".
 				</p>
+
 				<p>
 					By <i>things</i> I mean anything you import and use. That could be functions, classes,
 					variables, modules themselves, APIs from your runtime, etc.
 				</p>
+
+				<p>
+					They're called "ambient" declarations because in the TypeScript universe ambient simply
+					means "without implementation"
+				</p>
+
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
 					benefited from ambient declarations.
 				</p>
+
 				<p>A simple ambient declaration file could look like this:</p>
 				<Highlighter filename="add.d.ts">
 					{stripIndent`
