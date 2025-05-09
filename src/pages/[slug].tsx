@@ -34,7 +34,7 @@ export default function PostPage({slug}: Props) {
 
 			<div>
 				<Link
-					className="text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600"
+					className="font-mono text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600"
 					href="/"
 				>
 					../
@@ -58,8 +58,6 @@ export default function PostPage({slug}: Props) {
 					'prose dark:text-gray-400 dark:prose-hr:border-gray-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert',
 					'prose-hr:border-gray-200',
 					'dark:prose-headings:text-gray-300',
-
-					'prose-table:border-none',
 
 					'prose-pre:border prose-pre:border-gray-200 prose-pre:bg-transparent prose-pre:text-gray-700 dark:prose-pre:border-gray-800 dark:prose-pre:text-gray-300',
 				)}

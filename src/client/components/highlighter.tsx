@@ -1,22 +1,43 @@
 import type {PropsWithChildren} from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import light from 'react-syntax-highlighter/dist/cjs/styles/hljs/lightfair';
-import dark from 'react-syntax-highlighter/dist/cjs/styles/hljs/night-owl';
 
+import light from 'react-syntax-highlighter/dist/cjs/styles/hljs/lightfair';
+import dark from 'react-syntax-highlighter/dist/cjs/styles/hljs/vs2015';
+
+import clsx from 'clsx';
 import {TbBrandCss3, TbBrandHtml5, TbBrandJavascript, TbBrandTypescript} from 'react-icons/tb';
 
 const Pre = ({children}: PropsWithChildren) => <pre className="px-4">{children}</pre>;
 
-export function Shell({children}: {readonly children: string}) {
+export function Shell({
+	children,
+	dollarOnFirstLineOnly,
+}: {
+	readonly children: string;
+	dollarOnFirstLineOnly?: boolean;
+}) {
 	const lines = children.split('\n');
 
 	return (
 		<pre className="px-4">
-			{lines.map(line => (
-				<p key={line} className="before:content-['$_'] before:select-none my-0">
-					{line}
-				</p>
-			))}
+			{lines.map((line, index) => {
+				const isFirst = index === 0;
+
+				return (
+					<p
+						key={line}
+						className={clsx(
+							'before:select-none my-0',
+							dollarOnFirstLineOnly
+								? isFirst &&
+										'before:content-["$_"] before:text-yellow-600 text-yellow-800 dark:before:text-yellow-400 dark:text-yellow-200'
+								: 'before:content-["$_"]',
+						)}
+					>
+						{line === '' ? <br /> : line}
+					</p>
+				);
+			})}
 		</pre>
 	);
 }
@@ -38,7 +59,7 @@ function Filename({filename}: {readonly filename: string}) {
 	})();
 
 	return (
-		<p className="text-sm text-gray-500 px-3 mx-1 mt-1 mb-0 rounded py-1.5 bg-gray-100 dark:bg-gray-900">
+		<p className="text-sm text-gray-600 dark:text-gray-400 px-3 mx-1 mt-1 mb-0 rounded py-1.5 bg-gray-100 dark:bg-gray-900/50">
 			<span className="mr-2">{icon}</span>
 			<span>{filename}</span>
 		</p>

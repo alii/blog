@@ -1,5 +1,5 @@
 import {stripIndent} from 'common-tags';
-import {Highlighter} from '../../../client/components/highlighter';
+import {Highlighter, Shell} from '../../../client/components/highlighter';
 import {Note} from '../../../client/components/note';
 import {Post} from '../../Post';
 
@@ -15,8 +15,7 @@ export class AmbientDeclarations extends Post {
 	public render() {
 		return (
 			<>
-				<h1>Ambient Declarations</h1>
-
+				<h1 className="font-mono">Ambient Declarations</h1>
 				<p>
 					I recently landed a pull request (
 					<a href="https://github.com/oven-sh/bun/pull/18024">#18024</a>) in{' '}
@@ -24,7 +23,6 @@ export class AmbientDeclarations extends Post {
 					Bun's TypeScript definitions. Working on this PR made me realize how little documentation
 					there is on ambient declarations, so I wanted to write about it.
 				</p>
-
 				<h2>What are ambient declarations?</h2>
 				<p>I'll start by answering this question with a couple questions...</p>
 				<blockquote>
@@ -47,12 +45,10 @@ export class AmbientDeclarations extends Post {
 					By <i>things</i> I mean anything you import and use. That could be functions, classes,
 					variables, modules themselves, APIs from your runtime, etc.
 				</p>
-
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
 					benefited from ambient declarations.
 				</p>
-
 				<p>A simple ambient declaration file could look like this:</p>
 				<Highlighter filename="add.d.ts">
 					{stripIndent`
@@ -75,15 +71,12 @@ export class AmbientDeclarations extends Post {
 					tells TypeScript to not expect any runtime code to exist here, it's purely a type
 					declaration only.
 				</p>
-
 				<Note variant="info" title="Using the declare keyword in source code">
 					It's completely legitimate and legal to use the <code>declare</code> keyword inside of
 					regular .ts files. There are many use cases for this, a common one being declaring types
 					of globals.
 				</Note>
-
 				<hr />
-
 				<h2>How Does TypeScript Find Types?</h2>
 				<p>
 					Module resolution is an incredibly complex topic, but it boils down to TypeScript looking
@@ -111,7 +104,6 @@ export class AmbientDeclarations extends Post {
 						.
 					</li>
 				</ul>
-
 				<h2>Ambient vs. Regular Declarations</h2>
 				<p>
 					<b>Regular declarations</b> are for code you write and control.
@@ -125,25 +117,30 @@ export class AmbientDeclarations extends Post {
 				<p>
 					<b>Ambient declarations</b> are for code that exists elsewhere.
 				</p>
+
 				<Highlighter filename="add.d.ts">
 					{stripIndent`
 						export declare function add(a: number, b: number): number;
 					`}
 				</Highlighter>
+
 				<p>
 					The <code>declare</code> keyword tells TypeScript: "This exists at runtime, but you won't
 					find it here."
 				</p>
-
 				<h2>Module vs. Script Declarations</h2>
-				<p>
-					<b>Module declarations:</b> Any <code>.d.ts</code> file with a top-level{' '}
-					<code>import</code> or <code>export</code>. Types are scoped to the module.
-					<br />
-					<b>Script (global) declarations:</b> No top-level import/export. Types are added to the
-					global scope.
-				</p>
-				<table className="border my-4">
+				<ul>
+					<li>
+						<b>Module declarations</b>: Any <code>.d.ts</code> file with a top-level{' '}
+						<code>import</code> or <code>export</code>. Types are added to the module.
+					</li>
+					<li>
+						<b>Script (global) declarations</b>: No top-level import/export. Types are added to the
+						global scope.
+					</li>
+				</ul>
+
+				<table>
 					<thead>
 						<tr>
 							<th>File Type</th>
@@ -157,14 +154,16 @@ export class AmbientDeclarations extends Post {
 							<td>
 								<code>export declare function foo(): void;</code>
 							</td>
-							<td>Module only</td>
+							<td>Module only (must be imported)</td>
 						</tr>
 						<tr>
 							<td>Script (global)</td>
 							<td>
 								<code>declare function setTimeout(...): number;</code>
+								<br />
+								<code>declare function foo(): void;</code>
 							</td>
-							<td>Global</td>
+							<td>Global (available everywhere)</td>
 						</tr>
 					</tbody>
 				</table>
@@ -172,23 +171,19 @@ export class AmbientDeclarations extends Post {
 					<b>Rule of thumb:</b> An ambient declaration file is global unless it has a top-level
 					import/export.
 				</p>
-
 				<Note variant="warning" title="Global pollution">
 					Script files can pollute the global namespace and can very easily{' '}
 					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
-
 				<p>
 					Why does this distinction exist? TypeScript is old in JavaScript's history - it predates
 					the modern module system (ESM) and needed to support the "everything is global" style of
 					early JS. That's why it still supports both module and script (global) declaration files.
 				</p>
-
 				<p>
 					<b>How does TypeScript treat these differently?</b>
 				</p>
-
 				<ul>
 					<li>
 						<b>Module:</b> Everything you declare is private to that module and must be explicitly
@@ -200,7 +195,6 @@ export class AmbientDeclarations extends Post {
 						<code>document</code>, and functions like <code>setTimeout</code>.
 					</li>
 				</ul>
-
 				<p>
 					<b>When would you use each?</b>
 				</p>
@@ -214,46 +208,18 @@ export class AmbientDeclarations extends Post {
 					</li>
 				</ul>
 
-				<Note variant="info" title="Edge case: Augmenting the global scope from a module">
+				<Note variant="info" title="Augmenting the global scope from a module">
 					You can still augment the global scope from inside a module-style declaration file by
 					using the <code>global {'{ ... }'}</code> escape hatch, but that should be reserved for
 					unavoidable edge-cases.
 				</Note>
-				<p>
-					<b>Real-world gotchas:</b> If you accidentally omit an import/export, your types might
-					leak everywhere! If two script files declare the same global, you'll get conflicts and
-					headaches.
-				</p>
-
-				<h2>Declaring global types</h2>
-				<p>Suppose you want to add a global variable for your project:</p>
-				<Highlighter filename="globals.d.ts">
-					{stripIndent`
-						declare const MY_API_KEY: string;
-					`}
-				</Highlighter>
-				<p>
-					Now you can use <code>MY_API_KEY</code> anywhere, and TypeScript won't complain.
-				</p>
-				<p>
-					To add types to the <code>window</code> object:
-				</p>
-				<Highlighter filename="globals.d.ts">
-					{stripIndent`
-						interface Window {
-							myCustomProperty: number;
-						}
-					`}
-				</Highlighter>
 
 				<h2>Declaring modules by name</h2>
-
 				<p>
 					You can declare a module by its name. As long as the ambient declaration file gets
-					referenced/ included in your build somehow then TypeScript then the module will be
+					referenced or included in your build somehow, then TypeScript will make the module
 					available.
 				</p>
-
 				<Highlighter filename="my-legacy-lib.d.ts">
 					{stripIndent`
 						declare module 'my-legacy-lib' {
@@ -261,13 +227,11 @@ export class AmbientDeclarations extends Post {
 						}
 					`}
 				</Highlighter>
-
 				<p>
 					This syntax also allows for declaring modules with wildcard matching. We do this in{' '}
 					<code>@types/bun</code>, since Bun allows for importing <code>.toml</code> and{' '}
 					<code>.html</code> files.
 				</p>
-
 				<Highlighter filename="bun.d.ts">
 					{stripIndent`
 						declare module '*.toml' {
@@ -280,10 +244,8 @@ export class AmbientDeclarations extends Post {
 						}
 					`}
 				</Highlighter>
-
 				<h2>Writing Your Own .d.ts Files</h2>
 				<p>Suppose you're using a JS library with no types. Here's how to add them:</p>
-
 				<ol>
 					<li>
 						Create a new <code>.d.ts</code> file (you could put this in a <code>types/</code>{' '}
@@ -306,7 +268,6 @@ export class AmbientDeclarations extends Post {
 						Make sure your <code>tsconfig.json</code> includes the types folder (usually automatic).
 					</li>
 				</ol>
-
 				<h2>Compiler contract</h2>
 				<p>
 					Since ambient modules don't contain runtime code, they should be treated like "promises"
@@ -320,16 +281,211 @@ export class AmbientDeclarations extends Post {
 					While doing research for the pull request mentioned at the beginning, I found a few cases
 					where the compiler was not able to resolve the types of some of Bun's APIs because we had
 					declared that certain symbols existed, where they might have already been declared by{' '}
-					<code>lib.dom.d.ts</code> (the builtin types that TypeScript provides by default) or
-					things like <code>@types/node</code> (the types for Node.js).
+					<a href="https://github.com/microsoft/TypeScript/blob/main/lib/lib.dom.d.ts">
+						lib.dom.d.ts
+					</a>{' '}
+					(the builtin types that TypeScript provides by default) or things like{' '}
+					<code>@types/node</code> (the types for Node.js). .
 				</p>
 				<p>
 					Avoiding these conflicts is unfortunately not always possible. Bun implements a really
 					solid best-effort approach to this, but sometimes you just have to get creative (and maybe
-					a little hacky).
+					a little hacky). For example, you might see code like this to "force" TypeScript to use
+					one type over another:
 				</p>
+				<Highlighter filename="my-globals.d.ts">
+					{stripIndent`
+						declare var Worker: globalThis extends {onmessage: any, Worker: infer T} ? T : never;
+					`}
+				</Highlighter>
+				<p>
+					Bun's types take this a step further by using a clever trick that let's us use the
+					built-in types if they exist, with a graceful fallback when it doesn't
+				</p>
+				<div className="space-y-1">
+					<Highlighter filename="bun.d.ts">
+						{stripIndent`
+						declare module "bun" {
+							namespace __internal {
+								type LibDomIsLoaded = typeof globalThis extends { onabort: any } ? true : false;
 
-				<h2>Gotchas</h2>
+								/**
+								 * Helper type for avoiding conflicts in types.
+								 *
+								 * Uses the lib.dom.d.ts definition if it exists, otherwise defines it locally.
+								 *
+								 * This is to avoid type conflicts between lib.dom.d.ts and \@types/bun.
+								 *
+								 * Unfortunately some symbols cannot be defined when both Bun types and lib.dom.d.ts types are loaded,
+								 * and since we can't redeclare the symbol in a way that satisfies both, we need to fallback
+								 * to the type that lib.dom.d.ts provides.
+								 */
+								type UseLibDomIfAvailable<GlobalThisKeyName extends PropertyKey, Otherwise> =
+								// \`onabort\` is defined in lib.dom.d.ts, so we can check to see if lib dom is loaded by checking if \`onabort\` is defined
+								LibDomIsLoaded extends true
+									? typeof globalThis extends { [K in GlobalThisKeyName]: infer T } // if it is loaded, infer it from \`globalThis\` and use that value
+									? T
+									: Otherwise // Not defined in lib dom (or anywhere else), so no conflict. We can safely use our own definition
+									: Otherwise; // Lib dom not loaded anyway, so no conflict. We can safely use our own definition
+							}
+						}
+					`}
+					</Highlighter>
+
+					<Highlighter filename="globals.d.ts">
+						{stripIndent`
+							declare var Worker: import("bun").__internal.UseLibDomIfAvailable<'Worker', {
+								new(filename: string, options?: import("bun").WorkerOptions): Worker;
+							}>;
+						`}
+					</Highlighter>
+				</div>
+				<p>
+					This declares that the <code>Worker</code> runtime value exists, and will use the version
+					from TypeScript's builtin lib files if they're loaded already in the program, and if not
+					it will use the version passed as the second argument.
+				</p>
+				<p>
+					This trick means we can write types that can exist in many different environments without
+					worrying about impossible-to-fix conflicts breaking the build.
+				</p>
+				<hr />
+				<h2>Declaring entire modules as global namespaces</h2>
+				<p>
+					Everything that you can import from the <code>bun</code> module also exists on a global
+					namespace, <code>Bun</code>.
+				</p>
+				<Highlighter filename="app.ts">
+					{stripIndent`
+						import { file } from 'bun';
+						await file('test.txt').text();
+
+						// Or, exactly the same thing:
+
+						await Bun.file('test.txt').text();
+					`}
+				</Highlighter>
+				<p>
+					In fact, you can do an equality to check to see that importing the module gives you the
+					same reference to the global namespace.
+				</p>
+				<Shell dollarOnFirstLineOnly>
+					{stripIndent`
+						bun repl
+
+						Welcome to Bun v1.2.13
+						Type ".help" for more information.
+
+						> require("bun") === Bun
+						true
+					`}
+				</Shell>
+				<p>
+					Declaring this in TypeScript uses some strange syntax. In Bun, you can{' '}
+					<a href="https://github.com/oven-sh/bun/blob/main/packages/bun-types/bun.ns.d.ts#L3-L5">
+						find the declaration here
+					</a>
+					.
+				</p>
+				<p>Let's break it down</p>
+				<Highlighter filename="bun.ns.d.ts">
+					{stripIndent`
+						import * as BunModule from "bun";
+
+						declare global {
+							export import Bun = BunModule;
+						}
+					`}
+				</Highlighter>
+				<ol>
+					<li>
+						<p>We have an import statement, so this file becomes a module.</p>
+					</li>
+					<li>
+						<p>
+							We import everything from the <code>bun</code> module and alias to a namespace called{' '}
+							<code>BunModule</code>
+						</p>
+					</li>
+					<li>
+						<p>
+							We use the `declare global` block to escape back into global scope, and then use the
+							funky syntax <code>export import</code>
+						</p>
+					</li>
+				</ol>
+				<p>
+					This <code>export import</code> syntax a way of saying "re-export this namespace" - except
+					when declaring on the global scope (either in script, or inside a{' '}
+					<code>declare global {'{ }'}</code> block) the export keyword kind of turns into a "make
+					this exist globally" keyword
+				</p>
+				<p>
+					And here's the "rest" of <code>@types/bun</code> that piece this all together
+				</p>
+				<div className="space-y-1">
+					<Highlighter filename="bun.d.ts">
+						{stripIndent`
+							declare module "bun" {
+								/**
+								 * Creates a new BunFile instance
+								 * @param path - The path to the file
+								 * @returns A new BunFile instance
+								 */
+								function file(path: string): BunFile;
+
+								interface BunFile {
+									/* ... */
+								}
+							}
+						`}
+					</Highlighter>
+
+					<Highlighter filename="index.d.ts">
+						{stripIndent`
+							// This index.d.ts file is the entrypoint for TypeScript to start
+							// resolving the type definitions from. You "import" the types
+							// by using triple-slash references, which tell TypeScript
+							// to add these declarations to the build.
+
+							/// <reference path="./bun.d.ts" />
+							/// <reference path="./bun.ns.d.ts" />
+						`}
+					</Highlighter>
+
+					<Highlighter filename="package.json" language="json">
+						{stripIndent`
+							{
+								"name": "@types/bun",
+								"version": "1.2.13",
+								"types": "./index.d.ts",
+								// ...
+							}
+						`}
+					</Highlighter>
+				</div>
+				<p>
+					In previous versions of Bun's TypeScript types, the Bun global was defined as a variable
+					that imported the <code>bun</code> module.
+				</p>
+				<Highlighter filename="globals.d.ts">
+					{stripIndent`
+						declare var Bun: typeof import("bun");
+					`}
+				</Highlighter>
+				<p>
+					But since this is a runtime value, we have lost all of the types that are exported from
+					the <code>bun</code> module. For example we can't use <code>Bun.BunFile</code> in our
+					code.
+				</p>
+				<p>
+					In the pull request mentioned at the beginning, I changed previous declaration to use the{' '}
+					<code>export import</code> syntax. This fixed the issue of losing the types, and means
+					that you can now use the Bun namespace exactly like you'd expect the <code>bun</code>{' '}
+					module to behave.
+				</p>
+				<hr />
+				<h2>Ambient declaration gotchas</h2>
 				<ul>
 					<li>
 						<b>"Cannot find module" or "type not found" errors:</b> Make sure your{' '}
@@ -342,7 +498,6 @@ export class AmbientDeclarations extends Post {
 						module declarations, and avoid globals unless necessary.
 					</li>
 				</ul>
-
 				<h2>Resources</h2>
 				<ul>
 					<li>
@@ -359,14 +514,12 @@ export class AmbientDeclarations extends Post {
 						<a href="https://github.com/DefinitelyTyped/DefinitelyTyped">DefinitelyTyped</a>
 					</li>
 				</ul>
-
 				<hr />
-
 				<p>Thanks to the following people for reading revisions and helping with this post</p>
-
 				<ul>
 					<li>
 						<a href="https://cnrad.dev">Conrad Crawford</a>
+						<a href="https://looskie.com">Cody Miller</a>
 					</li>
 				</ul>
 			</>

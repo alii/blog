@@ -11,9 +11,9 @@ export const config: PageConfig = {
 export default function Home() {
 	return (
 		<main className="space-y-8">
-			<h2>alistair.blog</h2>
+			<h2 className="font-mono">alistair.blog</h2>
 
-			<ul className="space-y-1 list-disc list-inside">
+			<ul className="space-y-1 list-disc list-inside font-mono">
 				{flatMap(sortPosts(posts), post => {
 					if (post.hidden) {
 						return [];
@@ -34,7 +34,7 @@ function BlogLink(props: {readonly href: string; readonly children: ReactNode}) 
 	return (
 		<li>
 			<Link
-				className="text-blue-500 hover:text-blue-700 dark:hover:text-blue-600"
+				className="text-blue-500 cursor-default hover:text-blue-700 dark:hover:text-blue-600"
 				href={props.href}
 			>
 				{props.children}

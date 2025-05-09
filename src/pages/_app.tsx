@@ -21,7 +21,7 @@ const footerLink =
 
 export default function App({Component, pageProps, router}: AppProps) {
 	return (
-		<div className={clsx('py-24 px-4 font-mono', mono.variable)}>
+		<div className={clsx('py-24 px-4', mono.variable)}>
 			<Head>
 				<title>alistair smith • blog</title>
 			</Head>
@@ -30,7 +30,7 @@ export default function App({Component, pageProps, router}: AppProps) {
 				<Component {...pageProps} />
 
 				<footer>
-					<p className="[&_a]:inline-block [&_a]:py-4 [&_a]:px-6 [&_a:first-child]:pl-0 [&_a:last-child]:pr-0">
+					<p className="font-mono [&_a]:inline-block [&_a]:py-4 [&_a]:px-6 [&_a:first-child]:pl-0 [&_a:last-child]:pr-0">
 						<ExternalLink href="https://alistair.sh" className={footerLink}>
 							<CiGlobe className="inline size-[15px] mr-[3px] mb-[1.5px]" />
 							<span>alistair.sh</span>

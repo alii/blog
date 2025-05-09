@@ -15,16 +15,17 @@ export class ServerlessDiscordOAuth extends Post {
 	public render() {
 		return (
 			<>
-				<h1>Serverless Discord OAuth with Next.js</h1>
+				<h1 className="font-mono">Serverless Discord OAuth with Next.js</h1>
 				<p>
-					OAuth is arguably the number one way to authorize a user from a third party platform. It
-					is a brilliant solution to a difficult problem, but it can be hard to implement,
+					Oauth is is a brilliant solution to a difficult problem, but it can be hard to implement,
 					especially in a serverless environment. Hopefully, this post will help you get started.
 				</p>
+
 				<p>
 					Live demo:{' '}
 					<Link href="/demos/serverless-discord-oauth">/demos/serverless-discord-oauth</Link>
 				</p>
+
 				<h2>The setup</h2>
 				<p>
 					Firstly, we're going to need to create a Next.js with TypeScript app. Feel free to skip

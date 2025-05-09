@@ -18,8 +18,9 @@ const icons = {
 export function Note(props: NoteProps) {
 	const className = clsx(
 		'p-4 pt-3 not-prose rounded-md space-y-2',
-		'[&_code]:p-1 [&_code]:-mx-1 [&_code]:inline [&_code]:rounded',
+		'[&_code]:inline [&_code]:rounded [&_code]:text-xs [&_code]:p-0.5',
 		'[&_a]:underline [&_a:hover]:text-blue-500',
+
 		{
 			'bg-yellow-100/90 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-500':
 				props.variant === 'warning',
