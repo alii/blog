@@ -3,163 +3,168 @@ import '../styles/main.css';
 
 import clsx from 'clsx';
 import type {AppProps} from 'next/app';
-import localFont from 'next/font/local';
+import {JetBrains_Mono} from 'next/font/google';
 import Head from 'next/head';
 import {CiGlobe, CiTwitter} from 'react-icons/ci';
 import {VscGithubAlt} from 'react-icons/vsc';
 import {ExternalLink} from '../client/components/external-link';
 
-const iosevkaTerm = localFont({
-	fallback: ['monospace'],
-	display: 'swap',
-	preload: true,
-	adjustFontFallback: false,
-	src: [
-		// Thin
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Thin-02.ttf',
-			weight: '100',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Thin-Italic-10.ttf',
-			weight: '100',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Thin-Oblique-09.ttf',
-			weight: '100',
-			style: 'oblique',
-		},
-		// Extralight
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-20.ttf',
-			weight: '200',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-Italic-28.ttf',
-			weight: '200',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-Oblique-27.ttf',
-			weight: '200',
-			style: 'oblique',
-		},
-		// Light
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Light-38.ttf',
-			weight: '300',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Light-Italic-46.ttf',
-			weight: '300',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Light-Oblique-45.ttf',
-			weight: '300',
-			style: 'oblique',
-		},
-		// Regular
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-56.ttf',
-			weight: '400',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Italic-64.ttf',
-			weight: '400',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Oblique-63.ttf',
-			weight: '400',
-			style: 'oblique',
-		},
-		// Medium
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Medium-74.ttf',
-			weight: '500',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Medium-Italic-82.ttf',
-			weight: '500',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Medium-Oblique-81.ttf',
-			weight: '500',
-			style: 'oblique',
-		},
-		// Semibold
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-92.ttf',
-			weight: '600',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-Italic-100.ttf',
-			weight: '600',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-Oblique-99.ttf',
-			weight: '600',
-			style: 'oblique',
-		},
-		// Bold
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Bold-110.ttf',
-			weight: '700',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Bold-Italic-118.ttf',
-			weight: '700',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Bold-Oblique-117.ttf',
-			weight: '700',
-			style: 'oblique',
-		},
-		// Extrabold
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-128.ttf',
-			weight: '800',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-Italic-136.ttf',
-			weight: '800',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-Oblique-135.ttf',
-			weight: '800',
-			style: 'oblique',
-		},
-		// Heavy
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-146.ttf',
-			weight: '900',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-Italic-154.ttf',
-			weight: '900',
-			style: 'italic',
-		},
-		{
-			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-Oblique-153.ttf',
-			weight: '900',
-			style: 'oblique',
-		},
-	],
+// const iosevkaTerm = localFont({
+// 	fallback: ['monospace'],
+// 	display: 'swap',
+// 	preload: true,
+// 	adjustFontFallback: false,
+// 	src: [
+// 		// Thin
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Thin-02.ttf',
+// 			weight: '100',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Thin-Italic-10.ttf',
+// 			weight: '100',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Thin-Oblique-09.ttf',
+// 			weight: '100',
+// 			style: 'oblique',
+// 		},
+// 		// Extralight
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-20.ttf',
+// 			weight: '200',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-Italic-28.ttf',
+// 			weight: '200',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extralight-Oblique-27.ttf',
+// 			weight: '200',
+// 			style: 'oblique',
+// 		},
+// 		// Light
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Light-38.ttf',
+// 			weight: '300',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Light-Italic-46.ttf',
+// 			weight: '300',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Light-Oblique-45.ttf',
+// 			weight: '300',
+// 			style: 'oblique',
+// 		},
+// 		// Regular
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-56.ttf',
+// 			weight: '400',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Italic-64.ttf',
+// 			weight: '400',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Oblique-63.ttf',
+// 			weight: '400',
+// 			style: 'oblique',
+// 		},
+// 		// Medium
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Medium-74.ttf',
+// 			weight: '500',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Medium-Italic-82.ttf',
+// 			weight: '500',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Medium-Oblique-81.ttf',
+// 			weight: '500',
+// 			style: 'oblique',
+// 		},
+// 		// Semibold
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-92.ttf',
+// 			weight: '600',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-Italic-100.ttf',
+// 			weight: '600',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Semibold-Oblique-99.ttf',
+// 			weight: '600',
+// 			style: 'oblique',
+// 		},
+// 		// Bold
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Bold-110.ttf',
+// 			weight: '700',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Bold-Italic-118.ttf',
+// 			weight: '700',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Bold-Oblique-117.ttf',
+// 			weight: '700',
+// 			style: 'oblique',
+// 		},
+// 		// Extrabold
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-128.ttf',
+// 			weight: '800',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-Italic-136.ttf',
+// 			weight: '800',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Extrabold-Oblique-135.ttf',
+// 			weight: '800',
+// 			style: 'oblique',
+// 		},
+// 		// Heavy
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-146.ttf',
+// 			weight: '900',
+// 			style: 'normal',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-Italic-154.ttf',
+// 			weight: '900',
+// 			style: 'italic',
+// 		},
+// 		{
+// 			path: '../../public/fonts/Iosevka-Term-Curly-Heavy-Oblique-153.ttf',
+// 			weight: '900',
+// 			style: 'oblique',
+// 		},
+// 	],
+// 	variable: '--font-mono',
+// });
+
+const jetbrainsMono = JetBrains_Mono({
+	subsets: ['latin'],
 	variable: '--font-mono',
 });
 
@@ -168,7 +173,7 @@ const footerLink =
 
 export default function App({Component, pageProps, router}: AppProps) {
 	return (
-		<div className={clsx('py-24 px-4 font-mono', iosevkaTerm.variable)}>
+		<div className={clsx('py-24 px-4 font-mono', jetbrainsMono.variable)}>
 			<Head>
 				<title>alistair smith • blog</title>
 			</Head>

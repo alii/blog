@@ -42,15 +42,9 @@ export class AmbientDeclarations extends Post {
 					2. How does TypeScript know the types of APIs that exist in the my runtime?
 				</blockquote>
 
-				<p>Answer: It can't!</p>
-
-				<p>Thanks for reading!</p>
-
-				<br />
-				<br />
-				<p>...</p>
-				<br />
-				<br />
+				<p>
+					The short answer: <b>It can't!</b>
+				</p>
 
 				<p>
 					The short but slightly longer answer is that it <i>CAN</i> with ambient declarations!
@@ -151,15 +145,85 @@ export class AmbientDeclarations extends Post {
 				</Highlighter>
 
 				<p>
+					The rule of thumb is: Ambient declaration file is a script/global unless top level imports
+					and exports are present.
+				</p>
+
+				<p>
 					You can still augment the global scope from inside a module-style declaration file by
 					using the <code>declare global &#123; ... &#125;</code> escape hatch, but that should be
 					reserved for unavoidable edge-cases.
 				</p>
 
 				<Note variant="warning" title="Be explicit">
-					Script files pollute the global namespace and can easily clash with other libraries.
+					Script files can pollute the global namespace and can very easily{' '}
+					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
+
+				<h2>Globally declaring modules by name</h2>
+
+				<p>
+					Ambient declarations can, at the global/top level scope, declare modules by name. This is
+					how things like the <code>bun</code> module or the <code>node:fs</code> module are
+					declared.
+				</p>
+
+				<p>
+					Here's a boiled-down version of how Bun's <code>Bun.file()</code> function gets defined:
+				</p>
+
+				<Highlighter filename="bun.d.ts">
+					{stripIndent`
+						declare module 'bun' {
+							function file(path: string): BunFile;
+
+							interface BunFile extends Blob {
+								/* ... */
+							}
+						}
+					`}
+				</Highlighter>
+
+				<p className="text-sm">
+					You can{' '}
+					<a href="https://github.com/oven-sh/bun/blob/de487713ed48e8b170c7014534864aa61de212a2/packages/bun-types/bun.d.ts#L4340">
+						see the full declaration here
+					</a>
+					.
+				</p>
+
+				<p>
+					Since we've already used the <code>declare</code> keyword at the top of this scope AND the
+					declaration file itself is a script (not a module)
+				</p>
+
+				<h3>Declaring modules by wildcard</h3>
+
+				<p>
+					Another great trick that the <code>declare module 'name'</code> syntax allows you to do is
+					declare modules with wildcard matching. Since Bun allows for importing things like{' '}
+					<code>.toml</code> files and <code>.html</code> files, we use this declaring the types of
+					these files.
+				</p>
+
+				<div className="space-y-1.5">
+					<Highlighter filename="bun.d.ts">
+						{stripIndent`
+							declare module '*.toml' {
+								const content: unknown;
+								export default content;
+							}
+						`}
+					</Highlighter>
+
+					<Highlighter filename="app.ts">
+						{stripIndent`
+							import myTomlFile from './my-file.toml';
+							myTomlFile; // => typed as \`unknown\`
+						`}
+					</Highlighter>
+				</div>
 
 				<h2>Gotchas</h2>
 
@@ -167,14 +231,28 @@ export class AmbientDeclarations extends Post {
 				<p>
 					Since ambient modules don't contain runtime code, they should be treated like "promises"
 					or "contracts" that you are making with the compiler. They're like documentation that
-					TypeScript understands - meaning they can get out of sync with the actual runtime js!
+					TypeScript can understand. Just like documentation for humans, it can get out of sync with
+					the actual runtime code. A lot of the work I'm doing at Bun is ensuring our type
+					definitions are up to date with Bun's runtime APIs.
 				</p>
 
-				<h3>Module vs Script</h3>
+				<h3>Conflicts</h3>
+				<p>
+					While doing research for the pull request mentioned at the beginning, I found a few cases
+					where the compiler was not able to resolve the types of some of Bun's APIs because we had
+					declared that certain symbols existed, where they might have already been declared by{' '}
+					<code>lib.dom.d.ts</code> (the builtin types that TypeScript provides by default) or
+					things like <code>@types/node</code> (the types for Node.js).
+				</p>
+
+				<p>
+					Avoiding these conflicts is unfortunately not always possible. Bun implements a really
+					solid best-effort approach to this.
+				</p>
 
 				<hr />
 
-				<p>Thanks goes to the following people for reading revisions and helping with this post</p>
+				<p>Thanks to the following people for reading revisions and helping with this post</p>
 
 				<ul>
 					<li>
