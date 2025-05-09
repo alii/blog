@@ -352,11 +352,13 @@ export class AmbientDeclarations extends Post {
 					Bun's types take this a step further by using a clever trick that let's us use the
 					built-in types if they exist, with a graceful fallback when it doesn't
 				</p>
+
 				<div className="space-y-1">
 					<Highlighter filename="bun.d.ts">
 						{stripIndent`
 						declare module "bun" {
 							namespace __internal {
+								// \`onabort\` is defined in lib.dom.d.ts, so we can check to see if lib dom is loaded by checking if \`onabort\` is defined
 								type LibDomIsLoaded = typeof globalThis extends { onabort: any } ? true : false;
 
 								/**
@@ -371,12 +373,11 @@ export class AmbientDeclarations extends Post {
 								 * to the type that lib.dom.d.ts provides.
 								 */
 								type UseLibDomIfAvailable<GlobalThisKeyName extends PropertyKey, Otherwise> =
-								// \`onabort\` is defined in lib.dom.d.ts, so we can check to see if lib dom is loaded by checking if \`onabort\` is defined
-								LibDomIsLoaded extends true
-									? typeof globalThis extends { [K in GlobalThisKeyName]: infer T } // if it is loaded, infer it from \`globalThis\` and use that value
-									? T
-									: Otherwise // Not defined in lib dom (or anywhere else), so no conflict. We can safely use our own definition
-									: Otherwise; // Lib dom not loaded anyway, so no conflict. We can safely use our own definition
+									LibDomIsLoaded extends true
+										? typeof globalThis extends { [K in GlobalThisKeyName]: infer T } // if it is loaded, infer it from \`globalThis\` and use that value
+											? T
+											: Otherwise // Not defined in lib dom (or anywhere else), so no conflict. We can safely use our own definition
+										: Otherwise; // Lib dom not loaded anyway, so no conflict. We can safely use our own definition
 							}
 						}
 					`}
