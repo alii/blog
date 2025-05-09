@@ -5,7 +5,7 @@ import {VscCheck, VscInfo, VscWarning} from 'react-icons/vsc';
 export type NoteProps = {
 	readonly title?: string;
 	readonly children: ReactNode;
-	readonly variant: 'warning' | 'info' | 'success' | 'tip';
+	readonly variant: 'warning' | 'info' | 'success';
 };
 
 const icons = {
@@ -26,12 +26,10 @@ export function Note(props: NoteProps) {
 			'bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-500': props.variant === 'info',
 			'bg-green-50 text-green-600 dark:bg-green-900/40 dark:text-green-500':
 				props.variant === 'success',
-			'bg-gray-100 text-gray-600 dark:bg-gray-900 dark:text-gray-500': props.variant === 'tip',
 
 			'[&_code]:bg-yellow-50 [&_code]:dark:bg-yellow-900/40': props.variant === 'warning',
 			'[&_code]:bg-blue-200/90 [&_code]:dark:bg-blue-900/40': props.variant === 'info',
 			'[&_code]:bg-green-200/90 [&_code]:dark:bg-green-900/40': props.variant === 'success',
-			'[&_code]:bg-gray-200/90 [&_code]:dark:bg-gray-800': props.variant === 'tip',
 		},
 	);
 
