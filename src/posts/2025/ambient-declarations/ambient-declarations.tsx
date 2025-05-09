@@ -1,5 +1,6 @@
 import {stripIndent} from 'common-tags';
 import {Highlighter} from '../../../client/components/highlighter';
+import {Note} from '../../../client/components/note';
 import {Post} from '../../Post';
 
 export class AmbientDeclarations extends Post {
@@ -17,17 +18,14 @@ export class AmbientDeclarations extends Post {
 				<h1>Ambient Declarations</h1>
 
 				<p>
-					I recently landed a <a href="https://github.com/oven-sh/bun/pull/18024">pull request</a>{' '}
-					in <a href="https://bun.sh/">Bun</a> that reorganized and rewrote significant portions of
+					I recently landed a pull request (
+					<a href="https://github.com/oven-sh/bun/pull/18024">#18024</a>) in{' '}
+					<a href="https://bun.sh/">Bun</a> that reorganized and rewrote significant portions of
 					Bun's TypeScript definitions. Working on this PR made me realize how little documentation
-					there is on ambient declarations, so I wanted to write about it—and hopefully make it a
-					little less mysterious (and a little more fun!).
+					there is on ambient declarations, so I wanted to write about it.
 				</p>
 
-				<hr />
-
 				<h2>What are ambient declarations?</h2>
-
 				<p>I'll start by answering this question with a couple questions...</p>
 				<blockquote>
 					1. How does TypeScript know the types of my <code>node_modules</code>, which are mostly
@@ -53,13 +51,44 @@ export class AmbientDeclarations extends Post {
 
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
-					benefited from ambient declarations.
+					benefited from ambient declarations. They're the secret sauce behind TypeScript's magic.
 				</p>
+
+				<p>A simple ambient declaration file could look like this:</p>
+				<Highlighter filename="add.d.ts">
+					{stripIndent`
+						/**
+						 * Performs addition using AI and LLMs
+						 *
+						 * @param a - The first number
+						 * @param b - The second number
+						 *
+						 * @returns The sum of a and b (probably)
+						 */
+						export declare function add(a: number, b: number): Promise<number>;
+					`}
+				</Highlighter>
+				<p>
+					If you can already read TypeScript this ambient declaration will be very easy to
+					understand. You can clearly see a JSDoc comment, the types of the arguments, the return
+					type, an export keyword, etc. It almost looks like real TypeScript, except the really
+					important part to note here is the keyword <code>declare</code> is used. This keyword
+					tells TypeScript to not expect any runtime code to exist here, it's purely a type
+					declaration only.
+				</p>
+
+				<Note variant="info" title="Using the declare keyword in source code">
+					It's completely legitimate and legal to use the <code>declare</code> keyword inside of
+					regular .ts files. There are many use cases for this, a common one being declaring types
+					of globals.
+				</Note>
+
+				<hr />
 
 				<h2>How Does TypeScript Find Types?</h2>
 				<p>
-					Module resolution is an incredibly complex topic, but you can boil down to TypeScript
-					looking for relevant types in a few places.
+					Module resolution is an incredibly complex topic, but it boils down to TypeScript looking
+					for relevant types in a few places.
 				</p>
 				<ul className="space-y-6">
 					<li>
@@ -106,16 +135,6 @@ export class AmbientDeclarations extends Post {
 					The <code>declare</code> keyword tells TypeScript: "This exists at runtime, but you won't
 					find it here."
 				</p>
-				<p>
-					<b>
-						It is also perfectly legal to use <code>declare</code> in .ts files
-					</b>
-				</p>
-				<Highlighter filename="globals.ts">
-					{stripIndent`
-						declare const MY_API_KEY: string;
-					`}
-				</Highlighter>
 
 				<h2>Module vs. Script Declarations</h2>
 				<p>
@@ -155,6 +174,12 @@ export class AmbientDeclarations extends Post {
 					import/export.
 				</p>
 
+				<Note variant="warning" title="Global pollution">
+					Script files can pollute the global namespace and can very easily{' '}
+					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
+					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
+				</Note>
+
 				<h2>Declaring Global Types</h2>
 				<p>Suppose you want to add a global variable for your project:</p>
 				<Highlighter filename="globals.d.ts">
@@ -176,10 +201,14 @@ export class AmbientDeclarations extends Post {
 					`}
 				</Highlighter>
 
-				<h2>Declaring Modules by Name and Wildcard</h2>
+				<h2>Declaring modules by name</h2>
+
 				<p>
-					<b>Named module:</b>
+					You can declare a module by its name. As long as the ambient declaration file gets
+					referenced/ included in your build somehow then TypeScript then the module will be
+					available.
 				</p>
+
 				<Highlighter filename="my-legacy-lib.d.ts">
 					{stripIndent`
 						declare module 'my-legacy-lib' {
@@ -189,27 +218,23 @@ export class AmbientDeclarations extends Post {
 				</Highlighter>
 
 				<p>
-					<b>Wildcard module (e.g. for CSS or JSON)</b>:
+					This syntax also allows for declaring modules with wildcard matching. We do this in{' '}
+					<code>@types/bun</code>, since Bun allows for importing <code>.toml</code> and{' '}
+					<code>.html</code> files.
 				</p>
 
-				<div className="space-y-1 5">
-					<Highlighter filename="css-modules.d.ts">
-						{stripIndent`
-						declare module '*.css' {
-							const content: { [className: string]: string };
+				<Highlighter filename="bun.d.ts">
+					{stripIndent`
+						declare module '*.toml' {
+							const content: unknown;
+							export default content;
+						}
+						declare module '*.html' {
+							const content: string;
 							export default content;
 						}
 					`}
-					</Highlighter>
-					<Highlighter filename="json-modules.d.ts">
-						{stripIndent`
-						declare module '*.json' {
-							const value: any;
-							export default value;
-						}
-					`}
-					</Highlighter>
-				</div>
+				</Highlighter>
 
 				<h2>Writing Your Own .d.ts Files</h2>
 				<p>Suppose you're using a JS library with no types. Here's how to add them:</p>
@@ -236,6 +261,28 @@ export class AmbientDeclarations extends Post {
 						Make sure your <code>tsconfig.json</code> includes the types folder (usually automatic).
 					</li>
 				</ol>
+
+				<h2>Compiler contract</h2>
+				<p>
+					Since ambient modules don't contain runtime code, they should be treated like "promises"
+					or "contracts" that you are making with the compiler. They're like documentation that
+					TypeScript can understand. Just like documentation for humans, it can get out of sync with
+					the actual runtime code. A lot of the work I'm doing at Bun is ensuring our type
+					definitions are up to date with Bun's runtime APIs.
+				</p>
+				<h2>Conflicts</h2>
+				<p>
+					While doing research for the pull request mentioned at the beginning, I found a few cases
+					where the compiler was not able to resolve the types of some of Bun's APIs because we had
+					declared that certain symbols existed, where they might have already been declared by{' '}
+					<code>lib.dom.d.ts</code> (the builtin types that TypeScript provides by default) or
+					things like <code>@types/node</code> (the types for Node.js).
+				</p>
+				<p>
+					Avoiding these conflicts is unfortunately not always possible. Bun implements a really
+					solid best-effort approach to this, but sometimes you just have to get creative (and maybe
+					a little hacky).
+				</p>
 
 				<h2>Gotchas</h2>
 				<ul>
