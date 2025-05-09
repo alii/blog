@@ -7,7 +7,7 @@ export class AmbientDeclarations extends Post {
 	public name = 'Ambient Declarations in TypeScript: The Complete Guide';
 	public slug = 'ambient-declarations';
 	public date = new Date('9 May 2025');
-	public hidden = true;
+	public hidden = false;
 	public keywords = ['Ambient Modules', 'TypeScript', 'Module Resolution'];
 	public excerpt =
 		"I recently landed a pull request in Bun that reorganised and rewrote significant portions of Bun's TypeScript definitions. Here's what I learned.";
@@ -41,22 +41,18 @@ export class AmbientDeclarations extends Post {
 					) that contain type information and tell TypeScript what <i>things</i> exist at runtime.
 					They use the file extension <code>.d.ts</code>, with the `.d` denoting "declaration".
 				</p>
-
 				<p>
 					By <i>things</i> I mean anything you import and use. That could be functions, classes,
 					variables, modules themselves, APIs from your runtime, etc.
 				</p>
-
 				<p>
 					They're called "ambient" declarations because in the TypeScript universe ambient simply
 					means "without implementation"
 				</p>
-
 				<p>
 					If you've ever imported a package and magically got autocomplete and type checking, you've
 					benefited from ambient declarations.
 				</p>
-
 				<p>A simple ambient declaration file could look like this:</p>
 				<Highlighter filename="add.d.ts">
 					{stripIndent`
@@ -112,30 +108,24 @@ export class AmbientDeclarations extends Post {
 						.
 					</li>
 				</ul>
-
 				<h2>Ambient vs. Regular Declarations</h2>
-
 				<p>
 					<b>Regular declarations</b> are for code you write and control.
 				</p>
-
 				<Highlighter filename="add.ts">
 					{stripIndent`
 						export function add(a: number, b: number): number {
 							return a + b;
 						}`}
 				</Highlighter>
-
 				<p>
 					<b>Ambient declarations</b> are for code that exists elsewhere.
 				</p>
-
 				<Highlighter filename="ai-add.d.ts">
 					{stripIndent`
 						export declare function add(a: number, b: number): number;
 					`}
 				</Highlighter>
-
 				<p>
 					The <code>declare</code> keyword tells TypeScript: "This exists at runtime, but you won't
 					find it here."
@@ -151,7 +141,6 @@ export class AmbientDeclarations extends Post {
 						global scope.
 					</li>
 				</ul>
-
 				<table>
 					<thead>
 						<tr>
@@ -188,25 +177,20 @@ export class AmbientDeclarations extends Post {
 					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
-
 				<h3>Declaring Global Types</h3>
-
 				<p>
 					Suppose you want to add a global variable that your runtime creates, or perhaps a library
 					you're using doesn't have types for:
 				</p>
-
 				<Highlighter filename="globals.d.ts">
 					{stripIndent`
 						declare function myAwesomeFunction(x: string): number;
 					`}
 				</Highlighter>
-
 				<p>
 					Because this declaration file is NOT a module, this will be accessible everywhere in your
 					program.
 				</p>
-
 				<p>
 					What if you wanted to add something to the <code>window</code> object? TypeScript declares
 					the window variable exists by assigning it to an interface called <code>Window</code>,
@@ -216,7 +200,6 @@ export class AmbientDeclarations extends Post {
 					</a>{' '}
 					to extend that interface, and tell TypeScript about new properties that exist.
 				</p>
-
 				<Highlighter filename="globals.d.ts">
 					{stripIndent`
 						interface Window {
@@ -224,7 +207,6 @@ export class AmbientDeclarations extends Post {
 						}
 					`}
 				</Highlighter>
-
 				<p>
 					Why does this distinction exist? TypeScript is old in JavaScript's history - it predates
 					the modern module system (ESM) and needed to support the "everything is global" style of
@@ -256,13 +238,11 @@ export class AmbientDeclarations extends Post {
 						something to the global scope.
 					</li>
 				</ul>
-
 				<Note variant="info" title="Augmenting the global scope from a module">
 					You can still augment the global scope from inside a module-style declaration file by
 					using the <code>global {'{ ... }'}</code> escape hatch, but that should be reserved for
 					unavoidable edge-cases.
 				</Note>
-
 				<h2>Declaring modules by name</h2>
 				<p>
 					You can declare a module by its name. As long as the ambient declaration file gets
@@ -352,7 +332,6 @@ export class AmbientDeclarations extends Post {
 					Bun's types take this a step further by using a clever trick that let's us use the
 					built-in types if they exist, with a graceful fallback when it doesn't
 				</p>
-
 				<div className="space-y-1">
 					<Highlighter filename="bun.d.ts">
 						{stripIndent`
@@ -403,8 +382,8 @@ export class AmbientDeclarations extends Post {
 				<hr />
 				<h2>Declaring entire modules as global namespaces</h2>
 				<p>
-					Everything that you can import from the <code>bun</code> module also exists on a global
-					namespace, <code>Bun</code>.
+					In Bun, everything importable from the <code>'bun'</code> module is also available on the
+					global namespace <code>Bun</code>
 				</p>
 				<Highlighter filename="app.ts">
 					{stripIndent`
@@ -432,13 +411,12 @@ export class AmbientDeclarations extends Post {
 					`}
 				</Shell>
 				<p>
-					Declaring this in TypeScript uses some strange syntax. In Bun, you can{' '}
+					Declaring this in TypeScript uses some strange syntax. You can{' '}
 					<a href="https://github.com/oven-sh/bun/blob/main/packages/bun-types/bun.ns.d.ts#L3-L5">
 						find the declaration here
 					</a>
-					.
+					, but it looks like this:
 				</p>
-				<p>Let's break it down</p>
 				<Highlighter filename="bun.ns.d.ts">
 					{stripIndent`
 						import * as BunModule from "bun";
@@ -448,6 +426,7 @@ export class AmbientDeclarations extends Post {
 						}
 					`}
 				</Highlighter>
+				<p>Let's break it down</p>
 				<ol>
 					<li>
 						<p>We have an import statement, so this file becomes a module.</p>
@@ -461,18 +440,18 @@ export class AmbientDeclarations extends Post {
 					<li>
 						<p>
 							We use the `declare global` block to escape back into global scope, and then use the
-							funky syntax <code>export import</code>
+							funky syntax <code>export import</code> to re-export the namespace to the global scope
 						</p>
 					</li>
 				</ol>
 				<p>
 					This <code>export import</code> syntax a way of saying "re-export this namespace" - except
-					when declaring on the global scope (either in script, or inside a{' '}
-					<code>declare global {'{ }'}</code> block) the export keyword kind of turns into a "make
-					this exist globally" keyword
+					when declaring on the global scope (inside a <code>declare global {'{ }'}</code> block or
+					inside a script/global file) the export keyword kind of turns into a namespace declaration
+					for the global scope.
 				</p>
 				<p>
-					And here's the "rest" of <code>@types/bun</code> that piece this all together
+					Here is the "rest" of <code>@types/bun</code> that piece this all together
 				</p>
 				<div className="space-y-1">
 					<Highlighter filename="bun.d.ts">
@@ -494,10 +473,8 @@ export class AmbientDeclarations extends Post {
 
 					<Highlighter filename="index.d.ts">
 						{stripIndent`
-							// This index.d.ts file is the entrypoint for TypeScript to start
-							// resolving the type definitions from. You "import" the types
-							// by using triple-slash references, which tell TypeScript
-							// to add these declarations to the build.
+							// You "import" types by using triple-slash references,
+							// which tell TypeScript to add these declarations to the build.
 
 							/// <reference path="./bun.d.ts" />
 							/// <reference path="./bun.ns.d.ts" />
@@ -516,8 +493,8 @@ export class AmbientDeclarations extends Post {
 					</Highlighter>
 				</div>
 				<p>
-					In previous versions of Bun's TypeScript types, the Bun global was defined as a variable
-					that imported the <code>bun</code> module.
+					In previous versions of Bun's types, the Bun global was defined as a variable that
+					imported the <code>bun</code> module.
 				</p>
 				<Highlighter filename="globals.d.ts">
 					{stripIndent`
@@ -531,9 +508,8 @@ export class AmbientDeclarations extends Post {
 				</p>
 				<p>
 					In the pull request mentioned at the beginning, I changed previous declaration to use the{' '}
-					<code>export import</code> syntax. This fixed the issue of losing the types, and means
-					that you can now use the Bun namespace exactly like you'd expect the <code>bun</code>{' '}
-					module to behave.
+					<code>export import</code> syntax which fixed this issue. It means you can now use the Bun
+					namespace exactly like you'd expect the <code>bun</code> module to behave.
 				</p>
 				<hr />
 				<h2>Ambient declaration gotchas</h2>
@@ -565,14 +541,16 @@ export class AmbientDeclarations extends Post {
 						<a href="https://github.com/DefinitelyTyped/DefinitelyTyped">DefinitelyTyped</a>
 					</li>
 				</ul>
+
 				<hr />
-				<p>Thanks to the following people for reading revisions and helping with this post</p>
-				<ul>
-					<li>
-						<a href="https://cnrad.dev">Conrad Crawford</a>
-						<a href="https://looskie.com">Cody Miller</a>
-					</li>
-				</ul>
+
+				<div className="text-xs">
+					<p>
+						Special thanks to the following people for reading revisions and helping with this post:
+					</p>
+					<a href="https://cnrad.dev">Conrad Crawford</a>,{' '}
+					<a href="https://looskie.com">Cody Miller</a>
+				</div>
 			</>
 		);
 	}
