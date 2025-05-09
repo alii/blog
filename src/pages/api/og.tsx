@@ -72,9 +72,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const node = (
 		<div
-			tw="flex flex-col justify-center items-start w-full h-full text-white font-mono"
+			tw="flex flex-col justify-center items-start w-full h-full text-gray-300 font-mono"
 			style={{
-				fontFamily: `${MONO.name}, monospace`,
 				padding: `0px ${xPadding}px`,
 				backgroundColor: '#030712',
 			}}
@@ -85,10 +84,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			>
 				{post.name}
 			</div>
-			<div tw="font-normal text-gray-300" style={{fontSize: excerptFontSize, lineHeight: 1.2}}>
+			<div
+				tw="font-normal text-white"
+				style={{fontSize: excerptFontSize, lineHeight: 1.2, fontFamily: `${MONO.name}, monospace`}}
+			>
 				{post.excerpt}
 			</div>
-			<div tw="text-[20px] text-gray-400 mt-10">alistair.blog</div>
+			<div
+				tw="text-[35px] text-gray-500 mt-10"
+				style={{fontFamily: `${SANS_SERIF.name}, sans-serif`}}
+			>
+				alistair.blog
+			</div>
 		</div>
 	);
 
