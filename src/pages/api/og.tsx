@@ -67,16 +67,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const node = (
 		<div
-			tw="flex flex-col justify-center items-start w-full h-full bg-zinc-900 text-white font-mono"
+			tw="flex flex-col justify-center items-start w-full h-full bg-gray-900 text-white font-mono"
 			style={{fontFamily: 'JetBrains Mono, monospace', padding: `0 ${xPadding}px`}}
 		>
 			<div tw="font-bold mb-6 leading-tight" style={{fontSize: titleFontSize}}>
 				{post.name}
 			</div>
-			<div tw="font-normal text-zinc-300" style={{fontSize: excerptFontSize, lineHeight: 1.2}}>
+			<div tw="font-normal text-gray-300" style={{fontSize: excerptFontSize, lineHeight: 1.2}}>
 				{post.excerpt}
 			</div>
-			<div tw="text-[20px] text-zinc-400 mt-10">alistair.blog</div>
+			<div tw="text-[20px] text-gray-400 mt-10">alistair.blog</div>
 		</div>
 	);
 
