@@ -67,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		font: SANS_SERIF,
 		maxWidth: dimensions.width - xPadding * 2,
 		maxHeight: (dimensions.height / 3) * 0.5,
-		maxFontSize: excerptFontSize * 0.8,
+		maxFontSize: Math.ceil(excerptFontSize - 12),
 	});
 
 	const node = (
