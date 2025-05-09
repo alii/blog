@@ -338,13 +338,14 @@ export class AmbientDeclarations extends Post {
 				</p>
 				<p>
 					Avoiding these conflicts is unfortunately not always possible. Bun implements a really
-					solid best-effort approach to this, but sometimes you just have to get creative (and maybe
-					a little hacky). For example, you might see code like this to "force" TypeScript to use
-					one type over another:
+					solid best-effort approach to this, but sometimes you just have to get creative. For
+					example, you might see code like this to "force" TypeScript to use one type over another:
 				</p>
 				<Highlighter filename="my-globals.d.ts">
 					{stripIndent`
-						declare var Worker: globalThis extends {onmessage: any, Worker: infer T} ? T : never;
+						declare var Worker: globalThis extends { onmessage: any; Worker: infer T }
+							? T
+							: never;
 					`}
 				</Highlighter>
 				<p>
