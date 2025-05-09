@@ -35,10 +35,11 @@ export class AmbientDeclarations extends Post {
 					The short answer: <b>It can't!</b>
 				</p>
 				<p>
-					The short but slightly longer answer is that it <i>CAN</i> with ambient declarations!
-					These are files that exist somewhere in your project (usually in <code>node_modules</code>
-					) that contain type information and tell TypeScript what <i>things</i> exist at runtime.
-					They use the file extension <code>.d.ts</code>, with the `.d` denoting "declaration".
+					The short but slightly longer answer is that it <i>CAN</i> with some extra files - ambient
+					declarations! These are files that exist somewhere in your project (usually in{' '}
+					<code>node_modules</code>) that contain type information and tell TypeScript what{' '}
+					<i>things</i> exist at runtime. They use the file extension <code>.d.ts</code>, with the
+					`.d` denoting "declaration".
 				</p>
 				<p>
 					By <i>things</i> I mean anything you import and use. That could be functions, classes,
@@ -176,36 +177,7 @@ export class AmbientDeclarations extends Post {
 					<a href="https://github.com/oven-sh/bun/issues/8761">clash with other declarations</a>.
 					Prefer the module pattern unless you <i>really</i> need to patch <code>globalThis</code>.
 				</Note>
-				<h3>Declaring Global Types</h3>
-				<p>
-					Suppose you want to add a global variable that your runtime creates, or perhaps a library
-					you're using doesn't have types for:
-				</p>
-				<Highlighter filename="globals.d.ts">
-					{stripIndent`
-						declare function myAwesomeFunction(x: string): number;
-					`}
-				</Highlighter>
-				<p>
-					Because this declaration file is NOT a module, this will be accessible everywhere in your
-					program.
-				</p>
-				<p>
-					What if you wanted to add something to the <code>window</code> object? TypeScript declares
-					the window variable exists by assigning it to an interface called <code>Window</code>,
-					which is also declared globally. You can perform{' '}
-					<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">
-						Declaration Merging
-					</a>{' '}
-					to extend that interface, and tell TypeScript about new properties that exist.
-				</p>
-				<Highlighter filename="globals.d.ts">
-					{stripIndent`
-						interface Window {
-							myAwesomeFunction: (x: string) => number;
-						}
-					`}
-				</Highlighter>
+
 				<p>
 					Why does this distinction exist? TypeScript is old in JavaScript's history - it predates
 					the modern module system (ESM) and needed to support the "everything is global" style of
@@ -242,6 +214,38 @@ export class AmbientDeclarations extends Post {
 					using the <code>global {'{ ... }'}</code> escape hatch, but that should be reserved for
 					unavoidable edge-cases.
 				</Note>
+
+				<h2>Declaring Global Types</h2>
+				<p>
+					Suppose you want to add a global variable that your runtime creates, or perhaps a library
+					you're using doesn't have types for:
+				</p>
+				<Highlighter filename="globals.d.ts">
+					{stripIndent`
+						declare function myAwesomeFunction(x: string): number;
+					`}
+				</Highlighter>
+				<p>
+					Because this declaration file is NOT a module, this will be accessible everywhere in your
+					program.
+				</p>
+				<p>
+					What if you wanted to add something to the <code>window</code> object? TypeScript declares
+					the window variable exists by assigning it to an interface called <code>Window</code>,
+					which is also declared globally. You can perform{' '}
+					<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">
+						Declaration Merging
+					</a>{' '}
+					to extend that interface, and tell TypeScript about new properties that exist.
+				</p>
+				<Highlighter filename="globals.d.ts">
+					{stripIndent`
+						interface Window {
+							myAwesomeFunction: (x: string) => number;
+						}
+					`}
+				</Highlighter>
+
 				<h2>Declaring modules by name</h2>
 				<p>
 					You can declare a module by its name. As long as the ambient declaration file gets
