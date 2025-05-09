@@ -35,11 +35,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		return new Response('Not found', {status: 404});
 	}
 
-	const fontData = await loadGoogleFont('JetBrains+Mono');
-
-	const JETBRAINS_MONO: Font = {
+	const MONO: Font = {
 		name: 'JetBrains Mono',
-		data: fontData,
+		data: await loadGoogleFont('JetBrains+Mono'),
+		style: 'normal',
+	};
+
+	const SANS_SERIF: Font = {
+		name: 'Geist',
+		data: await loadGoogleFont('Geist'),
 		style: 'normal',
 	};
 
@@ -50,31 +54,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const xPadding = 60;
 
-	const titleFontSize = await findLargestUsableFontSize({
-		text: post.name,
-		font: JETBRAINS_MONO,
-		maxWidth: dimensions.width - xPadding * 2,
-		maxHeight: (dimensions.height / 3) * 0.5,
-	});
-
 	const excerptFontSize = await findLargestUsableFontSize({
 		text: post.excerpt,
-		font: JETBRAINS_MONO,
+		font: MONO,
 		maxWidth: dimensions.width - xPadding * 2,
 		maxHeight: (dimensions.height / 3) * 1.5,
 		lineHeight: 1.2,
+	});
+
+	const titleFontSize = await findLargestUsableFontSize({
+		text: post.name,
+		font: SANS_SERIF,
+		maxWidth: dimensions.width - xPadding * 2,
+		maxHeight: (dimensions.height / 3) * 0.5,
+		maxFontSize: excerptFontSize * 0.8,
 	});
 
 	const node = (
 		<div
 			tw="flex flex-col justify-center items-start w-full h-full text-white font-mono"
 			style={{
-				fontFamily: 'JetBrains Mono, monospace',
+				fontFamily: `${MONO.name}, monospace`,
 				padding: `0px ${xPadding}px`,
 				backgroundColor: '#030712',
 			}}
 		>
-			<div tw="font-bold mb-6 leading-tight" style={{fontSize: titleFontSize}}>
+			<div
+				tw="font-bold mb-6 leading-tight"
+				style={{fontSize: titleFontSize, fontFamily: `${SANS_SERIF.name}, sans-serif`}}
+			>
 				{post.name}
 			</div>
 			<div tw="font-normal text-gray-300" style={{fontSize: excerptFontSize, lineHeight: 1.2}}>
@@ -87,7 +95,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const stream = await unstable_createNodejsStream(node, {
 		width: 1200,
 		height: 630,
-		fonts: [JETBRAINS_MONO],
+		fonts: [MONO, SANS_SERIF],
 	});
 
 	res.setHeader('Content-Type', 'image/png');
