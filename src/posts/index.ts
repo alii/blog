@@ -3,13 +3,11 @@ import {ServerlessDiscordOAuth} from './2022/01/serverless-discord-oauth/serverl
 import {ZeroKbBlog} from './2022/01/zero-kb-blog/zero-kb-blog';
 import {OpenSource} from './2022/03/open-source/open-source';
 import {StrictTSConfig} from './2022/08/strict-tsconfig/strict-tsconfig';
-import {WhichFruitsMayYouReap} from './2023/which-fruits-may-you-reap/which-fruits-may-you-reap';
 import {WTFESM} from './2023/wtf-esm/wtf-esm';
 import {AmbientModules} from './2025/ambient-modules/ambient-modules';
 
 export const posts = [
 	new AmbientModules(),
-	new WhichFruitsMayYouReap(),
 	new WTFESM(),
 	new OpenSource(),
 	new Mochip(),
