@@ -94,7 +94,7 @@ export class ZeroKbBlog extends Post {
 					And boom! just like that, 0kb bundle. If you are going to use this though, just bear in
 					mind that as well as the trade offs mentioned above, you literally cannot use any
 					JavaScript in the client anymore for this page. Zero. Nada. Null. Void. That means no
-					state updates, no SWR requests. No <code>useEffects</code> (thank god tbh).
+					state updates, no network requests, no useEffect, no event listeners, no timers. Nothing.
 				</p>
 			</>
 		);
