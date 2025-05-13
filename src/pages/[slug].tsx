@@ -34,7 +34,7 @@ export default function PostPage({slug}: Props) {
 
 			<div>
 				<Link
-					className="font-mono text-blue-500 dark:text-gray-400 hover:text-blue-800 dark:hover:text-gray-600"
+					className="font-mono text-blue-500 dark:text-zinc-400 hover:text-blue-800 dark:hover:text-zinc-600"
 					href="/"
 				>
 					../
@@ -48,18 +48,18 @@ export default function PostPage({slug}: Props) {
 			)}
 
 			<p>
-				<time dateTime={post.date.toISOString()} className="dark:text-gray-400">
+				<time dateTime={post.date.toISOString()} className="dark:text-zinc-400">
 					{post.date.toDateString()}
 				</time>
 			</p>
 
 			<main
 				className={clsx(
-					'prose dark:text-gray-400 dark:prose-hr:border-gray-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert',
-					'prose-hr:border-gray-200',
-					'dark:prose-headings:text-gray-300',
+					'prose dark:text-zinc-400 dark:prose-hr:border-zinc-800 prose-blue prose-img:rounded-md prose-img:w-full dark:prose-invert',
+					'prose-hr:border-zinc-200',
+					'dark:prose-headings:text-zinc-300',
 
-					'prose-pre:border prose-pre:border-gray-200 prose-pre:bg-transparent prose-pre:text-gray-700 dark:prose-pre:border-gray-800 dark:prose-pre:text-gray-300',
+					'prose-pre:border prose-pre:border-zinc-200 prose-pre:bg-transparent prose-pre:text-zinc-700 dark:prose-pre:border-zinc-800 dark:prose-pre:text-zinc-300',
 				)}
 			>
 				{post.render()}

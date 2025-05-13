@@ -72,7 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const node = (
 		<div
-			tw="flex flex-col justify-center items-start w-full h-full text-gray-400 font-mono"
+			tw="flex flex-col justify-center items-start w-full h-full text-zinc-400 font-mono"
 			style={{
 				padding: `0px ${xPadding}px`,
 				backgroundColor: '#030712',
@@ -91,7 +91,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				{post.excerpt}
 			</div>
 			<div
-				tw="text-[35px] text-gray-500 mt-10"
+				tw="text-[35px] text-zinc-500 mt-10"
 				style={{fontFamily: `${SANS_SERIF.name}, sans-serif`}}
 			>
 				alistair.blog

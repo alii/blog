@@ -1,5 +1,5 @@
 body {
-	@apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-200 font-light;
+	@apply bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-200 font-light;
 }
 
 .prose video {

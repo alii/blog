@@ -17,7 +17,7 @@ const mono = JetBrains_Mono({
 });
 
 const footerLink =
-	'hover:underline cursor-default text-sm decoration-blue-500/20 hover:decoration-blue-500/50 text-gray-400 dark:text-gray-700';
+	'hover:underline cursor-default text-sm decoration-blue-500/20 hover:decoration-blue-500/50 text-zinc-400 dark:text-zinc-700';
 
 export default function App({Component, pageProps, router}: AppProps) {
 	return (

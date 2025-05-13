@@ -59,7 +59,7 @@ function Filename({filename}: {readonly filename: string}) {
 	})();
 
 	return (
-		<p className="text-sm text-gray-600 dark:text-gray-400 px-3 mx-1 mt-1 mb-0 rounded py-1.5 bg-gray-100 dark:bg-gray-900/50">
+		<p className="text-sm text-zinc-600 dark:text-zinc-400 px-3 mx-1 mt-1 mb-0 rounded py-1.5 bg-zinc-100 dark:bg-zinc-900/50">
 			<span className="mr-2">{icon}</span>
 			<span>{filename}</span>
 		</p>
@@ -77,7 +77,7 @@ export function Highlighter({
 }) {
 	return (
 		<div className="[&_pre]:!m-0 [&_pre]:border-none">
-			<div className="hidden dark:block border rounded-md overflow-hidden border-gray-800">
+			<div className="hidden dark:block border rounded-md overflow-hidden border-zinc-800">
 				{filename && <Filename filename={filename} />}
 
 				<SyntaxHighlighter language={language} style={dark} PreTag={Pre}>
@@ -85,7 +85,7 @@ export function Highlighter({
 				</SyntaxHighlighter>
 			</div>
 
-			<div className="dark:hidden border rounded-md border-gray-200">
+			<div className="dark:hidden border rounded-md border-zinc-200">
 				{filename && <Filename filename={filename} />}
 
 				<SyntaxHighlighter language={language} style={light} PreTag={Pre}>
