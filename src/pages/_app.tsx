@@ -23,7 +23,7 @@ export default function App({Component, pageProps, router}: AppProps) {
 	return (
 		<div className={clsx('py-24 px-4', mono.variable)}>
 			<Head>
-				<title>alistair smith • blog</title>
+				<title>blog • alistair smith</title>
 			</Head>
 
 			<div className="space-y-20 max-w-prose mx-auto">
