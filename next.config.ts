@@ -6,17 +6,17 @@ const config: NextConfig = {
 			{
 				source: '/post/:slug',
 				destination: 'https://old.alistair.blog/post/:slug',
-				permanent: true,
+				statusCode: 301,
 			},
 			{
 				source: '/:slug',
 				destination: 'https://alistair.sh/:slug',
-				permanent: true,
+				statusCode: 301,
 			},
 			{
 				source: '/',
 				destination: 'https://alistair.sh/blog',
-				permanent: true,
+				statusCode: 301,
 			},
 		];
 	},
