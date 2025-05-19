@@ -1,3 +1,11 @@
+# ⚠️ ARCHIVED ⚠️
+
+I've archived this repo as I've moved all the blog posts to [my main website repo @ alii/website](https://github.com/alii/website).
+
+This repo will stay on GitHub for archival purposes.
+
+---
+
 [alistair.blog](https://alistair.blog)
 
 ### I want to use this for my own blog!
